@@ -1,50 +1,34 @@
 import { Routes, Route } from "react-router-dom";
 
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import Projects from "./pages/Projects";
+import ProjectDetails from "./pages/ProjectDetails";
+import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
 function App() {
   return (
-    <Routes>
+    <>
+      <Navbar />
+      <Routes>
 
-      <Route
-        path="/"
-        element={<h1>Home Page</h1>}
-      />
-
-      <Route
-        path="/login"
-        element={<h1>Login Page</h1>}
-      />
-
-      <Route
-        path="/register"
-        element={<h1>Register Page</h1>}
-      />
-
-      <Route
-        path="/dashboard"
-        element={<h1>Dashboard</h1>}
-      />
-
-      <Route
-        path="/projects"
-        element={<h1>Projects</h1>}
-      />
-
-      <Route
-        path="/projects/:id"
-        element={<h1>Project Details</h1>}
-      />
-
-      <Route
-        path="/profile"
-        element={<h1>Profile</h1>}
-      />
-
-      <Route
-        path="*"
-        element={<h1>404 Not Found</h1>}
-      />
-
-    </Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
+        <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
+        <Route path="/projects/:id" element={<ProtectedRoute><ProjectDetails /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer/>
+    </>
   );
 }
 
