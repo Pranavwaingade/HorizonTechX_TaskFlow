@@ -1,0 +1,33 @@
+.dashboard-layout{
+
+    display:flex;
+
+    min-height:100vh;
+
+    background:var(--background);
+
+}
+
+.dashboard-main{
+
+    flex:1;
+
+    margin-left:260px;
+
+    padding:35px;
+
+    transition:.35s;
+
+}
+
+@media(max-width:992px){
+
+.dashboard-main{
+
+margin-left:0;
+
+padding:20px;
+
+}
+
+}

@@ -1,0 +1,187 @@
+.dashboard-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 40px;
+
+    gap: 30px;
+
+}
+
+.dashboard-header h1 {
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+    color: var(--text);
+
+    margin-bottom: 8px;
+
+}
+
+.dashboard-header p {
+
+    color: var(--text-light);
+
+    font-size: 15px;
+
+}
+
+.header-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+.search-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: white;
+
+    padding: 12px 18px;
+
+    border-radius: 14px;
+
+    border: 1px solid var(--border);
+
+    width: 320px;
+
+}
+
+.search-box input {
+
+    border: none;
+
+    outline: none;
+
+    background: none;
+
+    width: 100%;
+
+    font-size: 15px;
+
+    color: var(--text);
+
+}
+
+.notification-btn {
+
+    position: relative;
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.notification-btn:hover {
+
+    background: var(--section);
+
+}
+
+.notification-btn span {
+
+    position: absolute;
+
+    top: 12px;
+
+    right: 12px;
+
+    width: 8px;
+
+    height: 8px;
+
+    background: #ef4444;
+
+    border-radius: 50%;
+
+}
+
+.profile-box img {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 2px solid var(--primary);
+
+}
+
+@media(max-width:992px) {
+
+    .dashboard-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    .header-right {
+
+        width: 100%;
+
+        justify-content: space-between;
+
+    }
+
+    .search-box {
+
+        width: 100%;
+
+    }
+
+}
+
+@media(max-width:600px) {
+
+    .header-right {
+
+        flex-wrap: wrap;
+
+    }
+
+    .search-box {
+
+        order: 3;
+
+        width: 100%;
+
+    }
+
+}

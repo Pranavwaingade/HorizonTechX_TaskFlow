@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { HiMenu, HiX } from "react-icons/hi";
+import { Menu, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import "./Navbar.css";
 
@@ -19,7 +19,6 @@ function Navbar() {
 
   return (
     <header className="navbar">
-
       <div className="navbar-container">
 
         {/* Logo */}
@@ -28,23 +27,21 @@ function Navbar() {
           className="logo"
           onClick={closeMenu}
         >
-          🚀 TaskFlow
+          Task<span>Flow</span>
         </Link>
 
         {/* Navigation */}
         <nav className={menuOpen ? "nav-links active" : "nav-links"}>
 
-          <NavLink
-            to="/dashboard"
-            onClick={closeMenu}
-          >
+          <NavLink to="/" onClick={closeMenu}>
+            Home
+          </NavLink>
+
+          <NavLink to="/dashboard" onClick={closeMenu}>
             Dashboard
           </NavLink>
 
-          <NavLink
-            to="/projects"
-            onClick={closeMenu}
-          >
+          <NavLink to="/projects" onClick={closeMenu}>
             Projects
           </NavLink>
 
@@ -57,9 +54,41 @@ function Navbar() {
             </NavLink>
           )}
 
+          {/* Mobile Auth Buttons */}
+          <div className="mobile-auth">
+
+            {user ? (
+              <button
+                className="logout-btn"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="login-btn"
+                  onClick={closeMenu}
+                >
+                  Login
+                </Link>
+
+                <Link
+                  to="/register"
+                  className="register-btn"
+                  onClick={closeMenu}
+                >
+                  Register
+                </Link>
+              </>
+            )}
+
+          </div>
+
         </nav>
 
-        {/* Right Side */}
+        {/* Desktop Auth */}
         <div className="navbar-right">
 
           {user ? (
@@ -95,16 +124,16 @@ function Navbar() {
 
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu */}
+
         <button
           className="menu-btn"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? <HiX /> : <HiMenu />}
+          {menuOpen ? <X size={30} /> : <Menu size={30} />}
         </button>
 
       </div>
-
     </header>
   );
 }

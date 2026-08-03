@@ -1,9 +1,23 @@
-import React from 'react'
+import DashboardContent from "../components/DashboardContent";
+import DashboardExtras from "../components/DashboardExtras";
+import DashboardHeader from "../components/DashboardHeader";
+import StatsCards from "../components/StatsCards";
+import "./Dashboard.css";
 
-const Dashboard = () => {
+function Dashboard() {
+
   return (
-    <div>Dashboard</div>
-  )
+
+    <section className="dashboard">
+      <DashboardHeader />
+      <StatsCards/>
+      <DashboardContent/>
+      <DashboardExtras/>
+
+    </section>
+
+  );
+
 }
 
-export default Dashboard
+export default Dashboard;
