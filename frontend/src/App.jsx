@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -8,33 +8,84 @@ import Projects from "./pages/Projects";
 import ProjectDetails from "./pages/ProjectDetails";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
 import DashboardLayout from "./layouts/DashboardLayout";
 
 function App() {
+
+  const location = useLocation();
+
+  const authPages =
+    location.pathname === "/login" ||
+    location.pathname === "/register";
+
+  const dashboardPages =
+    location.pathname.startsWith("/dashboard") ||
+    location.pathname.startsWith("/projects") ||
+    location.pathname.startsWith("/profile");
+
+  const hideLayout =
+    location.pathname === "/login" ||
+    location.pathname === "/register";
+
   return (
     <>
-      <Navbar />
+
+      {!hideLayout && <Navbar />}
+
       <Routes>
+
+        {/* Public Routes */}
+
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/dashboard" element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} /> */}
-        {/* <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} /> */}
-        {/* <Route path="/projects/:id" element={<ProtectedRoute><ProjectDetails /></ProtectedRoute>} /> */}
-        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="*" element={<NotFound />} />
-        <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+
+        {/* Protected Routes */}
+
+        <Route element={<ProtectedRoute />}>
+
+          <Route element={<DashboardLayout />}>
+
+            <Route
+              path="/dashboard"
+              element={<Dashboard />}
+            />
+
+          </Route>
+
+          <Route
+            path="/projects"
+            element={<Projects />}
+          />
+
+          <Route
+            path="/projects/:id"
+            element={<ProjectDetails />}
+          />
+
+          <Route
+            path="/profile"
+            element={<Profile />}
+          />
+
         </Route>
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/:id" element={<ProjectDetails />}/>
+
+        {/* 404 */}
+
+        <Route
+          path="*"
+          element={<NotFound />}
+        />
 
       </Routes>
 
-      <Footer />
+      {!hideLayout && <Footer />}
+
     </>
   );
 }

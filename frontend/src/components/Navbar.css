@@ -41,6 +41,7 @@
 
 }
 
+
 /* Navigation */
 
 .nav-links {
@@ -94,9 +95,13 @@
   gap: 15px;
 }
 
-.user-name {
-  color: #111827;
-  font-weight: 600;
+.user-name{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color: #111827;
+    font-weight:700;
+    font-size:15px;
 }
 
 .login-btn,

@@ -1,46 +1,61 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
-function AuthProvider({ children }) {
-  const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem("user");
+export const AuthProvider = ({ children }) => {
 
-    return storedUser
-      ? JSON.parse(storedUser)
-      : null;
-  });
+    const [user, setUser] = useState(null);
+    const [token, setToken] = useState(localStorage.getItem("token") || "");
+    const [loading, setLoading] = useState(true);
 
-  const login = (token, userData) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem(
-      "user",
-      JSON.stringify(userData)
+    useEffect(() => {
+
+        const storedUser = localStorage.getItem("user");
+
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+
+        setLoading(false);
+
+    }, []);
+
+    // Login
+    const login = (userData, jwtToken) => {
+
+        setUser(userData);
+        setToken(jwtToken);
+
+        localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("token", jwtToken);
+
+    };
+
+    // Logout
+    const logout = () => {
+
+        setUser(null);
+        setToken("");
+
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+
+    };
+
+    return (
+        <AuthContext.Provider
+            value={{
+                user,
+                token,
+                loading,
+                login,
+                logout,
+                isAuthenticated: !!token
+            }}
+        >
+            {children}
+        </AuthContext.Provider>
     );
-
-    setUser(userData);
-  };
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
-    setUser(null);
-  };
-
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        login,
-        logout,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
-}
-
-export default AuthProvider;
+};
 
 export const useAuth = () => useContext(AuthContext);

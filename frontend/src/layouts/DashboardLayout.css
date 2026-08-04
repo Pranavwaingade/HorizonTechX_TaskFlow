@@ -2,7 +2,7 @@
 
     display:flex;
 
-    min-height:100vh;
+    min-height:fit-content;
 
     background:var(--background);
 
@@ -12,7 +12,7 @@
 
     flex:1;
 
-    margin-left:260px;
+    margin-left:20px;
 
     padding:35px;
 

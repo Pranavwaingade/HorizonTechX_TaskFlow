@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import toast from "react-hot-toast";
+
 import { useAuth } from "../context/AuthContext";
 import "./Navbar.css";
 
 function Navbar() {
+
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const closeMenu = () => {
@@ -13,15 +18,25 @@ function Navbar() {
   };
 
   const handleLogout = () => {
+
     logout();
+
+    toast.success("Logged out successfully");
+
+    navigate("/");
+
     closeMenu();
+
   };
 
   return (
+
     <header className="navbar">
+
       <div className="navbar-container">
 
         {/* Logo */}
+
         <Link
           to="/"
           className="logo"
@@ -31,41 +46,62 @@ function Navbar() {
         </Link>
 
         {/* Navigation */}
+
         <nav className={menuOpen ? "nav-links active" : "nav-links"}>
 
-          <NavLink to="/" onClick={closeMenu}>
+          <NavLink
+            to="/"
+            onClick={closeMenu}
+          >
             Home
           </NavLink>
 
-          <NavLink to="/dashboard" onClick={closeMenu}>
-            Dashboard
-          </NavLink>
-
-          <NavLink to="/projects" onClick={closeMenu}>
-            Projects
-          </NavLink>
-
           {user && (
-            <NavLink
-              to="/profile"
-              onClick={closeMenu}
-            >
-              Profile
-            </NavLink>
+
+            <>
+
+              <NavLink
+                to="/dashboard"
+                onClick={closeMenu}
+              >
+                Dashboard
+              </NavLink>
+
+              <NavLink
+                to="/projects"
+                onClick={closeMenu}
+              >
+                Projects
+              </NavLink>
+
+              <NavLink
+                to="/profile"
+                onClick={closeMenu}
+              >
+                Profile
+              </NavLink>
+
+            </>
+
           )}
 
-          {/* Mobile Auth Buttons */}
+          {/* Mobile Auth */}
+
           <div className="mobile-auth">
 
             {user ? (
+
               <button
                 className="logout-btn"
                 onClick={handleLogout}
               >
                 Logout
               </button>
+
             ) : (
+
               <>
+
                 <Link
                   to="/login"
                   className="login-btn"
@@ -81,7 +117,9 @@ function Navbar() {
                 >
                   Register
                 </Link>
+
               </>
+
             )}
 
           </div>
@@ -89,12 +127,15 @@ function Navbar() {
         </nav>
 
         {/* Desktop Auth */}
+
         <div className="navbar-right">
 
           {user ? (
+
             <>
+
               <span className="user-name">
-                {user.name}
+                👋 {user.name}
               </span>
 
               <button
@@ -103,9 +144,13 @@ function Navbar() {
               >
                 Logout
               </button>
+
             </>
+
           ) : (
+
             <>
+
               <Link
                 to="/login"
                 className="login-btn"
@@ -119,23 +164,30 @@ function Navbar() {
               >
                 Register
               </Link>
+
             </>
+
           )}
 
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Button */}
 
         <button
           className="menu-btn"
           onClick={() => setMenuOpen(!menuOpen)}
         >
+
           {menuOpen ? <X size={30} /> : <Menu size={30} />}
+
         </button>
 
       </div>
+
     </header>
+
   );
+
 }
 
 export default Navbar;
