@@ -4,6 +4,9 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
+import { protect } from "./middleware/authMiddleware.js";
+
 
 dotenv.config();
 connectDB();
@@ -14,6 +17,19 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
+app.use("/api/projects", projectRoutes);
+app.get("/api/test", protect, (req, res) => {
+
+    res.json({
+
+        success: true,
+        message: "Protected Route Working",
+
+        user: req.user
+
+    });
+
+});
 
 app.get("/", (req, res) => {
   res.status(200).json({
@@ -29,17 +45,4 @@ app.listen(PORT, () => {
 });
 
 
-import { protect } from "./middleware/authMiddleware.js";
 
-app.get("/api/test", protect, (req, res) => {
-
-    res.json({
-
-        success: true,
-        message: "Protected Route Working",
-
-        user: req.user
-
-    });
-
-});

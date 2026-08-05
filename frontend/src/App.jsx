@@ -51,10 +51,13 @@ function App() {
 
           <Route element={<DashboardLayout />}>
 
-            <Route
-              path="/dashboard"
-              element={<Dashboard />}
-            />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/projects" element={<Projects />} />
+            {/* <Route path="/tasks" element={<Tasks />} /> */}
+            {/* <Route path="/team" element={<Team />} /> */}
+            {/* <Route path="/comments" element={<Comments />} /> */}
+            <Route path="/profile" element={<Profile />} />
+            {/* <Route path="/settings" element={<Settings />} /> */}
 
           </Route>
 
