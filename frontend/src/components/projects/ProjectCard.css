@@ -1,16 +1,16 @@
 .project-card {
 
+    position: relative;
+
     background: var(--card);
+
+    border: 1px solid var(--border);
 
     border-radius: 18px;
 
     padding: 25px;
 
-    border: 1px solid var(--border);
-
     transition: .35s;
-
-    cursor: pointer;
 
     box-shadow: 0 4px 10px rgba(0, 0, 0, .04);
 
@@ -20,7 +20,107 @@
 
     transform: translateY(-8px);
 
-    box-shadow: 0 15px 35px rgba(37, 99, 235, .12);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .08);
+
+}
+
+.project-menu {
+
+    position: absolute;
+
+    top: 15px;
+
+    right: 15px;
+
+}
+
+.menu-btn {
+
+    width: 36px;
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.menu-btn:hover {
+
+    background: var(--section);
+
+}
+
+.menu-dropdown {
+
+    position: absolute;
+
+    top: 42px;
+
+    right: 0;
+
+    width: 170px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
+
+    z-index: 999;
+
+}
+
+.menu-dropdown button {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 14px 16px;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    color: var(--text);
+
+    transition: .3s;
+
+}
+
+.menu-dropdown button:hover {
+
+    background: var(--section);
+
+}
+
+.delete-item {
+
+    color: var(--danger) !important;
 
 }
 
@@ -29,8 +129,6 @@
     margin: 18px 0 10px;
 
     font-size: 22px;
-
-    color: var(--text);
 
 }
 
@@ -50,8 +148,6 @@
 
 }
 
-/* Pending */
-
 .status-pending {
 
     background: #FFF4CC;
@@ -60,8 +156,6 @@
 
 }
 
-/* In Progress */
-
 .status-in-progress {
 
     background: var(--section);
@@ -69,8 +163,6 @@
     color: var(--primary);
 
 }
-
-/* Completed */
 
 .status-completed {
 
@@ -84,10 +176,76 @@
 
     color: var(--text-light);
 
-    margin-bottom: 18px;
+    margin: 18px 0;
 
 }
 
+
+.project-actions{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:20px;
+
+}
+
+.edit-btn{
+
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:var(--primary);
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.edit-btn:hover{
+
+    background:var(--primary-hover);
+
+}
+
+.delete-btn{
+
+    flex:1;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:var(--danger);
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.delete-btn:hover{
+
+    opacity:.9;
+
+}
 .due-date {
 
     display: flex;
@@ -96,7 +254,7 @@
 
     gap: 8px;
 
-    color: #64748b;
+    color: var(--text-light);
 
     font-size: 14px;
 

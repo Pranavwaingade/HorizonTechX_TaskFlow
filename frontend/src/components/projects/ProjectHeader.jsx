@@ -1,7 +1,8 @@
 import { Search, Plus } from "lucide-react";
 import "./ProjectHeader.css";
 
-function ProjectHeader() {
+function ProjectHeader({ onCreate }) {
+
   return (
     <div className="project-header">
 
@@ -20,7 +21,10 @@ function ProjectHeader() {
           />
         </div>
 
-        <button className="create-btn">
+        <button
+          className="create-btn"
+          onClick={onCreate}
+        >
           <Plus size={18} />
           Create Project
         </button>

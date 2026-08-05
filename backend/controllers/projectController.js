@@ -52,8 +52,6 @@ export const createProject = async (req, res) => {
 
 };
 
-
-
 // export const getProjects = async (req, res) => {
 
 //     try {
@@ -94,7 +92,6 @@ export const createProject = async (req, res) => {
 
 // };
 
-
 export const getProjects = async (req, res) => {
 
     try {
@@ -118,6 +115,82 @@ export const getProjects = async (req, res) => {
     } catch (error) {
 
         console.log(error);
+
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+
+    }
+
+};
+
+export const updateProject = async (req, res) => {
+
+    try {
+
+        const project = await Project.findOne({
+            _id: req.params.id,
+            owner: req.user.id,
+        });
+
+        if (!project) {
+            return res.status(404).json({
+                success: false,
+                message: "Project not found",
+            });
+        }
+
+        project.title = req.body.title || project.title;
+        project.description = req.body.description || project.description;
+        project.dueDate = req.body.dueDate || project.dueDate;
+        project.status = req.body.status || project.status;
+
+        await project.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Project Updated Successfully",
+            project,
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+
+    }
+
+};
+
+export const deleteProject = async (req, res) => {
+
+    try {
+
+        const project = await Project.findOne({
+            _id: req.params.id,
+            owner: req.user.id,
+        });
+
+        if (!project) {
+
+            return res.status(404).json({
+                success: false,
+                message: "Project not found",
+            });
+
+        }
+
+        await project.deleteOne();
+
+        res.status(200).json({
+            success: true,
+            message: "Project Deleted Successfully",
+        });
+
+    } catch (error) {
 
         res.status(500).json({
             success: false,

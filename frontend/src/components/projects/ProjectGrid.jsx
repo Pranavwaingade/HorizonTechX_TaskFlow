@@ -5,7 +5,7 @@ import ProjectCard from "./ProjectCard";
 
 import "./ProjectGrid.css";
 
-function ProjectGrid() {
+function ProjectGrid({refresh, onEdit,onDelete,}) {
 
     const [projects, setProjects] = useState([]);
 
@@ -15,52 +15,52 @@ function ProjectGrid() {
 
         fetchProjects();
 
-    }, []);
-
-    // const fetchProjects = async () => {
-
-    //     try {
-
-    //         const { data } = await API.get("/projects");
-
-    //         setProjects(data.projects);
-
-    //     }
-
-    //     catch (error) {
-
-    //         console.log(error);
-
-    //     }
-
-    //     finally {
-
-    //         setLoading(false);
-
-    //     }
-
-    // };
+    }, [refresh]);
 
     const fetchProjects = async () => {
-    try {
 
-        const { data } = await API.get("/projects");
+        try {
 
-        console.log("Projects Response =>", data);
+            const { data } = await API.get("/projects");
 
-        setProjects(data.projects);
-        console.log(localStorage.getItem("token"))
+            setProjects(data.projects);
 
-    } catch (error) {
+        }
 
-        console.log(error.response);
+        catch (error) {
 
-    } finally {
+            console.log(error);
 
-        setLoading(false);
+        }
 
-    }
-};
+        finally {
+
+            setLoading(false);
+
+        }
+
+    };
+
+//     const fetchProjects = async () => {
+//     try {
+
+//         const { data } = await API.get("/projects");
+
+//         console.log("Projects Response =>", data);
+
+//         setProjects(data.projects);
+//         console.log(localStorage.getItem("token"))
+
+//     } catch (error) {
+
+//         console.log(error.response);
+
+//     } finally {
+
+//         setLoading(false);
+
+//     }
+// };
 
     if (loading) {
 
@@ -97,6 +97,8 @@ function ProjectGrid() {
                 <ProjectCard
                     key={project._id}
                     project={project}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
                 />
 
             ))}
