@@ -1,3 +1,8 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import API from "../services/api";
+
 import {
   FolderKanban,
   ArrowRight,
@@ -9,26 +14,37 @@ import "./DashboardContent.css";
 
 function DashboardContent() {
 
-  const projects = [
-    "Website Redesign",
-    "CRM Dashboard",
-    "TaskFlow Mobile App",
-  ];
+  const navigate = useNavigate();
 
-  const tasks = [
-    {
-      title: "Design Login Page",
-      status: "Completed",
-    },
-    {
-      title: "Connect Backend API",
-      status: "In Progress",
-    },
-    {
-      title: "Create Project Module",
-      status: "Pending",
-    },
-  ];
+  const [projects, setProjects] = useState([]);
+
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+
+    fetchDashboard();
+
+  }, []);
+
+  const fetchDashboard = async () => {
+
+    try {
+
+      const { data } = await API.get("/dashboard");
+
+      setProjects(data.recentProjects || []);
+
+      setTasks(data.todayTasks || []);
+
+    }
+
+    catch (error) {
+
+      console.log(error);
+
+    }
+
+  };
 
   return (
 
@@ -42,40 +58,52 @@ function DashboardContent() {
 
           <h2>Recent Projects</h2>
 
-          <button>
+          <button onClick={() => navigate("/projects")}>
 
             View All
 
-            <ArrowRight size={18}/>
+            <ArrowRight size={18} />
 
           </button>
 
         </div>
 
-        {projects.map((project,index)=>(
+        {projects.length === 0 ? (
 
-          <div
-            className="project-item"
-            key={index}
-          >
+          <p>No Projects Found</p>
 
-            <div className="project-icon">
+        ) : (
 
-              <FolderKanban size={20}/>
+          projects.map((project) => (
+
+            <div
+              className="project-item"
+              key={project._id}
+            >
+
+              <div className="project-icon">
+
+                <FolderKanban size={20} />
+
+              </div>
+
+              <div>
+
+                <h3>{project.title}</h3>
+
+                <span>
+
+                  {new Date(project.updatedAt).toLocaleDateString("en-IN")}
+
+                </span>
+
+              </div>
 
             </div>
 
-            <div>
+          ))
 
-              <h3>{project}</h3>
-
-              <span>Updated Today</span>
-
-            </div>
-
-          </div>
-
-        ))}
+        )}
 
       </div>
 
@@ -89,32 +117,40 @@ function DashboardContent() {
 
         </div>
 
-        {tasks.map((task,index)=>(
+        {tasks.length === 0 ? (
 
-          <div
-            className="task-item"
-            key={index}
-          >
+          <p>No Tasks Found</p>
 
-            <div className="task-left">
+        ) : (
 
-              <CircleCheckBig size={18}/>
+          tasks.map((task) => (
 
-              <span>{task.title}</span>
+            <div
+              className="task-item"
+              key={task._id}
+            >
+
+              <div className="task-left">
+
+                <CircleCheckBig size={18} />
+
+                <span>{task.title}</span>
+
+              </div>
+
+              <div className="task-status">
+
+                <Clock3 size={16} />
+
+                <small>{task.status}</small>
+
+              </div>
 
             </div>
 
-            <div className="task-status">
+          ))
 
-              <Clock3 size={16}/>
-
-              <small>{task.status}</small>
-
-            </div>
-
-          </div>
-
-        ))}
+        )}
 
       </div>
 

@@ -1,0 +1,68 @@
+/* ========================= */
+/* Task Buttons */
+/* ========================= */
+
+.task-actions {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 22px;
+
+}
+
+.edit-btn,
+.delete-btn {
+
+    flex: 1;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: var(--transition);
+
+}
+
+.edit-btn {
+
+    background: var(--primary);
+
+    color: #fff;
+
+}
+
+.edit-btn:hover {
+
+    background: var(--primary-hover);
+
+}
+
+.delete-btn {
+
+    background: #FEE2E2;
+
+    color: var(--danger);
+
+}
+
+.delete-btn:hover {
+
+    background: #FECACA;
+
+}

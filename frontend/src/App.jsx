@@ -8,6 +8,7 @@ import Projects from "./pages/Projects";
 import ProjectDetails from "./pages/ProjectDetails";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import Tasks from "./pages/Tasks";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
@@ -53,7 +54,7 @@ function App() {
 
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/projects" element={<Projects />} />
-            {/* <Route path="/tasks" element={<Tasks />} /> */}
+            <Route path="/tasks" element={<Tasks />} />
             {/* <Route path="/team" element={<Team />} /> */}
             {/* <Route path="/comments" element={<Comments />} /> */}
             <Route path="/profile" element={<Profile />} />
