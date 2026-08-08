@@ -96,7 +96,7 @@ export const getProjects = async (req, res) => {
 
     try {
 
-        console.log("Logged User =>", req.user);
+        // console.log("Logged User =>", req.user);
 
         const projects = await Project.find({
             owner: req.user.id,
@@ -104,7 +104,7 @@ export const getProjects = async (req, res) => {
             createdAt: -1,
         });
 
-        console.log("Projects =>", projects);
+        // console.log("Projects =>", projects);
 
         res.status(200).json({
             success: true,

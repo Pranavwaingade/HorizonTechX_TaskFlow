@@ -47,7 +47,7 @@ import User from "../models/User.js";
 export const protect = async (req, res, next) => {
     try {
 
-        console.log("Authorization Header =>", req.headers.authorization);
+        // console.log("Authorization Header =>", req.headers.authorization);
 
         let token;
 
@@ -58,7 +58,7 @@ export const protect = async (req, res, next) => {
             token = req.headers.authorization.split(" ")[1];
         }
 
-        console.log("Extracted Token =>", token);
+        // console.log("Extracted Token =>", token);
 
         if (!token) {
             return res.status(401).json({
