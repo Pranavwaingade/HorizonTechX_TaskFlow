@@ -1,0 +1,378 @@
+/* ========================================
+   Comments Container
+======================================== */
+
+.comments-container {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid var(--border);
+}
+
+.comments-container h2 {
+    margin: 0 0 20px;
+    font-size: 20px;
+    color: var(--text);
+}
+
+
+/* ========================================
+   Add Comment Form
+======================================== */
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    min-height: 90px;
+    padding: 14px 16px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    background: var(--section);
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 14px;
+
+    resize: vertical;
+    outline: none;
+
+    transition: 0.25s;
+    box-sizing: border-box;
+}
+
+.comment-form textarea::placeholder {
+    color: var(--text-light);
+}
+
+.comment-form textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+
+/* ========================================
+   Add Comment Button
+======================================== */
+
+.comment-form button {
+    align-self: flex-end;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: var(--primary);
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.comment-form button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   Comments List
+======================================== */
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+/* ========================================
+   Single Comment
+======================================== */
+
+.comment-item {
+    display: flex;
+    gap: 12px;
+
+    padding: 16px;
+
+    background: var(--section);
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    transition: 0.25s;
+}
+
+.comment-item:hover {
+    border-color: var(--primary);
+    box-shadow: 0 5px 18px rgba(37, 99, 235, 0.08);
+}
+
+
+/* ========================================
+   Avatar
+======================================== */
+
+.comment-avatar {
+    min-width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+/* ========================================
+   Comment Content
+======================================== */
+
+.comment-content {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* ========================================
+   Comment Header
+======================================== */
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 7px;
+}
+
+.comment-header strong {
+    color: var(--text);
+    font-size: 14px;
+}
+
+.comment-header small {
+    color: var(--text-light);
+    font-size: 12px;
+}
+
+
+/* ========================================
+   Comment Text
+======================================== */
+
+.comment-content > p {
+    margin: 0;
+
+    color: var(--text-light);
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+
+/* ========================================
+   Comment Actions
+======================================== */
+
+.comment-actions {
+    display: flex;
+    gap: 12px;
+
+    margin-top: 10px;
+}
+
+.comment-actions button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    padding: 5px 8px;
+
+    border: none;
+    background: transparent;
+
+    color: var(--text-light);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    border-radius: 6px;
+
+    transition: 0.2s;
+}
+
+.comment-actions button:hover {
+    background: var(--card);
+    color: var(--primary);
+}
+
+
+/* Delete Button */
+
+.comment-actions button:last-child:hover {
+    color: var(--danger);
+}
+
+
+/* ========================================
+   Edit Comment
+======================================== */
+
+.comment-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.comment-edit textarea {
+    width: 100%;
+    padding: 12px 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    background: var(--card);
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 14px;
+
+    resize: vertical;
+    outline: none;
+
+    box-sizing: border-box;
+}
+
+.comment-edit textarea:focus {
+    border-color: var(--primary);
+}
+
+.comment-edit > div {
+    display: flex;
+    gap: 8px;
+}
+
+.comment-edit button {
+    padding: 7px 14px;
+
+    border: none;
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.comment-edit button:first-child {
+    background: var(--primary);
+    color: white;
+}
+
+.comment-edit button:first-child:hover {
+    background: var(--primary-hover);
+}
+
+.comment-edit button:last-child {
+    background: var(--section);
+    color: var(--text-light);
+}
+
+.comment-edit button:last-child:hover {
+    background: var(--border);
+}
+
+
+/* ========================================
+   No Comments
+======================================== */
+
+.no-comments {
+    margin: 10px 0;
+
+    padding: 25px;
+
+    text-align: center;
+
+    color: var(--text-light);
+
+    background: var(--section);
+
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   Loading
+======================================== */
+
+.comments-loading {
+    padding: 25px;
+
+    text-align: center;
+
+    color: var(--text-light);
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 600px) {
+
+    .comment-item {
+        padding: 12px;
+    }
+
+    .comment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+    }
+
+    .comment-form button {
+        width: 100%;
+    }
+
+    .comment-actions {
+        gap: 6px;
+    }
+
+}

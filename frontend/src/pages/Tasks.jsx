@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import API from "../services/api";
 
 import TaskHeader from "../components/tasks/TaskHeader";
 import TaskGrid from "../components/tasks/TaskGrid";
 import TaskModal from "../components/tasks/TaskModal";
+
 import toast from "react-hot-toast";
 
 function Tasks() {
+
+    const navigate = useNavigate();
 
     const [open, setOpen] = useState(false);
 
@@ -17,11 +21,17 @@ function Tasks() {
 
     const [editingTask, setEditingTask] = useState(null);
 
+
+    // ==============================
+    // Fetch Projects
+    // ==============================
+
     useEffect(() => {
 
         fetchProjects();
 
     }, []);
+
 
     const fetchProjects = async () => {
 
@@ -41,12 +51,15 @@ function Tasks() {
 
     };
 
+
+    // ==============================
+    // Delete Task
+    // ==============================
+
     const handleDelete = async (task) => {
 
         const confirmDelete = window.confirm(
-
             `Delete "${task.title}" ?`
-
         );
 
         if (!confirmDelete) return;
@@ -64,16 +77,18 @@ function Tasks() {
         catch (error) {
 
             toast.error(
-
                 error.response?.data?.message ||
-
                 "Failed to delete task"
-
             );
 
         }
 
     };
+
+
+    // ==============================
+    // Edit Task
+    // ==============================
 
     const handleEdit = (task) => {
 
@@ -82,29 +97,71 @@ function Tasks() {
         setOpen(true);
 
     };
+
+
+    // ==============================
+    // Open Task Details
+    // ==============================
+
+    const handleOpenTask = (task) => {
+
+        navigate(`/tasks/${task._id}`);
+
+    };
+
+
     return (
 
         <>
 
             <TaskHeader
-                onCreate={() => setOpen(true)}
+                onCreate={() => {
+
+                    setEditingTask(null);
+
+                    setOpen(true);
+
+                }}
             />
 
+
             <TaskGrid
+
                 refresh={refresh}
+
                 onEdit={handleEdit}
+
                 onDelete={handleDelete}
+
+                onOpen={handleOpenTask}
+
             />
+
+
             <TaskModal
+
                 open={open}
+
                 onClose={() => {
+
                     setOpen(false);
+
                     setEditingTask(null);
+
                 }}
+
                 projects={projects}
+
                 task={editingTask}
-                onSuccess={() => setRefresh(prev => !prev)}
+
+                onSuccess={() => {
+
+                    setRefresh(prev => !prev);
+
+                }}
+
             />
+
         </>
 
     );

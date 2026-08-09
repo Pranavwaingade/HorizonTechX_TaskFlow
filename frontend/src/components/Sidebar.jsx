@@ -52,28 +52,17 @@ function Sidebar() {
           <span>Tasks</span>
         </NavLink>
 
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            toast("🚧 Team page coming soon");
-          }}
-        >
+        <NavLink to="/team">
           <Users size={20} />
           <span>Team</span>
-        </a>
+        </NavLink>
 
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            toast("🚧 Comments page coming soon");
-          }}
-        >
+        <NavLink to="/comments">
           <MessageSquare size={20} />
           <span>Comments</span>
-        </a>
-                  <NavLink to="/profile">
+        </NavLink>
+
+        <NavLink to="/profile">
           <User size={20} />
           <span>Profile</span>
         </NavLink>

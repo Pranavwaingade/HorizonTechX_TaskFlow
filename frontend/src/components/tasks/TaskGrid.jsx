@@ -3,7 +3,7 @@ import API from "../../services/api";
 import TaskCard from "./TaskCard";
 import "./TaskGrid.css";
 
-function TaskGrid({refresh ,onEdit,onDelete,}) {
+function TaskGrid({refresh ,onEdit,onDelete, onOpen }) {
 
     const [tasks, setTasks] = useState([]);
 
@@ -76,6 +76,7 @@ function TaskGrid({refresh ,onEdit,onDelete,}) {
                     task={task}
                     onEdit={onEdit}
                     onDelete={onDelete}
+                    onOpen={onOpen}
                 />
 
             ))}

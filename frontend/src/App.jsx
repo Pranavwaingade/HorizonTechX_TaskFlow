@@ -9,6 +9,9 @@ import ProjectDetails from "./pages/ProjectDetails";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import Tasks from "./pages/Tasks";
+import TaskDetails from "./pages/TaskDetails";
+import Team from "./pages/Team";
+import Comments from "./pages/Comments";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
@@ -55,27 +58,17 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/tasks" element={<Tasks />} />
-            {/* <Route path="/team" element={<Team />} /> */}
-            {/* <Route path="/comments" element={<Comments />} /> */}
+            <Route path="/tasks/:id" element={<TaskDetails />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/comments" element={<Comments />} />
             <Route path="/profile" element={<Profile />} />
             {/* <Route path="/settings" element={<Settings />} /> */}
 
           </Route>
 
-          <Route
-            path="/projects"
-            element={<Projects />}
-          />
-
-          <Route
-            path="/projects/:id"
-            element={<ProjectDetails />}
-          />
-
-          <Route
-            path="/profile"
-            element={<Profile />}
-          />
+          {/* <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:id" element={<ProjectDetails />} />
+          <Route path="/profile" element={<Profile />} /> */}
 
         </Route>
 
