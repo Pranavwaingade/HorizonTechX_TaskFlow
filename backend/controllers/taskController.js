@@ -1,18 +1,48 @@
 import Task from "../models/Task.js";
+import Project from "../models/Project.js";
+
+
+// ========================================
+// Helper
+// Check if user can access project
+// ========================================
+
+const canAccessProject = async (projectId, userId) => {
+
+    const project = await Project.findOne({
+
+        _id: projectId,
+
+        $or: [
+
+            { owner: userId },
+
+            { members: userId },
+
+        ],
+
+    });
+
+    return project;
+
+};
 
 
 // Create Task
+// Owner + Project Members
 export const createTask = async (req, res) => {
 
     try {
 
         const {
+
             title,
             description,
             status,
             priority,
             dueDate,
             project,
+
         } = req.body;
 
 
@@ -23,6 +53,29 @@ export const createTask = async (req, res) => {
                 success: false,
 
                 message: "Title and Project are required",
+
+            });
+
+        }
+
+
+        // Check project access
+
+        const projectData =
+            await canAccessProject(
+                project,
+                req.user._id
+            );
+
+
+        if (!projectData) {
+
+            return res.status(403).json({
+
+                success: false,
+
+                message:
+                    "You do not have access to this project",
 
             });
 
@@ -48,13 +101,23 @@ export const createTask = async (req, res) => {
         });
 
 
+        const populatedTask =
+            await Task.findById(task._id)
+
+                .populate(
+                    "project",
+                    "title owner members"
+                );
+
+
         res.status(201).json({
 
             success: true,
 
-            message: "Task Created Successfully",
+            message:
+                "Task Created Successfully",
 
-            task,
+            task: populatedTask,
 
         });
 
@@ -74,24 +137,62 @@ export const createTask = async (req, res) => {
 
 };
 
+
 // Get All Tasks
+// Owner + Project Members
 export const getTasks = async (req, res) => {
 
     try {
 
-        const tasks = await Task.find({
+        // Find projects accessible
+        // by logged-in user
 
-            owner: req.user._id,
+        const projects =
+            await Project.find({
 
-        })
+                $or: [
 
-            .populate("project", "title")
+                    {
+                        owner:
+                            req.user._id,
+                    },
 
-            .sort({
+                    {
+                        members:
+                            req.user._id,
+                    },
 
-                createdAt: -1,
+                ],
 
-            });
+            }).select("_id");
+
+
+        const projectIds =
+            projects.map(
+                (project) =>
+                    project._id
+            );
+
+
+        const tasks =
+            await Task.find({
+
+                project: {
+                    $in: projectIds,
+                },
+
+            })
+
+                .populate(
+                    "project",
+                    "title"
+                )
+
+                .sort({
+
+                    createdAt: -1,
+
+                });
 
 
         res.status(200).json({
@@ -120,20 +221,17 @@ export const getTasks = async (req, res) => {
 
 };
 
+
 // Get Single Task
+// Owner + Project Members
 export const getTaskById = async (req, res) => {
 
     try {
 
-        const task = await Task.findOne({
-
-            _id: req.params.id,
-
-            owner: req.user._id,
-
-        })
-
-            .populate("project", "title");
+        const task =
+            await Task.findById(
+                req.params.id
+            );
 
 
         if (!task) {
@@ -149,11 +247,48 @@ export const getTaskById = async (req, res) => {
         }
 
 
+        // Check project access
+
+        const project =
+            await canAccessProject(
+
+                task.project,
+
+                req.user._id
+
+            );
+
+
+        if (!project) {
+
+            return res.status(403).json({
+
+                success: false,
+
+                message:
+                    "You do not have access to this task",
+
+            });
+
+        }
+
+
+        const populatedTask =
+            await Task.findById(
+                task._id
+            )
+
+                .populate(
+                    "project",
+                    "title"
+                );
+
+
         res.status(200).json({
 
             success: true,
 
-            task,
+            task: populatedTask,
 
         });
 
@@ -173,19 +308,14 @@ export const getTaskById = async (req, res) => {
 
 };
 
+
 // Update Task
+// Project Owner OR Task Creator
 export const updateTask = async (req, res) => {
 
     try {
 
-        const task = await Task.findOne({
-
-            _id: req.params.id,
-
-            owner: req.user._id,
-
-        });
-
+        const task = await Task.findById(req.params.id);
 
         if (!task) {
 
@@ -200,28 +330,81 @@ export const updateTask = async (req, res) => {
         }
 
 
-        const updatedTask = await Task.findByIdAndUpdate(
+        // Check project access
 
-            req.params.id,
+        const project = await Project.findById(task.project);
 
-            req.body,
+        if (!project) {
 
-            {
+            return res.status(404).json({
 
-                new: true,
+                success: false,
 
-                runValidators: true,
+                message: "Project not found",
 
-            }
+            });
 
-        );
+        }
+
+
+        const isProjectOwner =
+            project.owner.toString() ===
+            req.user._id.toString();
+
+
+        const isTaskCreator =
+            task.owner.toString() ===
+            req.user._id.toString();
+
+
+        // Owner OR Task Creator can update
+
+        if (!isProjectOwner && !isTaskCreator) {
+
+            return res.status(403).json({
+
+                success: false,
+
+                message:
+                    "You are not authorized to update this task",
+
+            });
+
+        }
+
+
+        const updatedTask =
+            await Task.findByIdAndUpdate(
+
+                req.params.id,
+
+                req.body,
+
+                {
+
+                    new: true,
+
+                    runValidators: true,
+
+                }
+
+            )
+
+                .populate(
+
+                    "project",
+
+                    "title owner members"
+
+                );
 
 
         res.status(200).json({
 
             success: true,
 
-            message: "Task Updated Successfully",
+            message:
+                "Task Updated Successfully",
 
             task: updatedTask,
 
@@ -243,19 +426,14 @@ export const updateTask = async (req, res) => {
 
 };
 
+
 // Delete Task
+// Project Owner OR Task Creator
 export const deleteTask = async (req, res) => {
 
     try {
 
-        const task = await Task.findOne({
-
-            _id: req.params.id,
-
-            owner: req.user._id,
-
-        });
-
+        const task = await Task.findById(req.params.id);
 
         if (!task) {
 
@@ -270,6 +448,49 @@ export const deleteTask = async (req, res) => {
         }
 
 
+        // Find project
+
+        const project = await Project.findById(task.project);
+
+        if (!project) {
+
+            return res.status(404).json({
+
+                success: false,
+
+                message: "Project not found",
+
+            });
+
+        }
+
+
+        const isProjectOwner =
+            project.owner.toString() ===
+            req.user._id.toString();
+
+
+        const isTaskCreator =
+            task.owner.toString() ===
+            req.user._id.toString();
+
+
+        // Owner OR Task Creator can delete
+
+        if (!isProjectOwner && !isTaskCreator) {
+
+            return res.status(403).json({
+
+                success: false,
+
+                message:
+                    "You are not authorized to delete this task",
+
+            });
+
+        }
+
+
         await task.deleteOne();
 
 
@@ -277,7 +498,8 @@ export const deleteTask = async (req, res) => {
 
             success: true,
 
-            message: "Task Deleted Successfully",
+            message:
+                "Task Deleted Successfully",
 
         });
 

@@ -7,57 +7,157 @@ export const getDashboardStats = async (req, res) => {
 
         const userId = req.user._id;
 
-        // Stats
+        // Find projects accessible to user
+        // Owner + Project Member
+        const projects = await Project.find({
 
-        const totalProjects = await Project.countDocuments({
-            owner: userId,
-        });
+            $or: [
 
-        const totalTasks = await Task.countDocuments({
-            owner: userId,
-        });
+                {
+                    owner: userId,
+                },
 
-        const completedTasks = await Task.countDocuments({
-            owner: userId,
-            status: "Completed",
-        });
+                {
+                    members: userId,
+                },
 
-        const pendingTasks = await Task.countDocuments({
-            owner: userId,
-            status: "Pending",
-        });
+            ],
 
-        const highPriorityTasks = await Task.countDocuments({
-            owner: userId,
-            priority: "High",
-        });
+        }).select("_id");
+
+        const projectIds = projects.map(
+            (project) => project._id
+        );
+
+
+        // Project Stats
+        const totalProjects =
+            projectIds.length;
+
+
+        // Task Stats
+        const totalTasks =
+            await Task.countDocuments({
+
+                project: {
+                    $in: projectIds,
+                },
+
+            });
+
+
+        const completedTasks =
+            await Task.countDocuments({
+
+                project: {
+                    $in: projectIds,
+                },
+
+                status: "Completed",
+
+            });
+
+
+        const pendingTasks =
+            await Task.countDocuments({
+
+                project: {
+                    $in: projectIds,
+                },
+
+                status: "Pending",
+
+            });
+
+
+        const highPriorityTasks =
+            await Task.countDocuments({
+
+                project: {
+                    $in: projectIds,
+                },
+
+                priority: "High",
+
+            });
+
 
         // Recent Projects
+        const recentProjects =
+            await Project.find({
 
-        const recentProjects = await Project.find({
-            owner: userId,
-        })
-            .sort({ createdAt: -1 })
-            .limit(5);
+                _id: {
+                    $in: projectIds,
+                },
+
+            })
+
+                .populate(
+                    "owner",
+                    "name email avatar"
+                )
+
+                .populate(
+                    "members",
+                    "name email avatar"
+                )
+
+                .sort({
+                    createdAt: -1,
+                })
+
+                .limit(5);
+
 
         // Recent Tasks
+        const todayTasks =
+            await Task.find({
 
-        const todayTasks = await Task.find({
-            owner: userId,
-        })
-            .populate("project", "title")
-            .sort({ createdAt: -1 })
-            .limit(5);
+                project: {
+                    $in: projectIds,
+                },
+
+            })
+
+                .populate(
+                    "project",
+                    "title"
+                )
+
+                .sort({
+                    createdAt: -1,
+                })
+
+                .limit(5);
+
 
         // Recent Activity
+        const recentActivity =
+            await Task.find({
 
-        const recentActivity = await Task.find({
-            owner: userId,
-        })
-            .sort({ updatedAt: -1 })
-            .limit(5)
-            .select("title status updatedAt");
+                project: {
+                    $in: projectIds,
+                },
 
+            })
+
+                .sort({
+                    updatedAt: -1,
+                })
+
+                .limit(5)
+
+                .select(
+                    "title status updatedAt project"
+                )
+
+                .populate(
+                    "project",
+                    "title"
+                );
+
+
+        // Response
         res.status(200).json({
 
             success: true,
@@ -87,6 +187,8 @@ export const getDashboardStats = async (req, res) => {
     }
 
     catch (error) {
+
+        console.log(error);
 
         res.status(500).json({
 

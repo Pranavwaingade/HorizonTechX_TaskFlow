@@ -3,20 +3,48 @@ import express from "express";
 import {
     createProject,
     getProjects,
-    updateProject,deleteProject,
+    getProjectById,
+    updateProject,
+    deleteProject,
+    addProjectMember,
 } from "../controllers/projectController.js";
 
 import { protect } from "../middleware/authMiddleware.js";
-
 const router = express.Router();
 
-// Get all projects & Create project
-
+// Projects
 router
     .route("/")
     .get(protect, getProjects)
     .post(protect, createProject);
-router.put("/:id", protect, updateProject);
-router.delete("/:id", protect, deleteProject);
+
+// Get Single Project
+router.get(
+    "/:id",
+    protect,
+    getProjectById
+);
+
+// Add Member to Project
+router.post(
+    "/:id/members",
+    protect,
+    addProjectMember
+);
+
+// Update Project
+router.put(
+    "/:id",
+    protect,
+    updateProject
+);
+
+// Delete Project
+router.delete(
+    "/:id",
+    protect,
+    deleteProject
+);
+
 
 export default router;

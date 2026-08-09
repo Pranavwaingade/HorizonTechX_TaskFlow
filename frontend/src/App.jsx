@@ -57,6 +57,7 @@ function App() {
 
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:id" element={<ProjectDetails />} />
             <Route path="/tasks" element={<Tasks />} />
             <Route path="/tasks/:id" element={<TaskDetails />} />
             <Route path="/team" element={<Team />} />
@@ -67,7 +68,6 @@ function App() {
           </Route>
 
           {/* <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:id" element={<ProjectDetails />} />
           <Route path="/profile" element={<Profile />} /> */}
 
         </Route>

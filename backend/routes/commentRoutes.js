@@ -3,6 +3,7 @@ import express from "express";
 import {
     createComment,
     getComments,
+    getAllComments,
     updateComment,
     deleteComment,
 } from "../controllers/commentController.js";
@@ -11,6 +12,13 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
+// All Comments
+
+router
+    .route("/")
+    .get(protect, getAllComments);
+
+
 // Task Comments
 
 router
@@ -18,11 +26,13 @@ router
     .get(protect, getComments)
     .post(protect, createComment);
 
+
 // Individual Comment
 
 router
     .route("/:commentId")
     .put(protect, updateComment)
     .delete(protect, deleteComment);
+
 
 export default router;

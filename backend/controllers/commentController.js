@@ -1,7 +1,50 @@
 import Comment from "../models/Comment.js";
 import Task from "../models/Task.js";
+import Project from "../models/Project.js";
+
+
+// Helper
+// Check if user can access task/project
+const canAccessTask = async (taskId, userId) => {
+
+    const task = await Task.findById(taskId);
+
+    if (!task) {
+        return null;
+    }
+
+    const project = await Project.findOne({
+
+        _id: task.project,
+
+        $or: [
+
+            {
+                owner: userId,
+            },
+
+            {
+                members: userId,
+            },
+
+        ],
+
+    });
+
+    if (!project) {
+        return null;
+    }
+
+    return {
+        task,
+        project,
+    };
+
+};
+
 
 // Create Comment
+// Owner + Project Members
 export const createComment = async (req, res) => {
 
     try {
@@ -10,67 +53,89 @@ export const createComment = async (req, res) => {
 
         const { taskId } = req.params;
 
+
         if (!text || !text.trim()) {
 
             return res.status(400).json({
 
                 success: false,
 
-                message: "Comment text is required",
+                message:
+                    "Comment text is required",
 
             });
 
         }
 
-        // Check task exists and belongs to logged-in user
 
-        const task = await Task.findOne({
+        // Check Task + Project access
 
-            _id: taskId,
+        const access =
+            await canAccessTask(
 
-            owner: req.user._id,
+                taskId,
 
-        });
+                req.user._id
 
-        if (!task) {
+            );
 
-            return res.status(404).json({
+
+        if (!access) {
+
+            return res.status(403).json({
 
                 success: false,
 
-                message: "Task not found",
+                message:
+                    "You do not have access to this task",
 
             });
 
         }
 
-        const comment = await Comment.create({
 
-            text: text.trim(),
+        const comment =
+            await Comment.create({
 
-            task: taskId,
+                text: text.trim(),
 
-            user: req.user._id,
+                task: taskId,
 
-        });
+                user: req.user._id,
 
-        const populatedComment = await Comment.findById(
+            });
 
-            comment._id
 
-        ).populate(
+        const populatedComment =
+            await Comment.findById(
 
-            "user",
+                comment._id
 
-            "name email avatar"
+            )
 
-        );
+                .populate(
+
+                    "user",
+
+                    "name email avatar"
+
+                )
+
+                .populate(
+
+                    "task",
+
+                    "title"
+
+                );
+
 
         res.status(201).json({
 
             success: true,
 
-            message: "Comment added successfully",
+            message:
+                "Comment added successfully",
 
             comment: populatedComment,
 
@@ -93,54 +158,70 @@ export const createComment = async (req, res) => {
 };
 
 
-// Get Comments
+// Get Comments For Specific Task
+// Owner + Project Members
 export const getComments = async (req, res) => {
 
     try {
 
         const { taskId } = req.params;
 
-        // Check task belongs to logged-in user
 
-        const task = await Task.findOne({
+        // Check Task + Project access
 
-            _id: taskId,
+        const access =
+            await canAccessTask(
 
-            owner: req.user._id,
+                taskId,
 
-        });
+                req.user._id
 
-        if (!task) {
+            );
 
-            return res.status(404).json({
+
+        if (!access) {
+
+            return res.status(403).json({
 
                 success: false,
 
-                message: "Task not found",
+                message:
+                    "You do not have access to this task",
 
             });
 
         }
 
-        const comments = await Comment.find({
 
-            task: taskId,
+        const comments =
+            await Comment.find({
 
-        })
+                task: taskId,
 
-            .populate(
+            })
 
-                "user",
+                .populate(
 
-                "name email avatar"
+                    "user",
 
-            )
+                    "name email avatar"
 
-            .sort({
+                )
 
-                createdAt: -1,
+                .populate(
 
-            });
+                    "task",
+
+                    "title"
+
+                )
+
+                .sort({
+
+                    createdAt: -1,
+
+                });
+
 
         res.status(200).json({
 
@@ -166,14 +247,145 @@ export const getComments = async (req, res) => {
 
 };
 
+
+// Get ALL Comments
+// Owner + Project Members
+export const getAllComments = async (req, res) => {
+
+    try {
+
+        // Find projects accessible
+        // by logged-in user
+
+        const projects =
+            await Project.find({
+
+                $or: [
+
+                    {
+                        owner:
+                            req.user._id,
+                    },
+
+                    {
+                        members:
+                            req.user._id,
+                    },
+
+                ],
+
+            }).select("_id");
+
+
+        const projectIds =
+            projects.map(
+
+                (project) =>
+                    project._id
+
+            );
+
+
+        // Find tasks inside
+        // accessible projects
+
+        const tasks =
+            await Task.find({
+
+                project: {
+
+                    $in: projectIds,
+
+                },
+
+            }).select("_id");
+
+
+        const taskIds =
+            tasks.map(
+
+                (task) =>
+                    task._id
+
+            );
+
+
+        // Find comments
+        // belonging to those tasks
+
+        const comments =
+            await Comment.find({
+
+                task: {
+
+                    $in: taskIds,
+
+                },
+
+            })
+
+                .populate(
+
+                    "user",
+
+                    "name email avatar"
+
+                )
+
+                .populate(
+
+                    "task",
+
+                    "title"
+
+                )
+
+                .sort({
+
+                    createdAt: -1,
+
+                });
+
+
+        res.status(200).json({
+
+            success: true,
+
+            count: comments.length,
+
+            comments,
+
+        });
+
+    }
+
+    catch (error) {
+
+        res.status(500).json({
+
+            success: false,
+
+            message: error.message,
+
+        });
+
+    }
+
+};
+
+
 // Update Comment
+// Comment Owner Only
 export const updateComment = async (req, res) => {
 
     try {
 
-        const { commentId } = req.params;
+        const { commentId } =
+            req.params;
 
-        const { text } = req.body;
+        const { text } =
+            req.body;
+
 
         if (!text || !text.trim()) {
 
@@ -181,19 +393,25 @@ export const updateComment = async (req, res) => {
 
                 success: false,
 
-                message: "Comment text is required",
+                message:
+                    "Comment text is required",
 
             });
 
         }
 
-        const comment = await Comment.findOne({
 
-            _id: commentId,
+        // Find user's own comment
 
-            user: req.user._id,
+        const comment =
+            await Comment.findOne({
 
-        });
+                _id: commentId,
+
+                user: req.user._id,
+
+            });
+
 
         if (!comment) {
 
@@ -201,35 +419,81 @@ export const updateComment = async (req, res) => {
 
                 success: false,
 
-                message: "Comment not found or unauthorized",
+                message:
+                    "Comment not found or unauthorized",
 
             });
 
         }
 
-        comment.text = text.trim();
+
+        // Also make sure task/project
+        // is still accessible
+
+        const access =
+            await canAccessTask(
+
+                comment.task,
+
+                req.user._id
+
+            );
+
+
+        if (!access) {
+
+            return res.status(403).json({
+
+                success: false,
+
+                message:
+                    "You do not have access to this task",
+
+            });
+
+        }
+
+
+        comment.text =
+            text.trim();
+
 
         await comment.save();
 
-        const updatedComment = await Comment.findById(
 
-            comment._id
+        const updatedComment =
+            await Comment.findById(
 
-        ).populate(
+                comment._id
 
-            "user",
+            )
 
-            "name email avatar"
+                .populate(
 
-        );
+                    "user",
+
+                    "name email avatar"
+
+                )
+
+                .populate(
+
+                    "task",
+
+                    "title"
+
+                );
+
 
         res.status(200).json({
 
             success: true,
 
-            message: "Comment updated successfully",
+            message:
+                "Comment updated successfully",
 
-            comment: updatedComment,
+            comment:
+                updatedComment,
 
         });
 
@@ -251,19 +515,24 @@ export const updateComment = async (req, res) => {
 
 
 // Delete Comment
+// Comment Owner Only
 export const deleteComment = async (req, res) => {
 
     try {
 
-        const { commentId } = req.params;
+        const { commentId } =
+            req.params;
 
-        const comment = await Comment.findOne({
 
-            _id: commentId,
+        const comment =
+            await Comment.findOne({
 
-            user: req.user._id,
+                _id: commentId,
 
-        });
+                user: req.user._id,
+
+            });
+
 
         if (!comment) {
 
@@ -271,19 +540,49 @@ export const deleteComment = async (req, res) => {
 
                 success: false,
 
-                message: "Comment not found or unauthorized",
+                message:
+                    "Comment not found or unauthorized",
 
             });
 
         }
 
-        await Comment.findByIdAndDelete(commentId);
+
+        // Check task/project access
+
+        const access =
+            await canAccessTask(
+
+                comment.task,
+
+                req.user._id
+
+            );
+
+
+        if (!access) {
+
+            return res.status(403).json({
+
+                success: false,
+
+                message:
+                    "You do not have access to this task",
+
+            });
+
+        }
+
+
+        await comment.deleteOne();
+
 
         res.status(200).json({
 
             success: true,
 
-            message: "Comment deleted successfully",
+            message:
+                "Comment deleted successfully",
 
         });
 
