@@ -11,22 +11,25 @@ import API from "../services/api";
 
 import "./DashboardExtras.css";
 
+
 function DashboardExtras() {
 
-    const [activities, setActivities] = useState([]);
 
-    const [members, setMembers] = useState([]);
+    const [activities, setActivities] =
+        useState([]);
+
+
+    const [members, setMembers] =
+        useState([]);
 
 
     // ========================================
-    // Fetch Dashboard Activity + Team
+    // Fetch Dashboard Data
     // ========================================
 
     useEffect(() => {
 
         fetchDashboard();
-
-        fetchTeamMembers();
 
     }, []);
 
@@ -35,32 +38,22 @@ function DashboardExtras() {
 
         try {
 
-            const { data } = await API.get("/dashboard");
-
-            setActivities(data.recentActivity || []);
-
-        }
-
-        catch (error) {
-
-            console.log(error);
-
-        }
-
-    };
+            const { data } =
+                await API.get("/dashboard");
 
 
-    // ========================================
-    // Fetch Team Members
-    // ========================================
+            // Recent Activity
 
-    const fetchTeamMembers = async () => {
+            setActivities(
+                data.recentActivity || []
+            );
 
-        try {
 
-            const { data } = await API.get("/team");
+            // Team Members
 
-            setMembers(data.members || []);
+            setMembers(
+                data.members || []
+            );
 
         }
 
@@ -81,17 +74,25 @@ function DashboardExtras() {
 
         if (status === "Completed") {
 
-            return <CircleCheckBig size={18} />;
+            return (
+                <CircleCheckBig size={18} />
+            );
 
         }
+
 
         if (status === "In Progress") {
 
-            return <Clock3 size={18} />;
+            return (
+                <Clock3 size={18} />
+            );
 
         }
 
-        return <FolderKanban size={18} />;
+
+        return (
+            <FolderKanban size={18} />
+        );
 
     };
 
@@ -102,22 +103,35 @@ function DashboardExtras() {
 
     const formatTime = (date) => {
 
-        if (!date) return "Recently";
+        if (!date) {
 
-        return new Date(date).toLocaleString("en-IN", {
+            return "Recently";
 
-            day: "2-digit",
+        }
 
-            month: "short",
 
-            hour: "2-digit",
+        return new Date(date)
+            .toLocaleString(
+                "en-IN",
+                {
 
-            minute: "2-digit",
+                    day: "2-digit",
 
-        });
+                    month: "short",
+
+                    hour: "2-digit",
+
+                    minute: "2-digit",
+
+                }
+            );
 
     };
 
+
+    // ========================================
+    // UI
+    // ========================================
 
     return (
 
@@ -130,12 +144,17 @@ function DashboardExtras() {
 
             <div className="dashboard-card">
 
-                <h2>Recent Activity</h2>
+
+                <h2>
+                    Recent Activity
+                </h2>
 
 
                 {activities.length === 0 ? (
 
-                    <p>No Recent Activity</p>
+                    <p>
+                        No Recent Activity
+                    </p>
 
                 ) : (
 
@@ -146,9 +165,12 @@ function DashboardExtras() {
                             key={item._id}
                         >
 
+
                             <div className="activity-icon">
 
-                                {getActivityIcon(item.status)}
+                                {getActivityIcon(
+                                    item.status
+                                )}
 
                             </div>
 
@@ -156,21 +178,24 @@ function DashboardExtras() {
                             <div>
 
                                 <h4>
-
                                     {item.title}
-
                                 </h4>
 
 
                                 <small>
 
-                                    {item.status} •{" "}
+                                    {item.status}
 
-                                    {formatTime(item.updatedAt)}
+                                    {" • "}
+
+                                    {formatTime(
+                                        item.updatedAt
+                                    )}
 
                                 </small>
 
                             </div>
+
 
                         </div>
 
@@ -181,18 +206,24 @@ function DashboardExtras() {
             </div>
 
 
+
             {/* ========================= */}
             {/* Team Members */}
             {/* ========================= */}
 
             <div className="dashboard-card">
 
-                <h2>Team Members</h2>
+
+                <h2>
+                    Team Members
+                </h2>
 
 
                 {members.length === 0 ? (
 
-                    <p>No Team Members</p>
+                    <p>
+                        No Team Members
+                    </p>
 
                 ) : (
 
@@ -203,11 +234,15 @@ function DashboardExtras() {
                             key={member._id}
                         >
 
+
                             <div className="member-left">
+
 
                                 <div className="avatar">
 
-                                    <UserRound size={18} />
+                                    <UserRound
+                                        size={18}
+                                    />
 
                                 </div>
 
@@ -218,23 +253,32 @@ function DashboardExtras() {
                                         {member.name}
                                     </span>
 
+
                                     <small
                                         style={{
                                             display: "block",
-                                            color: "var(--text-light)",
+                                            color:
+                                                "var(--text-light)",
                                             fontSize: "11px",
                                             marginTop: "2px",
                                         }}
                                     >
-                                        {member.role}
+
+                                        {member.role ||
+                                            "Member"}
+
                                     </small>
 
                                 </div>
 
+
                             </div>
 
 
-                            <span className="online-dot"></span>
+                            <span
+                                className="online-dot"
+                            ></span>
+
 
                         </div>
 
@@ -250,5 +294,6 @@ function DashboardExtras() {
     );
 
 }
+
 
 export default DashboardExtras;

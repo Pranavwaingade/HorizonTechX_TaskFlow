@@ -1,72 +1,214 @@
+/* ========================================
+   Project Details
+======================================== */
+
 .project-details {
-
     padding: 20px 0;
-
 }
+
+
+/* ========================================
+   Project Header
+======================================== */
 
 .project-header {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: flex-start;
-
     gap: 20px;
-
-    margin-bottom: 20px;
-
+    margin-bottom: 30px;
 }
+
 
 .back-btn {
-
     display: inline-flex;
-
     align-items: center;
-
     gap: 8px;
-
     margin-bottom: 15px;
-
     text-decoration: none;
-
     color: var(--primary);
-
     font-weight: 600;
-
+    transition: 0.2s ease;
 }
+
+
+.back-btn:hover {
+    opacity: 0.8;
+}
+
 
 .project-header h1 {
-
     font-size: 42px;
-
     margin-bottom: 10px;
-
     color: var(--text);
-
 }
+
 
 .project-header p {
-
     color: var(--text-light);
-
     max-width: 550px;
-
+    line-height: 1.6;
 }
 
+
+/* ========================================
+   Add Task Button
+======================================== */
+
 .add-task-btn {
-
     display: flex;
-
     align-items: center;
-
     gap: 8px;
 
     padding: 14px 22px;
 
     border: none;
-
     border-radius: 12px;
+
+    background: var(--primary);
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.add-task-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+
+.add-task-btn:active {
+    transform: translateY(0);
+}
+
+
+/* ========================================
+   Project Members Card
+======================================== */
+
+.project-members-card {
+
+    margin-bottom: 30px;
+
+    padding: 24px;
+
+    background: var(--card-bg, #ffffff);
+
+    border: 1px solid var(--border, #e5e7eb);
+
+    border-radius: 16px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ========================================
+   Members Header
+======================================== */
+
+.members-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+
+.members-header h2 {
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin: 0 0 6px;
+
+    font-size: 22px;
+
+    color: var(--text);
+}
+
+
+.members-header p {
+
+    margin: 0;
+
+    color: var(--text-light);
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   Add Member
+======================================== */
+
+.add-member-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+
+.add-member-box input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 13px 15px;
+
+    border: 1px solid var(--border, #d1d5db);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: var(--background, #ffffff);
+
+    color: var(--text);
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+
+.add-member-box input:focus {
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(99, 102, 241, 0.1);
+}
+
+
+.add-member-box button {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 13px 18px;
+
+    border: none;
+
+    border-radius: 10px;
 
     background: var(--primary);
 
@@ -76,22 +218,265 @@
 
     cursor: pointer;
 
+    white-space: nowrap;
+
+    transition: 0.2s ease;
 }
 
-@media(max-width:768px) {
+
+.add-member-box button:hover {
+
+    opacity: 0.9;
+
+    transform: translateY(-1px);
+}
+
+
+.add-member-box button:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* ========================================
+   Members List
+======================================== */
+
+.members-list {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(220px, 1fr));
+
+    gap: 12px;
+}
+
+
+.project-member {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px;
+
+    border: 1px solid var(--border, #e5e7eb);
+
+    border-radius: 12px;
+
+    background: var(--background, #f9fafb);
+
+    transition: 0.2s ease;
+}
+
+
+.project-member:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.06);
+}
+
+
+/* ========================================
+   Member Avatar
+======================================== */
+
+.member-avatar {
+
+    width: 42px;
+
+    height: 42px;
+
+    min-width: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--primary);
+
+    color: white;
+
+    font-weight: 700;
+
+    font-size: 17px;
+}
+
+
+.project-member h4 {
+
+    margin: 0 0 4px;
+
+    color: var(--text);
+
+    font-size: 15px;
+}
+
+
+.project-member span {
+
+    display: block;
+
+    color: var(--text-light);
+
+    font-size: 13px;
+
+    word-break: break-word;
+}
+
+
+/* ========================================
+   No Members
+======================================== */
+
+.no-members {
+
+    margin: 10px 0 0;
+
+    padding: 20px;
+
+    text-align: center;
+
+    color: var(--text-light);
+
+    border: 1px dashed var(--border, #d1d5db);
+
+    border-radius: 10px;
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 768px) {
+
+    .project-details {
+        padding: 15px 0;
+    }
+
 
     .project-header {
 
         flex-direction: column;
 
+        gap: 15px;
+
+        margin-bottom: 25px;
     }
+
+
+    .project-header h1 {
+
+        font-size: 32px;
+    }
+
+
+    .project-header p {
+
+        font-size: 14px;
+    }
+
 
     .add-task-btn {
 
         width: 100%;
 
         justify-content: center;
+    }
 
+
+    .project-members-card {
+
+        padding: 18px;
+
+        border-radius: 14px;
+    }
+
+
+    .members-header h2 {
+
+        font-size: 20px;
+    }
+
+
+    .add-member-box {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .add-member-box input {
+
+        width: 100%;
+    }
+
+
+    .add-member-box button {
+
+        width: 100%;
+    }
+
+
+    .members-list {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ========================================
+   Small Mobile
+======================================== */
+
+@media (max-width: 480px) {
+
+    .project-header h1 {
+
+        font-size: 28px;
+    }
+
+
+    .project-members-card {
+
+        padding: 15px;
+    }
+
+
+    .project-member {
+
+        padding: 12px;
+    }
+
+
+    .member-avatar {
+
+        width: 38px;
+
+        height: 38px;
+
+        min-width: 38px;
+
+        font-size: 15px;
     }
 
 }
