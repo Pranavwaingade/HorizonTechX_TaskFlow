@@ -1,23 +1,54 @@
-import DashboardContent from "../components/DashboardContent";
-import DashboardExtras from "../components/DashboardExtras";
-import DashboardHeader from "../components/DashboardHeader";
-import StatsCards from "../components/StatsCards";
+import StatsCards from "../components/dashboard/StatsCards";
+import DashboardContent from "../components/dashboard/DashboardContent";
+import DashboardExtras from "../components/dashboard/DashboardExtras";
+
 import "./Dashboard.css";
+
 
 function Dashboard() {
 
-  return (
+    return (
 
-    <section className="dashboard">
-      <DashboardHeader />
-      <StatsCards/>
-      <DashboardContent/>
-      <DashboardExtras/>
+        <div className="dashboard-page">
 
-    </section>
+            {/* Welcome */}
 
-  );
+            <section className="dashboard-welcome">
+
+                <div>
+
+                    <p>
+                        Welcome back 👋
+                    </p>
+
+                    <h2>
+                        Let's get things done.
+                    </h2>
+
+                </div>
+
+            </section>
+
+
+            {/* Stats */}
+
+            <StatsCards />
+
+
+            {/* Recent Projects + Tasks */}
+
+            <DashboardContent />
+
+
+            {/* Activity + Team */}
+
+            <DashboardExtras />
+
+        </div>
+
+    );
 
 }
+
 
 export default Dashboard;

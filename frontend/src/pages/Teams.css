@@ -1,0 +1,450 @@
+.teams-page {
+    padding: 32px;
+    width: 100%;
+}
+
+.teams-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
+}
+
+.page-label {
+    margin: 0 0 6px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.6;
+}
+
+.teams-header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.page-description {
+    margin: 8px 0 0;
+    opacity: 0.65;
+}
+
+
+/* ========================================
+   Loading / Empty
+======================================== */
+
+.teams-state {
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    gap: 10px;
+
+    border: 1px dashed rgba(128, 128, 128, 0.35);
+    border-radius: 16px;
+}
+
+.teams-state h2 {
+    margin: 4px 0;
+}
+
+.teams-state p {
+    margin: 0;
+    opacity: 0.65;
+}
+
+
+/* ========================================
+   Projects
+======================================== */
+
+.teams-projects {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(420px, 1fr));
+
+    gap: 22px;
+}
+
+
+/* ========================================
+   Project Card
+======================================== */
+
+.team-project-card {
+    border: 1px solid rgba(128, 128, 128, 0.2);
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    background: var(--card-bg, #fff);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ========================================
+   Project Header
+======================================== */
+
+.team-project-header {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid
+        rgba(128, 128, 128, 0.15);
+}
+
+.team-project-header h2 {
+    margin: 0;
+
+    font-size: 20px;
+}
+
+.team-project-header p {
+    margin: 6px 0 0;
+
+    font-size: 13px;
+
+    opacity: 0.6;
+}
+
+.team-project-count {
+    min-width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    border-radius: 10px;
+
+    background: rgba(128, 128, 128, 0.1);
+
+    font-size: 13px;
+}
+
+
+/* ========================================
+   Members
+======================================== */
+
+.project-members {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding: 18px 0;
+}
+
+.team-member {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px;
+
+    border-radius: 12px;
+
+    transition: background 0.2s ease;
+}
+
+.team-member:hover {
+    background: rgba(128, 128, 128, 0.07);
+}
+
+
+/* ========================================
+   Avatar
+======================================== */
+
+.team-avatar {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background: rgba(128, 128, 128, 0.15);
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.team-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* ========================================
+   Member Info
+======================================== */
+
+.team-info {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.team-info h3 {
+    margin: 0;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.team-info p {
+    margin: 3px 0 0;
+
+    font-size: 12px;
+
+    opacity: 0.6;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   Owner Badge
+======================================== */
+
+.owner-badge {
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    background: rgba(80, 120, 255, 0.12);
+}
+
+
+/* ========================================
+   No Members
+======================================== */
+
+.no-members {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 20px;
+
+    font-size: 13px;
+
+    opacity: 0.55;
+}
+
+
+/* ========================================
+   Add Member Section
+======================================== */
+
+.add-member-section {
+    padding-top: 16px;
+
+    border-top: 1px solid
+        rgba(128, 128, 128, 0.15);
+}
+
+.add-member-btn {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 11px 15px;
+
+    border: 1px dashed
+        rgba(128, 128, 128, 0.35);
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.add-member-btn:hover {
+    background: rgba(128, 128, 128, 0.07);
+
+    border-color: rgba(128, 128, 128, 0.6);
+}
+
+
+/* ========================================
+   Add Member Form
+======================================== */
+
+.add-member-form {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.add-member-input-wrap {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 11px;
+
+    border: 1px solid
+        rgba(128, 128, 128, 0.3);
+
+    border-radius: 10px;
+}
+
+.add-member-input-wrap input {
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-size: 13px;
+}
+
+.add-member-submit {
+    height: 40px;
+
+    padding: 0 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    background: #111;
+
+    color: #fff;
+}
+
+.add-member-submit:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+.add-member-cancel {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid
+        rgba(128, 128, 128, 0.25);
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    cursor: pointer;
+}
+
+.add-member-cancel:hover {
+    background: rgba(128, 128, 128, 0.08);
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 700px) {
+
+    .teams-page {
+        padding: 20px;
+    }
+
+    .teams-projects {
+        grid-template-columns: 1fr;
+    }
+
+    .add-member-form {
+        flex-wrap: wrap;
+    }
+
+    .add-member-input-wrap {
+        width: 100%;
+        flex-basis: 100%;
+    }
+
+}

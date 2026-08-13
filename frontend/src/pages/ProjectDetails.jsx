@@ -2,24 +2,25 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
     ArrowLeft,
+    FolderKanban,
+    Users,
     Plus,
     UserPlus,
-    Users,
 } from "lucide-react";
 import toast from "react-hot-toast";
 
-import { useAuth } from "../context/AuthContext";
 import API from "../services/api";
+
 import KanbanBoard from "../components/KanbanBoard";
 import TaskModal from "../components/tasks/TaskModal";
 
 import "./ProjectDetails.css";
 
+
 function ProjectDetails() {
 
     const { id } = useParams();
 
-    const { user } = useAuth();
 
     // ========================================
     // State
@@ -27,17 +28,19 @@ function ProjectDetails() {
 
     const [project, setProject] = useState(null);
 
-    const [members, setMembers] = useState([]);
-
-    const [memberEmail, setMemberEmail] = useState("");
-
-    const [addingMember, setAddingMember] = useState(false);
+    const [tasks, setTasks] = useState([]);
 
     const [loading, setLoading] = useState(true);
 
-    const [tasks, setTasks] = useState([]);
+    const [tasksLoading, setTasksLoading] =
+        useState(true);
 
-    const [taskModalOpen, setTaskModalOpen] = useState(false);
+    const [taskModalOpen, setTaskModalOpen] =
+        useState(false);
+
+    const [editingTask, setEditingTask] =
+        useState(null);
+
 
     // ========================================
     // Fetch Project
@@ -49,17 +52,17 @@ function ProjectDetails() {
 
             setLoading(true);
 
-            const { data } = await API.get(
-                `/projects/${id}`
-            );
+            const { data } =
+                await API.get(`/projects/${id}`);
 
             setProject(data.project);
 
-            setMembers(
-                data.project.members || []
-            );
-
         } catch (error) {
+
+            console.log(
+                "Project details error:",
+                error
+            );
 
             toast.error(
                 error.response?.data?.message ||
@@ -74,18 +77,27 @@ function ProjectDetails() {
 
     };
 
+
     // ========================================
-    // Fetch Project Tasks
+    // Fetch Tasks
     // ========================================
 
     const fetchTasks = async () => {
 
         try {
 
-            const { data } = await API.get("/tasks");
+            setTasksLoading(true);
 
-            const projectTasks = data.tasks.filter(
-                (task) => {
+            const { data } =
+                await API.get("/tasks");
+
+
+            const allTasks =
+                data.tasks || [];
+
+
+            const projectTasks =
+                allTasks.filter((task) => {
 
                     const taskProjectId =
                         task.project?._id ||
@@ -96,24 +108,34 @@ function ProjectDetails() {
                         id?.toString()
                     );
 
-                }
-            );
+                });
+
 
             setTasks(projectTasks);
 
         } catch (error) {
+
+            console.log(
+                "Tasks error:",
+                error
+            );
 
             toast.error(
                 error.response?.data?.message ||
                 "Failed to load tasks"
             );
 
+        } finally {
+
+            setTasksLoading(false);
+
         }
 
     };
 
+
     // ========================================
-    // Page Load
+    // Initial Load
     // ========================================
 
     useEffect(() => {
@@ -121,9 +143,105 @@ function ProjectDetails() {
         if (!id) return;
 
         fetchProject();
+
         fetchTasks();
 
     }, [id]);
+
+
+    // ========================================
+    // Create Task
+    // ========================================
+
+    const handleAddTask = () => {
+
+        setEditingTask(null);
+
+        setTaskModalOpen(true);
+
+    };
+
+
+    // ========================================
+    // Edit Task
+    // ========================================
+
+    const handleEditTask = (task) => {
+
+        setEditingTask(task);
+
+        setTaskModalOpen(true);
+
+    };
+
+
+    // ========================================
+    // Delete Task
+    // ========================================
+
+    const handleDeleteTask = async (taskId) => {
+
+        const confirmed =
+            window.confirm(
+                "Are you sure you want to delete this task?"
+            );
+
+
+        if (!confirmed) return;
+
+
+        try {
+
+            await API.delete(
+                `/tasks/${taskId}`
+            );
+
+            toast.success(
+                "Task deleted successfully 🗑️"
+            );
+
+            fetchTasks();
+
+        } catch (error) {
+
+            console.log(
+                "Delete task error:",
+                error
+            );
+
+            toast.error(
+                error.response?.data?.message ||
+                "Failed to delete task"
+            );
+
+        }
+
+    };
+
+
+    // ========================================
+    // Task Success
+    // ========================================
+
+    const handleTaskSuccess = () => {
+
+        fetchTasks();
+
+    };
+
+
+    // ========================================
+    // Close Task Modal
+    // ========================================
+
+    const handleCloseTaskModal = () => {
+
+        setTaskModalOpen(false);
+
+        setEditingTask(null);
+
+    };
+
 
     // ========================================
     // Loading
@@ -132,14 +250,25 @@ function ProjectDetails() {
     if (loading) {
 
         return (
-            <section className="project-details">
 
-                <p>Loading project...</p>
+            <section className="project-details-page">
+
+                <div className="project-details-state">
+
+                    <FolderKanban size={30} />
+
+                    <p>
+                        Loading project...
+                    </p>
+
+                </div>
 
             </section>
+
         );
 
     }
+
 
     // ========================================
     // Project Not Found
@@ -148,106 +277,50 @@ function ProjectDetails() {
     if (!project) {
 
         return (
-            <section className="project-details">
+
+            <section className="project-details-page">
 
                 <Link
                     to="/projects"
-                    className="back-btn"
+                    className="project-back-btn"
                 >
 
-                    <ArrowLeft size={18} />
+                    <ArrowLeft size={17} />
 
-                    Back
+                    Back to Projects
 
                 </Link>
 
-                <h2>
-                    Project not found
-                </h2>
+
+                <div className="project-details-state">
+
+                    <FolderKanban size={30} />
+
+                    <h2>
+                        Project not found
+                    </h2>
+
+                    <p>
+                        This project may have been
+                        deleted or you don't have access.
+                    </p>
+
+                </div>
 
             </section>
+
         );
 
     }
 
-    // ========================================
-    // Check Project Owner
-    // ========================================
-
-    const projectOwnerId =
-        project.owner?._id ||
-        project.owner;
-
-    const currentUserId =
-        user?._id ||
-        user?.id;
-
-    const isProjectOwner =
-        projectOwnerId?.toString() ===
-        currentUserId?.toString();
 
     // ========================================
-    // Add Member
-    // OWNER ONLY
+    // Members
     // ========================================
 
-    const handleAddMember = async () => {
+    const members =
+        project.members || [];
 
-        if (!memberEmail.trim()) {
-
-            toast.error("Enter member email");
-
-            return;
-
-        }
-
-        try {
-
-            setAddingMember(true);
-
-            const { data } = await API.post(
-                `/projects/${id}/members`,
-                {
-                    email: memberEmail.trim(),
-                }
-            );
-
-            toast.success(
-                "Member added successfully 🎉"
-            );
-
-            setProject(data.project);
-
-            setMembers(
-                data.project.members || []
-            );
-
-            setMemberEmail("");
-
-        } catch (error) {
-
-            toast.error(
-                error.response?.data?.message ||
-                "Failed to add member"
-            );
-
-        } finally {
-
-            setAddingMember(false);
-
-        }
-
-    };
-
-    // ========================================
-    // Task Created Successfully
-    // ========================================
-
-    const handleTaskCreated = () => {
-
-        fetchTasks();
-
-    };
 
     // ========================================
     // UI
@@ -255,48 +328,67 @@ function ProjectDetails() {
 
     return (
 
-        <section className="project-details">
+        <section className="project-details-page">
+
+
+            {/* =================================
+                Back
+            ================================= */}
+
+            <Link
+                to="/projects"
+                className="project-back-btn"
+            >
+
+                <ArrowLeft size={17} />
+
+                Back to Projects
+
+            </Link>
+
 
             {/* =================================
                 Project Header
             ================================= */}
 
-            <div className="project-header">
+            <div className="project-details-header">
 
-                <div>
+                <div className="project-details-icon">
 
-                    <Link
-                        to="/projects"
-                        className="back-btn"
-                    >
+                    <FolderKanban size={24} />
 
-                        <ArrowLeft size={18} />
+                </div>
 
-                        Back
 
-                    </Link>
+                <div className="project-details-heading">
+
+                    <p className="page-label">
+                        Project
+                    </p>
 
                     <h1>
                         {project.title}
                     </h1>
 
-                    <p>
+                    <p className="project-description">
+
                         {project.description ||
                             "No project description"}
+
                     </p>
 
                 </div>
 
+
                 {/* Add Task */}
 
                 <button
-                    className="add-task-btn"
-                    onClick={() =>
-                        setTaskModalOpen(true)
-                    }
+                    type="button"
+                    className="project-add-task-btn"
+                    onClick={handleAddTask}
                 >
 
-                    <Plus size={18} />
+                    <Plus size={17} />
 
                     Add Task
 
@@ -304,13 +396,14 @@ function ProjectDetails() {
 
             </div>
 
+
             {/* =================================
                 Team Members
             ================================= */}
 
-            <div className="project-members-card">
+            <div className="project-members-section">
 
-                <div className="members-header">
+                <div className="section-heading">
 
                     <div>
 
@@ -323,63 +416,36 @@ function ProjectDetails() {
                         </h2>
 
                         <p>
-                            Project members
-                            collaborating on this project.
+                            People collaborating
+                            on this project.
                         </p>
 
                     </div>
 
+
+                    <span className="member-count">
+
+                        {members.length}
+
+                        {" "}
+
+                        {members.length === 1
+                            ? "Member"
+                            : "Members"}
+
+                    </span>
+
                 </div>
 
-                {/* =================================
-                    Add Member
-                    OWNER ONLY
-                ================================= */}
-
-                {isProjectOwner && (
-
-                    <div className="add-member-box">
-
-                        <input
-                            type="email"
-                            placeholder="Enter registered user email"
-                            value={memberEmail}
-                            onChange={(e) =>
-                                setMemberEmail(
-                                    e.target.value
-                                )
-                            }
-                        />
-
-                        <button
-                            onClick={handleAddMember}
-                            disabled={addingMember}
-                        >
-
-                            <UserPlus size={17} />
-
-                            {addingMember
-                                ? "Adding..."
-                                : "Add Member"}
-
-                        </button>
-
-                    </div>
-
-                )}
-
-                {/* =================================
-                    Members List
-                ================================= */}
 
                 {members.length > 0 ? (
 
-                    <div className="members-list">
+                    <div className="members-grid">
 
                         {members.map((member) => (
 
                             <div
-                                className="project-member"
+                                className="member-card"
                                 key={member._id}
                             >
 
@@ -387,19 +453,22 @@ function ProjectDetails() {
 
                                     {member.name
                                         ?.charAt(0)
-                                        ?.toUpperCase()}
+                                        ?.toUpperCase() || "U"}
 
                                 </div>
+
 
                                 <div>
 
                                     <h4>
-                                        {member.name}
+                                        {member.name ||
+                                            "Unknown User"}
                                     </h4>
 
-                                    <span>
-                                        {member.email}
-                                    </span>
+                                    <p>
+                                        {member.email ||
+                                            "No email"}
+                                    </p>
 
                                 </div>
 
@@ -411,32 +480,91 @@ function ProjectDetails() {
 
                 ) : (
 
-                    <p className="no-members">
-                        No team members added yet.
-                    </p>
+                    <div className="no-members">
+
+                        <Users size={24} />
+
+                        <p>
+                            No team members yet.
+                        </p>
+
+                    </div>
 
                 )}
 
             </div>
 
+
             {/* =================================
-                Tasks / Kanban
+                Tasks
             ================================= */}
 
-            <KanbanBoard
-                tasks={tasks}
-            />
+            <div className="project-tasks-section">
+
+                <div className="section-heading">
+
+                    <div>
+
+                        <h2>
+                            Tasks
+                        </h2>
+
+                        <p>
+                            Manage tasks for this project.
+                        </p>
+
+                    </div>
+
+
+                    <span className="task-count">
+
+                        {tasks.length}
+
+                        {" "}
+
+                        {tasks.length === 1
+                            ? "Task"
+                            : "Tasks"}
+
+                    </span>
+
+                </div>
+
+
+                {tasksLoading ? (
+
+                    <div className="tasks-loading">
+
+                        <FolderKanban size={24} />
+
+                        <p>
+                            Loading tasks...
+                        </p>
+
+                    </div>
+
+                ) : (
+
+                    <KanbanBoard
+                        tasks={tasks}
+                        onEdit={handleEditTask}
+                        onDelete={handleDeleteTask}
+                    />
+
+                )}
+
+            </div>
+
 
             {/* =================================
-                Create Task Modal
+                Task Modal
             ================================= */}
 
             <TaskModal
                 open={taskModalOpen}
-                onClose={() =>
-                    setTaskModalOpen(false)
-                }
-                onSuccess={handleTaskCreated}
+                onClose={handleCloseTaskModal}
+                onSuccess={handleTaskSuccess}
+                task={editingTask}
                 projectId={id}
                 projects={[]}
             />
@@ -446,5 +574,6 @@ function ProjectDetails() {
     );
 
 }
+
 
 export default ProjectDetails;

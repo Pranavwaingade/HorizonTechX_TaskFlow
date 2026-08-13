@@ -1,90 +1,109 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Navigate,
+} from "react-router-dom";
 
-import Home from "./pages/Home";
+import AppLayout from "./components/layout/AppLayout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ProtectedRoute from "./routes/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
 import ProjectDetails from "./pages/ProjectDetails";
-import Profile from "./pages/Profile";
-import NotFound from "./pages/NotFound";
 import Tasks from "./pages/Tasks";
-import TaskDetails from "./pages/TaskDetails";
-import Team from "./pages/Team";
-import Comments from "./pages/Comments";
-
-import ProtectedRoute from "./components/ProtectedRoute";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-
-import DashboardLayout from "./layouts/DashboardLayout";
+import Teams from "./pages/Teams";
 
 function App() {
 
-  const location = useLocation();
+    return (
 
-  const authPages =
-    location.pathname === "/login" ||
-    location.pathname === "/register";
+        <BrowserRouter>
 
-  const dashboardPages =
-    location.pathname.startsWith("/dashboard") ||
-    location.pathname.startsWith("/projects") ||
-    location.pathname.startsWith("/profile");
+            <Routes>
 
-  const hideLayout =
-    location.pathname === "/login" ||
-    location.pathname === "/register";
+                {/* ==============================
+                    Public Routes
+                ============================== */}
 
-  return (
-    <>
+                <Route
+                    path="/"
+                    element={
+                        <Navigate
+                            to="/dashboard"
+                            replace
+                        />
+                    }
+                />
 
-      {!hideLayout && <Navbar />}
+                <Route
+                    path="/login"
+                    element={<Login />}
+                />
 
-      <Routes>
+                <Route
+                    path="/register"
+                    element={<Register />}
+                />
 
-        {/* Public Routes */}
 
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+                {/* ==============================
+                    Protected Routes
+                ============================== */}
 
-        {/* Protected Routes */}
+                <Route element={<ProtectedRoute />}>
 
-        <Route element={<ProtectedRoute />}>
+                    <Route element={<AppLayout />}>
 
-          <Route element={<DashboardLayout />}>
+                        <Route
+                            path="/dashboard"
+                            element={<Dashboard />}
+                        />
 
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:id" element={<ProjectDetails />} />
-            <Route path="/tasks" element={<Tasks />} />
-            <Route path="/tasks/:id" element={<TaskDetails />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/comments" element={<Comments />} />
-            <Route path="/profile" element={<Profile />} />
-            {/* <Route path="/settings" element={<Settings />} /> */}
+                        <Route
+                            path="/projects"
+                            element={<Projects />}
+                        />
 
-          </Route>
+                        <Route
+                            path="/projects/:id"
+                            element={<ProjectDetails />}
+                        />
+                        <Route
+                            path="/tasks"
+                            element={<Tasks />}
+                        />
+                        <Route
+                            path="/teams"
+                            element={<Teams />}
+                        />
 
-          {/* <Route path="/projects" element={<Projects />} />
-          <Route path="/profile" element={<Profile />} /> */}
 
-        </Route>
+                    </Route>
 
-        {/* 404 */}
+                </Route>
 
-        <Route
-          path="*"
-          element={<NotFound />}
-        />
+                {/* ==============================
+                    Invalid URL
+                ============================== */}
 
-      </Routes>
+                <Route
+                    path="*"
+                    element={
+                        <Navigate
+                            to="/dashboard"
+                            replace
+                        />
+                    }
+                />
 
-      {!hideLayout && <Footer />}
+            </Routes>
 
-    </>
-  );
+        </BrowserRouter>
+
+    );
+
 }
 
 export default App;

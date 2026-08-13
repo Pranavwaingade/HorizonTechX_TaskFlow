@@ -1,0 +1,101 @@
+/* .app-layout {
+
+    --sidebar-width: 270px;
+
+    min-height: 100vh;
+
+    background: #f8fafc;
+
+}
+
+
+/* ========================================
+   Main Application Area
+======================================== */
+
+/* .app-main {
+
+    min-width: 0;
+
+    width: calc(100% - var(--sidebar-width));
+
+    min-height: 100vh;
+
+    margin-left: var(--sidebar-width);
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/* ========================================
+   Page Content
+======================================== */
+
+/* .app-content {
+
+    flex: 1;
+
+    min-width: 0;
+
+    overflow-x: hidden;
+
+} */
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+/*@media (max-width: 900px) { 
+
+    .app-layout {
+
+        --sidebar-width: 0px;
+
+    }
+
+    .app-main {
+
+        width: 100%;
+
+        margin-left: 0;
+
+    }
+
+}  */
+
+
+.app-layout {
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+
+.app-main {
+    min-height: 100vh;
+    margin-left: 250px;
+}
+
+
+.app-content {
+    min-height: calc(100vh - 72px);
+    padding: 32px 38px;
+    box-sizing: border-box;
+}
+
+
+@media (max-width: 768px) {
+
+    .app-main {
+        margin-left: 70px;
+    }
+
+
+    .app-content {
+        padding: 24px 18px;
+    }
+
+}

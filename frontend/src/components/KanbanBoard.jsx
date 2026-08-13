@@ -2,73 +2,154 @@ import TaskCard from "./TaskCard";
 
 import "./KanbanBoard.css";
 
-function KanbanBoard({ tasks }) {
 
-    const todo = tasks.filter((t) => t.status === "todo");
+function KanbanBoard({
+    tasks = [],
+    onEdit,
+    onDelete,
+}) {
 
-    const progress = tasks.filter(
-        (t) => t.status === "progress"
+    // ========================================
+    // Separate Tasks By Status
+    // ========================================
+
+    const pendingTasks = tasks.filter(
+        (task) => task.status === "Pending"
     );
 
-    const done = tasks.filter(
-        (t) => t.status === "done"
+    const progressTasks = tasks.filter(
+        (task) => task.status === "In Progress"
     );
+
+    const completedTasks = tasks.filter(
+        (task) => task.status === "Completed"
+    );
+
+
+    // ========================================
+    // Render Tasks
+    // ========================================
+
+    const renderTasks = (taskList) => {
+
+        if (taskList.length === 0) {
+
+            return (
+                <div className="empty-kanban">
+
+                    <p>
+                        No tasks
+                    </p>
+
+                </div>
+            );
+
+        }
+
+
+        return taskList.map((task) => (
+
+            <TaskCard
+                key={task._id}
+                task={task}
+                onEdit={onEdit}
+                onDelete={onDelete}
+            />
+
+        ));
+
+    };
+
+
+    // ========================================
+    // UI
+    // ========================================
 
     return (
 
         <div className="kanban-board">
 
+
+            {/* =================================
+                Pending
+            ================================= */}
+
             <div className="kanban-column">
 
-                <h3>📌 To Do</h3>
+                <div className="kanban-column-header">
 
-                {todo.map((task) => (
+                    <h3>
+                        📌 To Do
+                    </h3>
 
-                    <TaskCard
+                    <span>
+                        {pendingTasks.length}
+                    </span>
 
-                        key={task.id}
+                </div>
 
-                        task={task}
 
-                    />
+                <div className="kanban-tasks">
 
-                ))}
+                    {renderTasks(pendingTasks)}
+
+                </div>
 
             </div>
 
+
+            {/* =================================
+                In Progress
+            ================================= */}
+
             <div className="kanban-column">
 
-                <h3>🚀 In Progress</h3>
+                <div className="kanban-column-header">
 
-                {progress.map((task) => (
+                    <h3>
+                        🚀 In Progress
+                    </h3>
 
-                    <TaskCard
+                    <span>
+                        {progressTasks.length}
+                    </span>
 
-                        key={task.id}
+                </div>
 
-                        task={task}
 
-                    />
+                <div className="kanban-tasks">
 
-                ))}
+                    {renderTasks(progressTasks)}
+
+                </div>
 
             </div>
 
+
+            {/* =================================
+                Completed
+            ================================= */}
+
             <div className="kanban-column">
 
-                <h3>✅ Done</h3>
+                <div className="kanban-column-header">
 
-                {done.map((task) => (
+                    <h3>
+                        ✅ Completed
+                    </h3>
 
-                    <TaskCard
+                    <span>
+                        {completedTasks.length}
+                    </span>
 
-                        key={task.id}
+                </div>
 
-                        task={task}
 
-                    />
+                <div className="kanban-tasks">
 
-                ))}
+                    {renderTasks(completedTasks)}
+
+                </div>
 
             </div>
 
@@ -77,5 +158,6 @@ function KanbanBoard({ tasks }) {
     );
 
 }
+
 
 export default KanbanBoard;

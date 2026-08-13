@@ -1,22 +1,169 @@
-.dashboard {
-    min-height: 100vh;
-    padding-bottom: 100px;
+
+.dashboard-label {
+
+    margin: 0 0 5px;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
 }
 
-.dashboard h1{
 
-font-size:38px;
+.dashboard-topbar h1 {
 
-margin-bottom:10px;
+    margin: 0;
 
-color:var(--text);
+    color: #111827;
+
+    font-size: 30px;
+
+    letter-spacing: -0.8px;
 
 }
 
-.dashboard p{
 
-font-size:17px;
+/* ========================================
+   Welcome
+======================================== */
 
-color:var(--text-light);
+.dashboard-welcome {
+
+    padding: 28px 30px;
+
+    margin-bottom: 28px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #6366f1
+        );
+
+    color: white;
+
+    box-shadow:
+        0 12px 30px rgba(79, 70, 229, 0.18);
+
+}
+
+
+.dashboard-welcome p {
+
+    margin: 0 0 6px;
+
+    font-size: 14px;
+
+    opacity: 0.85;
+
+}
+
+
+.dashboard-welcome h2 {
+
+    margin: 0;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+}
+
+
+/* ========================================
+   Placeholder
+======================================== */
+
+.dashboard-placeholder {
+
+    min-height: 220px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 18px;
+
+    background: white;
+
+    text-align: center;
+
+}
+
+
+.dashboard-placeholder h3 {
+
+    margin: 0 0 8px;
+
+    color: #111827;
+
+    font-size: 20px;
+
+}
+
+
+.dashboard-placeholder p {
+
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+}
+
+
+/* ========================================
+   Mobile
+======================================== */
+
+@media (max-width: 768px) {
+
+    .dashboard-main {
+
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 24px 18px;
+
+    }
+
+
+    .dashboard-topbar h1 {
+
+        font-size: 25px;
+
+    }
+
+
+    .dashboard-welcome {
+
+        padding: 22px;
+
+    }
+
+
+    .dashboard-welcome h2 {
+
+        font-size: 21px;
+
+    }
 
 }

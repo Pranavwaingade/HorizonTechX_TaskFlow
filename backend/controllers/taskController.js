@@ -28,8 +28,11 @@ const canAccessProject = async (projectId, userId) => {
 };
 
 
+// ========================================
 // Create Task
 // Owner + Project Members
+// ========================================
+
 export const createTask = async (req, res) => {
 
     try {
@@ -42,6 +45,7 @@ export const createTask = async (req, res) => {
             priority,
             dueDate,
             project,
+            assignedTo,
 
         } = req.body;
 
@@ -52,7 +56,8 @@ export const createTask = async (req, res) => {
 
                 success: false,
 
-                message: "Title and Project are required",
+                message:
+                    "Title and Project are required",
 
             });
 
@@ -63,8 +68,11 @@ export const createTask = async (req, res) => {
 
         const projectData =
             await canAccessProject(
+
                 project,
+
                 req.user._id
+
             );
 
 
@@ -78,6 +86,46 @@ export const createTask = async (req, res) => {
                     "You do not have access to this project",
 
             });
+
+        }
+
+
+        // =================================
+        // Validate Assigned User
+        // =================================
+
+        if (assignedTo) {
+
+            const isProjectMember =
+                projectData.members.some(
+
+                    (memberId) =>
+                        memberId.toString() ===
+                        assignedTo.toString()
+
+                );
+
+
+            const isProjectOwner =
+                projectData.owner.toString() ===
+                assignedTo.toString();
+
+
+            if (
+                !isProjectMember &&
+                !isProjectOwner
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Assigned user must be a project member",
+
+                });
+
+            }
 
         }
 
@@ -98,6 +146,9 @@ export const createTask = async (req, res) => {
 
             owner: req.user._id,
 
+            assignedTo:
+                assignedTo || null,
+
         });
 
 
@@ -105,8 +156,19 @@ export const createTask = async (req, res) => {
             await Task.findById(task._id)
 
                 .populate(
+
                     "project",
+
                     "title owner members"
+
+                )
+
+                .populate(
+
+                    "assignedTo",
+
+                    "name email avatar"
+
                 );
 
 
@@ -138,8 +200,11 @@ export const createTask = async (req, res) => {
 };
 
 
+// ========================================
 // Get All Tasks
 // Owner + Project Members
+// ========================================
+
 export const getTasks = async (req, res) => {
 
     try {
@@ -169,8 +234,10 @@ export const getTasks = async (req, res) => {
 
         const projectIds =
             projects.map(
+
                 (project) =>
                     project._id
+
             );
 
 
@@ -178,14 +245,27 @@ export const getTasks = async (req, res) => {
             await Task.find({
 
                 project: {
+
                     $in: projectIds,
+
                 },
 
             })
 
                 .populate(
+
                     "project",
+
                     "title"
+
+                )
+
+                .populate(
+
+                    "assignedTo",
+
+                    "name email avatar"
+
                 )
 
                 .sort({
@@ -222,15 +302,20 @@ export const getTasks = async (req, res) => {
 };
 
 
+// ========================================
 // Get Single Task
 // Owner + Project Members
+// ========================================
+
 export const getTaskById = async (req, res) => {
 
     try {
 
         const task =
             await Task.findById(
+
                 req.params.id
+
             );
 
 
@@ -240,7 +325,8 @@ export const getTaskById = async (req, res) => {
 
                 success: false,
 
-                message: "Task not found",
+                message:
+                    "Task not found",
 
             });
 
@@ -275,12 +361,25 @@ export const getTaskById = async (req, res) => {
 
         const populatedTask =
             await Task.findById(
+
                 task._id
+
             )
 
                 .populate(
+
                     "project",
+
                     "title"
+
+                )
+
+                .populate(
+
+                    "assignedTo",
+
+                    "name email avatar"
+
                 );
 
 
@@ -309,13 +408,22 @@ export const getTaskById = async (req, res) => {
 };
 
 
+// ========================================
 // Update Task
 // Project Owner OR Task Creator
+// ========================================
+
 export const updateTask = async (req, res) => {
 
     try {
 
-        const task = await Task.findById(req.params.id);
+        const task =
+            await Task.findById(
+
+                req.params.id
+
+            );
+
 
         if (!task) {
 
@@ -323,7 +431,8 @@ export const updateTask = async (req, res) => {
 
                 success: false,
 
-                message: "Task not found",
+                message:
+                    "Task not found",
 
             });
 
@@ -332,7 +441,13 @@ export const updateTask = async (req, res) => {
 
         // Check project access
 
-        const project = await Project.findById(task.project);
+        const project =
+            await Project.findById(
+
+                task.project
+
+            );
+
 
         if (!project) {
 
@@ -340,7 +455,8 @@ export const updateTask = async (req, res) => {
 
                 success: false,
 
-                message: "Project not found",
+                message:
+                    "Project not found",
 
             });
 
@@ -359,7 +475,10 @@ export const updateTask = async (req, res) => {
 
         // Owner OR Task Creator can update
 
-        if (!isProjectOwner && !isTaskCreator) {
+        if (
+            !isProjectOwner &&
+            !isTaskCreator
+        ) {
 
             return res.status(403).json({
 
@@ -369,6 +488,54 @@ export const updateTask = async (req, res) => {
                     "You are not authorized to update this task",
 
             });
+
+        }
+
+
+        // =================================
+        // Validate assignedTo
+        // =================================
+
+        if (
+            req.body.assignedTo !== undefined &&
+            req.body.assignedTo !== null &&
+            req.body.assignedTo !== ""
+        ) {
+
+            const assignedUser =
+                req.body.assignedTo;
+
+
+            const isProjectMember =
+                project.members.some(
+
+                    (memberId) =>
+                        memberId.toString() ===
+                        assignedUser.toString()
+
+                );
+
+
+            const isProjectOwnerUser =
+                project.owner.toString() ===
+                assignedUser.toString();
+
+
+            if (
+                !isProjectMember &&
+                !isProjectOwnerUser
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Assigned user must be a project member",
+
+                });
+
+            }
 
         }
 
@@ -395,6 +562,14 @@ export const updateTask = async (req, res) => {
                     "project",
 
                     "title owner members"
+
+                )
+
+                .populate(
+
+                    "assignedTo",
+
+                    "name email avatar"
 
                 );
 
@@ -427,13 +602,22 @@ export const updateTask = async (req, res) => {
 };
 
 
+// ========================================
 // Delete Task
 // Project Owner OR Task Creator
+// ========================================
+
 export const deleteTask = async (req, res) => {
 
     try {
 
-        const task = await Task.findById(req.params.id);
+        const task =
+            await Task.findById(
+
+                req.params.id
+
+            );
+
 
         if (!task) {
 
@@ -441,7 +625,8 @@ export const deleteTask = async (req, res) => {
 
                 success: false,
 
-                message: "Task not found",
+                message:
+                    "Task not found",
 
             });
 
@@ -450,7 +635,13 @@ export const deleteTask = async (req, res) => {
 
         // Find project
 
-        const project = await Project.findById(task.project);
+        const project =
+            await Project.findById(
+
+                task.project
+
+            );
+
 
         if (!project) {
 
@@ -458,7 +649,8 @@ export const deleteTask = async (req, res) => {
 
                 success: false,
 
-                message: "Project not found",
+                message:
+                    "Project not found",
 
             });
 
@@ -477,7 +669,10 @@ export const deleteTask = async (req, res) => {
 
         // Owner OR Task Creator can delete
 
-        if (!isProjectOwner && !isTaskCreator) {
+        if (
+            !isProjectOwner &&
+            !isTaskCreator
+        ) {
 
             return res.status(403).json({
 

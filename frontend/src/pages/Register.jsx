@@ -1,149 +1,355 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {
+    Eye,
+    EyeOff,
+    Lock,
+    Mail,
+    User,
+} from "lucide-react";
 import toast from "react-hot-toast";
 
-import API from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
-import InputField from "../components/auth/InputField";
-import "../components/auth/Auth.css";
+import "./Login.css";
 
 function Register() {
 
     const navigate = useNavigate();
 
-    const { login } = useAuth();
-
-    const [loading, setLoading] = useState(false);
+    const { register } = useAuth();
 
     const [formData, setFormData] = useState({
-
         name: "",
         email: "",
-        password: ""
-
+        password: "",
+        confirmPassword: "",
     });
+
+    const [showPassword, setShowPassword] =
+        useState(false);
+
+    const [showConfirmPassword, setShowConfirmPassword] =
+        useState(false);
+
+    const [loading, setLoading] =
+        useState(false);
+
 
     const handleChange = (e) => {
 
         setFormData({
-
             ...formData,
-
-            [e.target.name]: e.target.value
-
+            [e.target.name]: e.target.value,
         });
 
     };
+
 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
 
-        if (!formData.name || !formData.email || !formData.password) {
 
-            return toast.error("Please fill all fields");
+        if (
+            !formData.name.trim() ||
+            !formData.email.trim() ||
+            !formData.password ||
+            !formData.confirmPassword
+        ) {
+
+            toast.error(
+                "Please fill all fields"
+            );
+
+            return;
 
         }
+
+
+        if (
+            formData.password !==
+            formData.confirmPassword
+        ) {
+
+            toast.error(
+                "Passwords do not match"
+            );
+
+            return;
+
+        }
+
+
+        if (formData.password.length < 6) {
+
+            toast.error(
+                "Password must be at least 6 characters"
+            );
+
+            return;
+
+        }
+
 
         try {
 
             setLoading(true);
 
-            const { data } = await API.post("/auth/register", formData);
 
-            login(data.user, data.token);
+            await register(
+                formData.name.trim(),
+                formData.email.trim(),
+                formData.password
+            );
 
-            toast.success(data.message);
+
+            toast.success(
+                "Account created successfully 🎉"
+            );
+
 
             navigate("/dashboard");
 
-        }
 
-        catch (error) {
+        } catch (error) {
 
             toast.error(
-
                 error.response?.data?.message ||
-
-                "Registration Failed"
-
+                "Registration failed"
             );
 
-        }
-
-        finally {
+        } finally {
 
             setLoading(false);
 
         }
 
     };
+
+
     return (
 
-        <div className="auth-container">
+        <main className="auth-page">
 
             <div className="auth-card">
 
-                <div className="auth-logo">🚀</div>
+                {/* Brand */}
 
-                <h1 className="auth-title">
-                    Create Account
-                </h1>
+                <div className="auth-brand">
 
-                <p className="auth-subtitle">
-                    Join TaskFlow and manage your projects efficiently.
-                </p>
+                    <div className="auth-logo">
+                        P
+                    </div>
+
+                    <h1>
+                        TaskFlow
+                    </h1>
+
+                    <p>
+                        Manage projects.
+                        Complete tasks.
+                    </p>
+
+                </div>
+
+
+                {/* Heading */}
+
+                <div className="auth-heading">
+
+                    <h2>
+                        Create Account 🚀
+                    </h2>
+
+                    <p>
+                        Start managing your
+                        projects with TaskFlow.
+                    </p>
+
+                </div>
+
+
+                {/* Form */}
 
                 <form
                     className="auth-form"
                     onSubmit={handleSubmit}
                 >
 
-                    <InputField
-                        label="Full Name"
-                        name="name"
-                        type="text"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Enter your full name"
-                        required
-                    />
+                    {/* Name */}
 
-                    <InputField
-                        label="Email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Enter your email"
-                        required
-                    />
+                    <div className="form-group">
 
-                    <InputField
-                        label="Password"
-                        name="password"
-                        type="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        placeholder="Create password"
-                        required
-                    />
+                        <label htmlFor="name">
+                            Full Name
+                        </label>
+
+                        <div className="input-wrapper">
+
+                            <User size={18} />
+
+                            <input
+                                id="name"
+                                type="text"
+                                name="name"
+                                placeholder="Enter your name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                autoComplete="name"
+                            />
+
+                        </div>
+
+                    </div>
+
+
+                    {/* Email */}
+
+                    <div className="form-group">
+
+                        <label htmlFor="email">
+                            Email
+                        </label>
+
+                        <div className="input-wrapper">
+
+                            <Mail size={18} />
+
+                            <input
+                                id="email"
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                autoComplete="email"
+                            />
+
+                        </div>
+
+                    </div>
+
+
+                    {/* Password */}
+
+                    <div className="form-group">
+
+                        <label htmlFor="password">
+                            Password
+                        </label>
+
+                        <div className="input-wrapper">
+
+                            <Lock size={18} />
+
+                            <input
+                                id="password"
+                                type={
+                                    showPassword
+                                        ? "text"
+                                        : "password"
+                                }
+                                name="password"
+                                placeholder="Create password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                autoComplete="new-password"
+                            />
+
+                            <button
+                                type="button"
+                                className="password-toggle"
+                                onClick={() =>
+                                    setShowPassword(
+                                        !showPassword
+                                    )
+                                }
+                            >
+
+                                {showPassword
+                                    ? <EyeOff size={18} />
+                                    : <Eye size={18} />
+                                }
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    {/* Confirm Password */}
+
+                    <div className="form-group">
+
+                        <label htmlFor="confirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <div className="input-wrapper">
+
+                            <Lock size={18} />
+
+                            <input
+                                id="confirmPassword"
+                                type={
+                                    showConfirmPassword
+                                        ? "text"
+                                        : "password"
+                                }
+                                name="confirmPassword"
+                                placeholder="Confirm password"
+                                value={
+                                    formData.confirmPassword
+                                }
+                                onChange={handleChange}
+                                autoComplete="new-password"
+                            />
+
+                            <button
+                                type="button"
+                                className="password-toggle"
+                                onClick={() =>
+                                    setShowConfirmPassword(
+                                        !showConfirmPassword
+                                    )
+                                }
+                            >
+
+                                {showConfirmPassword
+                                    ? <EyeOff size={18} />
+                                    : <Eye size={18} />
+                                }
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    {/* Submit */}
 
                     <button
-                        className="auth-btn"
+                        type="submit"
+                        className="auth-submit"
                         disabled={loading}
                     >
-                        {
-                            loading
-                                ? "Creating Account..."
-                                : "Create Account"
+
+                        {loading
+                            ? "Creating account..."
+                            : "Create Account"
                         }
+
                     </button>
 
                 </form>
 
-                <div className="auth-footer">
+
+                {/* Login */}
+
+                <p className="auth-switch">
 
                     Already have an account?
 
@@ -153,11 +359,11 @@ function Register() {
                         Login
                     </Link>
 
-                </div>
+                </p>
 
             </div>
 
-        </div>
+        </main>
 
     );
 

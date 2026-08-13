@@ -1,155 +1,251 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 import toast from "react-hot-toast";
 
-import API from "../services/api";
 import { useAuth } from "../context/AuthContext";
 
-import InputField from "../components/auth/InputField";
-import "../components/auth/Auth.css";
+import "./Login.css";
 
 function Login() {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const { login } = useAuth();
+    const { login } = useAuth();
 
-  const [loading, setLoading] = useState(false);
-
-  const [formData, setFormData] = useState({
-
-    email: "",
-    password: ""
-
-  });
-
-  const handleChange = (e) => {
-
-    setFormData({
-
-      ...formData,
-
-      [e.target.name]: e.target.value
-
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
     });
 
-  };
+    const [showPassword, setShowPassword] =
+        useState(false);
 
-  const handleSubmit = async (e) => {
+    const [loading, setLoading] =
+        useState(false);
 
-    e.preventDefault();
+    const handleChange = (e) => {
 
-    if (!formData.email || !formData.password) {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
 
-      return toast.error("Please fill all fields");
+    };
 
-    }
+    const handleSubmit = async (e) => {
 
-    try {
+        e.preventDefault();
 
-      setLoading(true);
+        if (
+            !formData.email.trim() ||
+            !formData.password
+        ) {
 
-      const { data } = await API.post("/auth/login", formData);
+            toast.error(
+                "Email and password are required"
+            );
 
-      login(data.user, data.token);
+            return;
 
-      toast.success(data.message);
+        }
 
-      navigate("/dashboard");
+        try {
 
-    }
+            setLoading(true);
 
-    catch (error) {
+            await login(
+                formData.email.trim(),
+                formData.password
+            );
 
-      toast.error(
+            toast.success(
+                "Login successful 🎉"
+            );
 
-        error.response?.data?.message ||
+            navigate("/dashboard");
 
-        "Login Failed"
+        } catch (error) {
 
-      );
+            toast.error(
+                error.response?.data?.message ||
+                "Invalid email or password"
+            );
 
-    }
+        } finally {
 
-    finally {
+            setLoading(false);
 
-      setLoading(false);
+        }
 
-    }
+    };
 
-  };
+    return (
 
-  return (
+        <main className="auth-page">
 
-    <div className="auth-container">
+            <div className="auth-card">
 
-      <div className="auth-card">
+                {/* Logo / Brand */}
 
-        <div className="auth-logo">🚀</div>
+                <div className="auth-brand">
 
-        <h1 className="auth-title">
-          Welcome Back
-        </h1>
+                    <div className="auth-logo">
+                        P
+                    </div>
 
-        <p className="auth-subtitle">
-          Login to continue managing your projects.
-        </p>
+                    <h1>
+                        TaskFlow
+                    </h1>
 
-        <form
-          className="auth-form"
-          onSubmit={handleSubmit}
-        >
+                    <p>
+                        Manage projects.
+                        Complete tasks.
+                    </p>
 
-          <InputField
-            label="Email"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            required
-          />
+                </div>
 
-          <InputField
-            label="Password"
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-            required
-          />
 
-          <button
-            className="auth-btn"
-            disabled={loading}
-          >
-            {
-              loading
-                ? "Logging In..."
-                : "Login"
-            }
-          </button>
+                {/* Heading */}
 
-        </form>
+                <div className="auth-heading">
 
-        <div className="auth-footer">
+                    <h2>
+                        Welcome Back 👋
+                    </h2>
 
-          Don't have an account?
+                    <p>
+                        Login to continue to your
+                        workspace.
+                    </p>
 
-          {" "}
+                </div>
 
-          <Link to="/register">
-            Register
-          </Link>
 
-        </div>
+                {/* Login Form */}
 
-      </div>
+                <form
+                    className="auth-form"
+                    onSubmit={handleSubmit}
+                >
 
-    </div>
+                    {/* Email */}
 
-  );
+                    <div className="form-group">
+
+                        <label htmlFor="email">
+                            Email
+                        </label>
+
+                        <div className="input-wrapper">
+
+                            <Mail size={18} />
+
+                            <input
+                                id="email"
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                autoComplete="email"
+                            />
+
+                        </div>
+
+                    </div>
+
+
+                    {/* Password */}
+
+                    <div className="form-group">
+
+                        <label htmlFor="password">
+                            Password
+                        </label>
+
+                        <div className="input-wrapper">
+
+                            <Lock size={18} />
+
+                            <input
+                                id="password"
+                                type={
+                                    showPassword
+                                        ? "text"
+                                        : "password"
+                                }
+                                name="password"
+                                placeholder="Enter your password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                autoComplete="current-password"
+                            />
+
+                            <button
+                                type="button"
+                                className="password-toggle"
+                                onClick={() =>
+                                    setShowPassword(
+                                        !showPassword
+                                    )
+                                }
+                                aria-label={
+                                    showPassword
+                                        ? "Hide password"
+                                        : "Show password"
+                                }
+                            >
+
+                                {showPassword
+                                    ? <EyeOff size={18} />
+                                    : <Eye size={18} />
+                                }
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    {/* Submit */}
+
+                    <button
+                        type="submit"
+                        className="auth-submit"
+                        disabled={loading}
+                    >
+
+                        {loading
+                            ? "Logging in..."
+                            : "Login"
+                        }
+
+                    </button>
+
+                </form>
+
+
+                {/* Register */}
+
+                <p className="auth-switch">
+
+                    Don't have an account?
+
+                    {" "}
+
+                    <Link to="/register">
+                        Create account
+                    </Link>
+
+                </p>
+
+            </div>
+
+        </main>
+
+    );
 
 }
 

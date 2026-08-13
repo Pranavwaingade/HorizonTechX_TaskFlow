@@ -1,0 +1,481 @@
+.dashboard-extras {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(0, 0.85fr);
+
+    gap: 20px;
+
+    margin-top: 20px;
+
+}
+
+
+/* ========================================
+   Extra Card
+======================================== */
+
+.dashboard-extra-card {
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    min-width: 0;
+
+}
+
+
+/* ========================================
+   Header
+======================================== */
+
+.extra-card-header {
+
+    padding-bottom: 17px;
+
+    border-bottom: 1px solid #f1f5f9;
+
+}
+
+
+.extra-card-header h2 {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0 0 5px;
+
+    color: #111827;
+
+    font-size: 17px;
+
+}
+
+
+.extra-card-header h2 svg {
+
+    color: #4f46e5;
+
+}
+
+
+.extra-card-header p {
+
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+
+}
+
+
+/* ========================================
+   Activity List
+======================================== */
+
+.activity-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.activity-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 3px;
+
+    border-bottom: 1px solid #f1f5f9;
+
+}
+
+
+.activity-item:last-child {
+
+    border-bottom: none;
+
+}
+
+
+/* ========================================
+   Activity Icon
+======================================== */
+
+.activity-icon {
+
+    width: 36px;
+
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+}
+
+
+.activity-icon.completed {
+
+    background: #dcfce7;
+
+    color: #16a34a;
+
+}
+
+
+.activity-icon.progress {
+
+    background: #dbeafe;
+
+    color: #2563eb;
+
+}
+
+
+.activity-icon.pending {
+
+    background: #fef3c7;
+
+    color: #d97706;
+
+}
+
+
+/* ========================================
+   Activity Info
+======================================== */
+
+.activity-info {
+
+    min-width: 0;
+
+    flex: 1;
+
+}
+
+
+.activity-info h4 {
+
+    margin: 0 0 3px;
+
+    overflow: hidden;
+
+    color: #111827;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}
+
+
+.activity-info p {
+
+    margin: 0 0 3px;
+
+    overflow: hidden;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}
+
+
+.activity-info small {
+
+    color: #94a3b8;
+
+    font-size: 10px;
+
+}
+
+
+/* ========================================
+   Activity Status
+======================================== */
+
+.activity-status {
+
+    flex-shrink: 0;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+}
+
+
+.activity-status.completed {
+
+    background: #dcfce7;
+
+    color: #15803d;
+
+}
+
+
+.activity-status.progress {
+
+    background: #dbeafe;
+
+    color: #2563eb;
+
+}
+
+
+.activity-status.pending {
+
+    background: #fef3c7;
+
+    color: #b45309;
+
+}
+
+
+/* ========================================
+   Team Members
+======================================== */
+
+.member-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.dashboard-member-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 14px 3px;
+
+    border-bottom: 1px solid #f1f5f9;
+
+}
+
+
+.dashboard-member-item:last-child {
+
+    border-bottom: none;
+
+}
+
+
+/* ========================================
+   Member Avatar
+======================================== */
+
+.member-avatar {
+
+    width: 36px;
+
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ede9fe;
+
+    color: #6d28d9;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+.member-info {
+
+    min-width: 0;
+
+    flex: 1;
+
+}
+
+
+.member-info h4 {
+
+    margin: 0 0 3px;
+
+    overflow: hidden;
+
+    color: #111827;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}
+
+
+.member-info p {
+
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+
+}
+
+
+/* ========================================
+   Online Dot
+======================================== */
+
+.online-dot {
+
+    width: 8px;
+
+    height: 8px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 3px #dcfce7;
+
+}
+
+
+/* ========================================
+   Empty / Loading
+======================================== */
+
+.extra-empty {
+
+    min-height: 170px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    color: #94a3b8;
+
+    text-align: center;
+
+}
+
+
+.extra-empty p {
+
+    margin: 3px 0 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+.extra-empty span {
+
+    font-size: 10px;
+
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 900px) {
+
+    .dashboard-extras {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .dashboard-extra-card {
+
+        padding: 17px;
+
+    }
+
+
+    .activity-item {
+
+        align-items: flex-start;
+
+    }
+
+
+    .activity-status {
+
+        display: none;
+
+    }
+
+}
