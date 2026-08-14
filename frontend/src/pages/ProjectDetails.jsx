@@ -5,10 +5,10 @@ import {
     FolderKanban,
     Users,
     Plus,
-    UserPlus,
 } from "lucide-react";
 import toast from "react-hot-toast";
 
+import { useAuth } from "../context/AuthContext";
 import API from "../services/api";
 
 import KanbanBoard from "../components/KanbanBoard";
@@ -21,16 +21,21 @@ function ProjectDetails() {
 
     const { id } = useParams();
 
+    const { user } = useAuth();
+
 
     // ========================================
     // State
     // ========================================
 
-    const [project, setProject] = useState(null);
+    const [project, setProject] =
+        useState(null);
 
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] =
+        useState([]);
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] =
+        useState(true);
 
     const [tasksLoading, setTasksLoading] =
         useState(true);
@@ -53,7 +58,9 @@ function ProjectDetails() {
             setLoading(true);
 
             const { data } =
-                await API.get(`/projects/${id}`);
+                await API.get(
+                    `/projects/${id}`
+                );
 
             setProject(data.project);
 
@@ -91,10 +98,8 @@ function ProjectDetails() {
             const { data } =
                 await API.get("/tasks");
 
-
             const allTasks =
                 data.tasks || [];
-
 
             const projectTasks =
                 allTasks.filter((task) => {
@@ -109,7 +114,6 @@ function ProjectDetails() {
                     );
 
                 });
-
 
             setTasks(projectTasks);
 
@@ -143,17 +147,46 @@ function ProjectDetails() {
         if (!id) return;
 
         fetchProject();
-
         fetchTasks();
 
     }, [id]);
 
 
     // ========================================
+    // Project Owner Check
+    // ========================================
+
+    const projectOwnerId =
+        project?.owner?._id ||
+        project?.owner;
+
+    const currentUserId =
+        user?._id ||
+        user?.id;
+
+    const isProjectOwner =
+        projectOwnerId &&
+        currentUserId &&
+        projectOwnerId.toString() ===
+        currentUserId.toString();
+
+
+    // ========================================
     // Create Task
+    // OWNER ONLY
     // ========================================
 
     const handleAddTask = () => {
+
+        if (!isProjectOwner) {
+
+            toast.error(
+                "Only project owner can create tasks"
+            );
+
+            return;
+
+        }
 
         setEditingTask(null);
 
@@ -179,13 +212,14 @@ function ProjectDetails() {
     // Delete Task
     // ========================================
 
-    const handleDeleteTask = async (taskId) => {
+    const handleDeleteTask = async (
+        taskId
+    ) => {
 
         const confirmed =
             window.confirm(
                 "Are you sure you want to delete this task?"
             );
-
 
         if (!confirmed) return;
 
@@ -291,7 +325,6 @@ function ProjectDetails() {
 
                 </Link>
 
-
                 <div className="project-details-state">
 
                     <FolderKanban size={30} />
@@ -380,19 +413,25 @@ function ProjectDetails() {
                 </div>
 
 
-                {/* Add Task */}
+                {/* =================================
+                    Add Task - OWNER ONLY
+                ================================= */}
 
-                <button
-                    type="button"
-                    className="project-add-task-btn"
-                    onClick={handleAddTask}
-                >
+                {isProjectOwner && (
 
-                    <Plus size={17} />
+                    <button
+                        type="button"
+                        className="project-add-task-btn"
+                        onClick={handleAddTask}
+                    >
 
-                    Add Task
+                        <Plus size={17} />
 
-                </button>
+                        Add Task
+
+                    </button>
+
+                )}
 
             </div>
 
@@ -453,7 +492,8 @@ function ProjectDetails() {
 
                                     {member.name
                                         ?.charAt(0)
-                                        ?.toUpperCase() || "U"}
+                                        ?.toUpperCase() ||
+                                        "U"}
 
                                 </div>
 
@@ -547,8 +587,16 @@ function ProjectDetails() {
 
                     <KanbanBoard
                         tasks={tasks}
-                        onEdit={handleEditTask}
-                        onDelete={handleDeleteTask}
+                        onEdit={
+                            isProjectOwner
+                                ? handleEditTask
+                                : undefined
+                        }
+                        onDelete={
+                            isProjectOwner
+                                ? handleDeleteTask
+                                : undefined
+                        }
                     />
 
                 )}
@@ -560,14 +608,26 @@ function ProjectDetails() {
                 Task Modal
             ================================= */}
 
-            <TaskModal
-                open={taskModalOpen}
-                onClose={handleCloseTaskModal}
-                onSuccess={handleTaskSuccess}
-                task={editingTask}
-                projectId={id}
-                projects={[]}
-            />
+            {isProjectOwner && (
+
+                <TaskModal
+                    open={taskModalOpen}
+                    onClose={
+                        handleCloseTaskModal
+                    }
+                    onSuccess={
+                        handleTaskSuccess
+                    }
+                    task={editingTask}
+                    projectId={id}
+                    projects={
+                        project
+                            ? [project]
+                            : []
+                    }
+                />
+
+            )}
 
         </section>
 

@@ -1,88 +1,15 @@
 .app-topbar {
-
     height: 70px;
-
     flex-shrink: 0;
 
     display: flex;
-
     align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
+    justify-content: flex-end;
 
     padding: 0 28px;
 
     border-bottom: 1px solid #e5e7eb;
-
     background: #ffffff;
-
-}
-
-
-/* ========================================
-   Search
-======================================== */
-
-.topbar-search {
-
-    width: min(380px, 45vw);
-
-    height: 40px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    padding: 0 13px;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 10px;
-
-    background: #f8fafc;
-
-    color: #94a3b8;
-
-}
-
-
-.topbar-search:focus-within {
-
-    border-color: #a5b4fc;
-
-    background: #ffffff;
-
-    box-shadow:
-        0 0 0 3px rgba(99, 102, 241, .08);
-
-}
-
-
-.topbar-search input {
-
-    width: 100%;
-
-    border: none;
-
-    outline: none;
-
-    background: transparent;
-
-    color: #111827;
-
-    font-size: 13px;
-
-}
-
-
-.topbar-search input::placeholder {
-
-    color: #94a3b8;
-
 }
 
 
@@ -91,74 +18,70 @@
 ======================================== */
 
 .topbar-right {
-
     display: flex;
-
     align-items: center;
-
     gap: 15px;
-
 }
 
 
-.notification-btn {
+/* ========================================
+   Dropdown Wrapper
+======================================== */
 
+.topbar-dropdown-wrapper {
+    position: relative;
+}
+
+
+/* ========================================
+   Notification
+======================================== */
+
+.notification-btn {
     position: relative;
 
     width: 38px;
-
     height: 38px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border: 1px solid #e5e7eb;
-
     border-radius: 10px;
 
     background: #ffffff;
-
     color: #64748b;
 
     cursor: pointer;
 
-    transition: .2s ease;
-
+    transition: 0.2s ease;
 }
 
 
-.notification-btn:hover {
-
+.notification-btn:hover,
+.notification-btn.active {
     border-color: #c7d2fe;
-
     background: #eef2ff;
-
     color: #4f46e5;
-
 }
 
+
+/* Notification Dot */
 
 .notification-dot {
-
     position: absolute;
 
     top: 8px;
-
     right: 8px;
 
     width: 6px;
-
     height: 6px;
 
     border: 1.5px solid #ffffff;
-
     border-radius: 50%;
 
     background: #ef4444;
-
 }
 
 
@@ -167,13 +90,10 @@
 ======================================== */
 
 .topbar-divider {
-
     width: 1px;
-
     height: 30px;
 
     background: #e5e7eb;
-
 }
 
 
@@ -182,69 +102,343 @@
 ======================================== */
 
 .topbar-user {
-
     display: flex;
-
     align-items: center;
-
     gap: 9px;
 
+    border: none;
+    background: transparent;
+
+    padding: 5px 7px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
 }
 
 
+.topbar-user:hover {
+    background: #f8fafc;
+}
+
+
+/* ========================================
+   Avatar
+======================================== */
+
 .topbar-avatar {
-
     width: 38px;
-
     height: 38px;
 
+    flex-shrink: 0;
+
     display: flex;
-
     align-items: center;
-
     justify-content: center;
+
+    overflow: hidden;
 
     border-radius: 50%;
 
     background: #eef2ff;
-
     color: #4f46e5;
 
     font-size: 14px;
-
     font-weight: 700;
-
 }
 
 
+.topbar-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* ========================================
+   User Info
+======================================== */
+
 .topbar-user-info {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 2px;
-
 }
 
 
 .topbar-user-info strong {
-
     color: #111827;
 
     font-size: 12px;
-
     font-weight: 700;
-
 }
 
 
 .topbar-user-info span {
+    max-width: 160px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     color: #94a3b8;
 
     font-size: 10px;
+}
 
+
+/* ========================================
+   General Dropdown
+======================================== */
+
+.topbar-dropdown {
+    position: absolute;
+
+    top: calc(100% + 10px);
+    right: 0;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 40px rgba(15, 23, 42, 0.14);
+
+    overflow: hidden;
+
+    z-index: 400;
+}
+
+
+/* ========================================
+   Notification Dropdown
+======================================== */
+
+.notification-dropdown {
+    width: 270px;
+}
+
+
+.dropdown-header {
+    padding: 15px 16px;
+}
+
+
+.dropdown-header strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 13px;
+}
+
+
+.dropdown-header span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+/* ========================================
+   Empty Notification
+======================================== */
+
+.notification-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 25px 18px;
+}
+
+
+.notification-empty-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 9px;
+
+    border-radius: 50%;
+
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+
+.notification-empty strong {
+    color: #374151;
+
+    font-size: 12px;
+}
+
+
+.notification-empty span {
+    margin-top: 4px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+/* ========================================
+   Profile Dropdown
+======================================== */
+
+.profile-dropdown {
+    width: 250px;
+
+    padding: 8px;
+}
+
+
+/* ========================================
+   Profile User
+======================================== */
+
+.profile-dropdown-user {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px;
+}
+
+
+.profile-large-avatar {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background: #eef2ff;
+    color: #4f46e5;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+.profile-large-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.profile-dropdown-user strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 13px;
+}
+
+
+.profile-dropdown-user span {
+    display: block;
+
+    max-width: 165px;
+
+    margin-top: 3px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+/* ========================================
+   Dropdown Separator
+======================================== */
+
+.dropdown-separator {
+    height: 1px;
+
+    margin: 5px 3px;
+
+    background: #eef0f3;
+}
+
+
+/* ========================================
+   Dropdown Item
+======================================== */
+
+.dropdown-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px 10px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #475467;
+
+    font-size: 12px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.dropdown-item:hover {
+    background: #f5f7ff;
+    color: #4f46e5;
+}
+
+
+/* ========================================
+   Logout
+======================================== */
+
+.dropdown-item.logout-item {
+    color: #dc2626;
+}
+
+
+.dropdown-item.logout-item:hover {
+    background: #fef2f2;
+    color: #dc2626;
 }
 
 
@@ -255,71 +449,46 @@
 @media (max-width: 700px) {
 
     .app-topbar {
-
         height: 62px;
 
         padding: 0 16px;
-
-    }
-
-
-    .topbar-search {
-
-        width: 42px;
-
-        padding: 0;
-
-        justify-content: center;
-
-        border: none;
-
-        background: transparent;
-
-    }
-
-
-    .topbar-search input {
-
-        display: none;
-
     }
 
 
     .topbar-user-info,
-
     .topbar-divider {
-
         display: none;
-
     }
 
 }
 
 
+/* ========================================
+   Small Mobile
+======================================== */
+
 @media (max-width: 450px) {
 
     .topbar-right {
-
         gap: 8px;
-
     }
 
 
     .notification-btn {
-
         width: 34px;
-
         height: 34px;
-
     }
 
 
     .topbar-avatar {
-
         width: 34px;
-
         height: 34px;
+    }
 
+
+    .profile-dropdown,
+    .notification-dropdown {
+        right: -5px;
     }
 
 }

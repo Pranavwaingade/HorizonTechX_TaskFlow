@@ -108,8 +108,7 @@
 
     padding-bottom: 18px;
 
-    border-bottom: 1px solid
-        rgba(128, 128, 128, 0.15);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.15);
 }
 
 .team-project-header h2 {
@@ -288,8 +287,7 @@
 .add-member-section {
     padding-top: 16px;
 
-    border-top: 1px solid
-        rgba(128, 128, 128, 0.15);
+    border-top: 1px solid rgba(128, 128, 128, 0.15);
 }
 
 .add-member-btn {
@@ -304,8 +302,7 @@
 
     padding: 11px 15px;
 
-    border: 1px dashed
-        rgba(128, 128, 128, 0.35);
+    border: 1px dashed rgba(128, 128, 128, 0.35);
 
     border-radius: 10px;
 
@@ -354,8 +351,7 @@
 
     padding: 0 11px;
 
-    border: 1px solid
-        rgba(128, 128, 128, 0.3);
+    border: 1px solid rgba(128, 128, 128, 0.3);
 
     border-radius: 10px;
 }
@@ -409,8 +405,7 @@
     align-items: center;
     justify-content: center;
 
-    border: 1px solid
-        rgba(128, 128, 128, 0.25);
+    border: 1px solid rgba(128, 128, 128, 0.25);
 
     border-radius: 10px;
 
@@ -423,6 +418,37 @@
     background: rgba(128, 128, 128, 0.08);
 }
 
+.remove-member-btn {
+    width: 34px;
+    height: 34px;
+
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+
+    background: #fff;
+    color: #dc2626;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.remove-member-btn:hover {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #b91c1c;
+}
+
+.remove-member-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
 
 /* ========================================
    Responsive

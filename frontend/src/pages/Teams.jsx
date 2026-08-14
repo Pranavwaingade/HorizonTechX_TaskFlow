@@ -2,20 +2,27 @@ import { useEffect, useState } from "react";
 import {
     Users,
     UserPlus,
+    UserMinus,
     X,
 } from "lucide-react";
 import toast from "react-hot-toast";
 
 import API from "../services/api";
+import { useAuth } from "../context/AuthContext";
 
 import "./Teams.css";
 
 
 function Teams() {
 
-    const [projects, setProjects] = useState([]);
+    const { user } = useAuth();
 
-    const [loading, setLoading] = useState(true);
+
+    const [projects, setProjects] =
+        useState([]);
+
+    const [loading, setLoading] =
+        useState(true);
 
     const [addingProjectId, setAddingProjectId] =
         useState(null);
@@ -25,6 +32,32 @@ function Teams() {
 
     const [submitting, setSubmitting] =
         useState(false);
+
+
+    // ========================================
+    // Check Project Owner
+    // ========================================
+
+    const isProjectOwner = (project) => {
+
+        const projectOwnerId =
+            project.owner?._id ||
+            project.owner;
+
+        const currentUserId =
+            user?._id ||
+            user?.id;
+
+        if (!projectOwnerId || !currentUserId) {
+            return false;
+        }
+
+        return (
+            projectOwnerId.toString() ===
+            currentUserId.toString()
+        );
+
+    };
 
 
     // ========================================
@@ -78,13 +111,24 @@ function Teams() {
 
     // ========================================
     // Open Add Member
+    // OWNER ONLY
     // ========================================
 
-    const handleOpenAddMember = (
-        projectId
-    ) => {
+    const handleOpenAddMember = (project) => {
 
-        setAddingProjectId(projectId);
+        if (!isProjectOwner(project)) {
+
+            toast.error(
+                "Only project owner can add members"
+            );
+
+            return;
+
+        }
+
+        setAddingProjectId(
+            project._id
+        );
 
         setMemberEmail("");
 
@@ -108,11 +152,21 @@ function Teams() {
 
     // ========================================
     // Add Member
+    // OWNER ONLY
     // ========================================
 
-    const handleAddMember = async (
-        projectId
-    ) => {
+    const handleAddMember = async (project) => {
+
+        if (!isProjectOwner(project)) {
+
+            toast.error(
+                "Only project owner can add members"
+            );
+
+            return;
+
+        }
+
 
         if (!memberEmail.trim()) {
 
@@ -129,16 +183,18 @@ function Teams() {
 
             setSubmitting(true);
 
-
             const { data } =
                 await API.post(
-                    `/projects/${projectId}/members`,
+
+                    `/projects/${project._id}/members`,
+
                     {
                         email:
                             memberEmail
                                 .trim()
                                 .toLowerCase(),
                     }
+
                 );
 
 
@@ -153,8 +209,6 @@ function Teams() {
             setMemberEmail("");
 
 
-            // Refresh projects
-
             await fetchProjects();
 
         } catch (error) {
@@ -167,6 +221,81 @@ function Teams() {
             toast.error(
                 error.response?.data?.message ||
                 "Failed to add member"
+            );
+
+        } finally {
+
+            setSubmitting(false);
+
+        }
+
+    };
+
+
+    // ========================================
+    // Remove Member
+    // OWNER ONLY
+    // ========================================
+
+    const handleRemoveMember = async (
+        project,
+        member
+    ) => {
+
+        if (!isProjectOwner(project)) {
+
+            toast.error(
+                "Only project owner can remove members"
+            );
+
+            return;
+
+        }
+
+
+        const confirmed =
+            window.confirm(
+                `Remove ${
+                    member.name ||
+                    "this member"
+                } from the project?`
+            );
+
+
+        if (!confirmed) return;
+
+
+        try {
+
+            setSubmitting(true);
+
+
+            const { data } =
+                await API.delete(
+
+                    `/projects/${project._id}/members/${member._id}`
+
+                );
+
+
+            toast.success(
+                data.message ||
+                "Member removed successfully"
+            );
+
+
+            await fetchProjects();
+
+        } catch (error) {
+
+            console.log(
+                "Remove member error:",
+                error
+            );
+
+            toast.error(
+                error.response?.data?.message ||
+                "Failed to remove member"
             );
 
         } finally {
@@ -204,8 +333,10 @@ function Teams() {
                     </h1>
 
                     <p className="page-description">
-                        View the people working across
-                        your projects.
+
+                        View the people working
+                        across your projects.
+
                     </p>
 
                 </div>
@@ -232,10 +363,6 @@ function Teams() {
 
             ) : projects.length === 0 ? (
 
-                /* =================================
-                    No Projects
-                ================================= */
-
                 <div className="teams-state">
 
                     <Users size={32} />
@@ -245,18 +372,16 @@ function Teams() {
                     </h2>
 
                     <p>
+
                         Create a project and add
                         members to build your team.
+
                     </p>
 
                 </div>
 
 
             ) : (
-
-                /* =================================
-                    Projects
-                ================================= */
 
                 <div className="teams-projects">
 
@@ -268,7 +393,9 @@ function Teams() {
                         >
 
 
-                            {/* Project Header */}
+                            {/* =================================
+                                Project Header
+                            ================================= */}
 
                             <div className="team-project-header">
 
@@ -305,11 +432,16 @@ function Teams() {
                             </div>
 
 
-                            {/* Members */}
+                            {/* =================================
+                                Members
+                            ================================= */}
 
                             <div className="project-members">
 
-                                {/* Owner */}
+
+                                {/* =================================
+                                    Owner
+                                ================================= */}
 
                                 {project.owner && (
 
@@ -346,24 +478,30 @@ function Teams() {
                                         <div className="team-info">
 
                                             <h3>
+
                                                 {
                                                     project.owner.name ||
                                                     "Unknown User"
                                                 }
+
                                             </h3>
 
                                             <p>
+
                                                 {
                                                     project.owner.email ||
                                                     "No email"
                                                 }
+
                                             </p>
 
                                         </div>
 
 
                                         <span className="owner-badge">
+
                                             Owner
+
                                         </span>
 
                                     </div>
@@ -371,7 +509,9 @@ function Teams() {
                                 )}
 
 
-                                {/* Members */}
+                                {/* =================================
+                                    Project Members
+                                ================================= */}
 
                                 {project.members?.map(
                                     (member) => (
@@ -412,20 +552,57 @@ function Teams() {
                                             <div className="team-info">
 
                                                 <h3>
+
                                                     {
                                                         member.name ||
                                                         "Unknown User"
                                                     }
+
                                                 </h3>
 
                                                 <p>
+
                                                     {
                                                         member.email ||
                                                         "No email"
                                                     }
+
                                                 </p>
 
                                             </div>
+
+
+                                            {/* =================================
+                                                Remove Member
+                                                OWNER ONLY
+                                            ================================= */}
+
+                                            {isProjectOwner(
+                                                project
+                                            ) && (
+
+                                                <button
+                                                    type="button"
+                                                    className="remove-member-btn"
+                                                    onClick={() =>
+                                                        handleRemoveMember(
+                                                            project,
+                                                            member
+                                                        )
+                                                    }
+                                                    disabled={
+                                                        submitting
+                                                    }
+                                                    title="Remove member"
+                                                >
+
+                                                    <UserMinus
+                                                        size={16}
+                                                    />
+
+                                                </button>
+
+                                            )}
 
                                         </div>
 
@@ -433,7 +610,9 @@ function Teams() {
                                 )}
 
 
-                                {/* No Members */}
+                                {/* =================================
+                                    No Members
+                                ================================= */}
 
                                 {(!project.members ||
                                     project.members.length === 0) && (
@@ -443,7 +622,9 @@ function Teams() {
                                         <Users size={18} />
 
                                         <span>
+
                                             No members added yet.
+
                                         </span>
 
                                     </div>
@@ -455,118 +636,129 @@ function Teams() {
 
                             {/* =================================
                                 Add Member
+                                OWNER ONLY
                             ================================= */}
 
-                            <div className="add-member-section">
+                            {isProjectOwner(project) && (
+
+                                <div className="add-member-section">
+
+                                    {addingProjectId ===
+                                        project._id ? (
+
+                                        <div className="add-member-form">
 
 
-                                {addingProjectId ===
-                                    project._id ? (
+                                            {/* Input */}
 
-                                    <div className="add-member-form">
+                                            <div className="add-member-input-wrap">
 
-                                        <div className="add-member-input-wrap">
+                                                <UserPlus
+                                                    size={17}
+                                                />
 
-                                            <UserPlus
-                                                size={17}
-                                            />
+                                                <input
+                                                    type="email"
+                                                    placeholder="Enter member email"
+                                                    value={
+                                                        memberEmail
+                                                    }
+                                                    onChange={(e) =>
+                                                        setMemberEmail(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    disabled={
+                                                        submitting
+                                                    }
+                                                    onKeyDown={(e) => {
 
-                                            <input
-                                                type="email"
-                                                placeholder="Enter member email"
-                                                value={
-                                                    memberEmail
-                                                }
-                                                onChange={(e) =>
-                                                    setMemberEmail(
-                                                        e.target.value
+                                                        if (
+                                                            e.key ===
+                                                            "Enter"
+                                                        ) {
+
+                                                            e.preventDefault();
+
+                                                            handleAddMember(
+                                                                project
+                                                            );
+
+                                                        }
+
+                                                    }}
+                                                />
+
+                                            </div>
+
+
+                                            {/* Add */}
+
+                                            <button
+                                                type="button"
+                                                className="add-member-submit"
+                                                onClick={() =>
+                                                    handleAddMember(
+                                                        project
                                                     )
                                                 }
                                                 disabled={
                                                     submitting
                                                 }
-                                                onKeyDown={(e) => {
+                                            >
 
-                                                    if (
-                                                        e.key ===
-                                                        "Enter"
-                                                    ) {
+                                                {submitting
+                                                    ? "Adding..."
+                                                    : "Add Member"}
 
-                                                        e.preventDefault();
+                                            </button>
 
-                                                        handleAddMember(
-                                                            project._id
-                                                        );
 
-                                                    }
+                                            {/* Cancel */}
 
-                                                }}
-                                            />
+                                            <button
+                                                type="button"
+                                                className="add-member-cancel"
+                                                onClick={
+                                                    handleCloseAddMember
+                                                }
+                                                disabled={
+                                                    submitting
+                                                }
+                                                title="Cancel"
+                                            >
+
+                                                <X size={17} />
+
+                                            </button>
 
                                         </div>
 
+                                    ) : (
 
                                         <button
                                             type="button"
-                                            className="add-member-submit"
+                                            className="add-member-btn"
                                             onClick={() =>
-                                                handleAddMember(
-                                                    project._id
+                                                handleOpenAddMember(
+                                                    project
                                                 )
                                             }
-                                            disabled={
-                                                submitting
-                                            }
                                         >
 
-                                            {submitting
-                                                ? "Adding..."
-                                                : "Add Member"}
+                                            <UserPlus
+                                                size={17}
+                                            />
+
+                                            Add Member
 
                                         </button>
 
+                                    )}
 
-                                        <button
-                                            type="button"
-                                            className="add-member-cancel"
-                                            onClick={
-                                                handleCloseAddMember
-                                            }
-                                            disabled={
-                                                submitting
-                                            }
-                                            title="Cancel"
-                                        >
+                                </div>
 
-                                            <X size={17} />
-
-                                        </button>
-
-                                    </div>
-
-                                ) : (
-
-                                    <button
-                                        type="button"
-                                        className="add-member-btn"
-                                        onClick={() =>
-                                            handleOpenAddMember(
-                                                project._id
-                                            )
-                                        }
-                                    >
-
-                                        <UserPlus
-                                            size={17}
-                                        />
-
-                                        Add Member
-
-                                    </button>
-
-                                )}
-
-                            </div>
+                            )}
 
                         </article>
 

@@ -299,6 +299,97 @@ export const addProjectMember = async (req, res) => {
 
 };
 
+// Remove Member from Project
+// Owner Only
+export const removeProjectMember = async (req, res) => {
+
+    try {
+
+        const projectId = req.params.id;
+        const memberId = req.params.memberId;
+
+        // Only project owner can remove members
+        const project = await Project.findOne({
+            _id: projectId,
+            owner: req.user._id,
+        });
+
+        if (!project) {
+
+            return res.status(404).json({
+                success: false,
+                message: "Project not found or unauthorized",
+            });
+
+        }
+
+        // Check whether user is actually a member
+        const isMember = project.members.some(
+            (id) =>
+                id.toString() ===
+                memberId.toString()
+        );
+
+        if (!isMember) {
+
+            return res.status(404).json({
+                success: false,
+                message: "User is not a project member",
+            });
+
+        }
+
+        // Remove member
+        project.members =
+            project.members.filter(
+                (id) =>
+                    id.toString() !==
+                    memberId.toString()
+            );
+
+        await project.save();
+
+        // Return updated project
+        const updatedProject =
+            await Project.findById(project._id)
+                .populate(
+                    "owner",
+                    "name email avatar"
+                )
+                .populate(
+                    "members",
+                    "name email avatar"
+                );
+
+        res.status(200).json({
+
+            success: true,
+
+            message:
+                "Member removed from project successfully",
+
+            project: updatedProject,
+
+        });
+
+    } catch (error) {
+
+        console.log(
+            "Remove member error:",
+            error
+        );
+
+        res.status(500).json({
+
+            success: false,
+
+            message: error.message,
+
+        });
+
+    }
+
+};
 
 // Update Project
 // Owner Only

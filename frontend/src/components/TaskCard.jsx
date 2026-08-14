@@ -6,6 +6,10 @@ import {
     Trash2,
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
+import { useAuth } from "../context/AuthContext";
+
 import "./TaskCard.css";
 
 
@@ -15,6 +19,10 @@ function TaskCard({
     onDelete,
 }) {
 
+    const navigate = useNavigate();
+
+    const { user } = useAuth();
+
 
     // ========================================
     // Format Date
@@ -23,28 +31,10 @@ function TaskCard({
     const formatDate = (date) => {
 
         if (!date) {
-
             return "No due date";
-
         }
 
-
-        const parsedDate =
-            new Date(date);
-
-
-        if (
-            Number.isNaN(
-                parsedDate.getTime()
-            )
-        ) {
-
-            return "No due date";
-
-        }
-
-
-        return parsedDate.toLocaleDateString(
+        return new Date(date).toLocaleDateString(
             "en-IN",
             {
                 day: "2-digit",
@@ -57,17 +47,37 @@ function TaskCard({
 
 
     // ========================================
-    // Assigned User
+    // Task Owner
     // ========================================
 
-    const assignedUser =
-        task.assignedTo || null;
-
-
-    const assignedUserName =
-        assignedUser?.name ||
-        assignedUser?.email ||
+    const ownerName =
+        task.owner?.name ||
         "Unassigned";
+
+
+    const taskOwnerId =
+        task.owner?._id ||
+        task.owner;
+
+
+    // ========================================
+    // Current Logged-in User
+    // ========================================
+
+    const currentUserId =
+        user?._id ||
+        user?.id;
+
+
+    // ========================================
+    // Owner Permission
+    // ========================================
+
+    const isTaskOwner =
+        currentUserId &&
+        taskOwnerId &&
+        currentUserId.toString() ===
+        taskOwnerId.toString();
 
 
     // ========================================
@@ -75,15 +85,25 @@ function TaskCard({
     // ========================================
 
     const priority =
-        task.priority || "Medium";
+        task.priority ||
+        "Medium";
 
 
     // ========================================
-    // Status
+    // Open Task Details
     // ========================================
 
-    const status =
-        task.status || "Pending";
+    const handleCardClick = () => {
+
+        if (!task?._id) {
+            return;
+        }
+
+        navigate(
+            `/tasks/${task._id}`
+        );
+
+    };
 
 
     // ========================================
@@ -92,11 +112,13 @@ function TaskCard({
 
     return (
 
-        <article className="task-card">
-
+        <div
+            className="task-card"
+            onClick={handleCardClick}
+        >
 
             {/* =================================
-                Title
+                Task Title
             ================================= */}
 
             <h4>
@@ -110,65 +132,39 @@ function TaskCard({
 
             {task.description && (
 
-                <p className="task-description">
-
+                <p>
                     {task.description}
-
                 </p>
 
             )}
 
 
             {/* =================================
-                Meta
+                Task Meta
             ================================= */}
 
             <div className="task-meta">
 
-
                 {/* Priority */}
 
                 <span
-                    className={
-                        `priority ${priority.toLowerCase()}`
-                    }
+                    className={`priority ${priority.toLowerCase()}`}
                 >
 
-                    <Flag size={14} />
+                    <Flag size={15} />
 
                     {priority}
 
                 </span>
 
 
-                {/* Assigned User */}
+                {/* Owner */}
 
-                <span className="task-assignee">
+                <span>
 
-                    <User size={14} />
+                    <User size={15} />
 
-                    {assignedUserName}
-
-                </span>
-
-            </div>
-
-
-            {/* =================================
-                Status
-            ================================= */}
-
-            <div className="task-status">
-
-                <span
-                    className={
-                        `status-badge ${status
-                            .toLowerCase()
-                            .replace(/\s+/g, "-")}`
-                    }
-                >
-
-                    {status}
+                    {ownerName}
 
                 </span>
 
@@ -176,14 +172,14 @@ function TaskCard({
 
 
             {/* =================================
-                Deadline
+                Due Date
             ================================= */}
 
             <div className="task-footer">
 
-                <CalendarDays size={14} />
-
                 <span>
+
+                    <CalendarDays size={15} />
 
                     {formatDate(
                         task.dueDate
@@ -195,70 +191,74 @@ function TaskCard({
 
 
             {/* =================================
-                Actions
+                Owner Actions
             ================================= */}
 
-            {(onEdit || onDelete) && (
+            {isTaskOwner &&
+                (onEdit || onDelete) && (
 
-                <div className="task-actions">
+                    <div className="task-actions">
+
+                        {/* Edit */}
+
+                        {onEdit && (
+
+                            <button
+                                type="button"
+                                className="task-edit-btn"
+                                onClick={(e) => {
+
+                                    e.stopPropagation();
+
+                                    onEdit(task);
+
+                                }}
+                            >
+
+                                <Pencil
+                                    size={15}
+                                />
+
+                                Edit
+
+                            </button>
+
+                        )}
 
 
-                    {/* Edit */}
+                        {/* Delete */}
 
-                    {onEdit && (
+                        {onDelete && (
 
-                        <button
-                            type="button"
-                            className="task-edit-btn"
-                            onClick={(e) => {
+                            <button
+                                type="button"
+                                className="task-delete-btn"
+                                onClick={(e) => {
 
-                                e.stopPropagation();
+                                    e.stopPropagation();
 
-                                onEdit(task);
+                                    onDelete(
+                                        task._id
+                                    );
 
-                            }}
-                        >
+                                }}
+                            >
 
-                            <Pencil size={14} />
+                                <Trash2
+                                    size={15}
+                                />
 
-                            Edit
+                                Delete
 
-                        </button>
+                            </button>
 
-                    )}
+                        )}
 
+                    </div>
 
-                    {/* Delete */}
+                )}
 
-                    {onDelete && (
-
-                        <button
-                            type="button"
-                            className="task-delete-btn"
-                            onClick={(e) => {
-
-                                e.stopPropagation();
-
-                                onDelete(
-                                    task._id
-                                );
-
-                            }}
-                        >
-
-                            <Trash2 size={14} />
-
-                            Delete
-
-                        </button>
-
-                    )}
-
-                </div>
-
-            )}
-
-        </article>
+        </div>
 
     );
 

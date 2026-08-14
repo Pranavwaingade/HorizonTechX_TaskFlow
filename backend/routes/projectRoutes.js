@@ -7,6 +7,7 @@ import {
     updateProject,
     deleteProject,
     addProjectMember,
+    removeProjectMember,
 } from "../controllers/projectController.js";
 
 import { protect } from "../middleware/authMiddleware.js";
@@ -30,6 +31,12 @@ router.post(
     "/:id/members",
     protect,
     addProjectMember
+);
+
+router.delete(
+    "/:id/members/:memberId",
+    protect,
+    removeProjectMember
 );
 
 // Update Project

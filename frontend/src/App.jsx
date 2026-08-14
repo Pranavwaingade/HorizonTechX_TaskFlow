@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
 import ProjectDetails from "./pages/ProjectDetails";
 import Tasks from "./pages/Tasks";
+import TaskDetails from "./pages/TaskDetails";
 import Teams from "./pages/Teams";
 
 function App() {
@@ -73,6 +74,10 @@ function App() {
                         <Route
                             path="/tasks"
                             element={<Tasks />}
+                        />
+                        <Route
+                            path="/tasks/:id"
+                            element={<TaskDetails />}
                         />
                         <Route
                             path="/teams"
