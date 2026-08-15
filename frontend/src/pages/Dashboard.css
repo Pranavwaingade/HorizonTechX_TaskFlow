@@ -1,9 +1,8 @@
-
 .dashboard-label {
 
     margin: 0 0 5px;
 
-    color: #6b7280;
+    color: var(--text-light);
 
     font-size: 12px;
 
@@ -16,11 +15,15 @@
 }
 
 
+/* ========================================
+   Dashboard Heading
+======================================== */
+
 .dashboard-topbar h1 {
 
     margin: 0;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 30px;
 
@@ -44,11 +47,11 @@
     background:
         linear-gradient(
             135deg,
-            #4f46e5,
+            var(--primary),
             #6366f1
         );
 
-    color: white;
+    color: #ffffff;
 
     box-shadow:
         0 12px 30px rgba(79, 70, 229, 0.18);
@@ -96,13 +99,20 @@
 
     padding: 30px;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 18px;
 
-    background: white;
+    background: var(--card);
+
+    color: var(--text);
 
     text-align: center;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
 
 }
 
@@ -111,7 +121,7 @@
 
     margin: 0 0 8px;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 20px;
 
@@ -122,7 +132,7 @@
 
     margin: 0;
 
-    color: #6b7280;
+    color: var(--text-light);
 
     font-size: 14px;
 

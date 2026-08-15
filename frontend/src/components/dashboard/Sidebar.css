@@ -16,12 +16,16 @@
 
     padding: 24px 16px;
 
-    background: #111827;
+    background: var(--card);
 
-    color: #ffffff;
+    color: var(--text);
 
-    border-right: 1px solid #1f2937;
+    border-right: 1px solid var(--border);
 
+    transition:
+        background-color .2s ease,
+        color .2s ease,
+        border-color .2s ease;
 }
 
 
@@ -56,9 +60,9 @@
 
     border-radius: 12px;
 
-    background: #4f46e5;
+    background: var(--primary);
 
-    color: white;
+    color: #ffffff;
 
     font-size: 20px;
 
@@ -70,6 +74,8 @@
 .sidebar-brand h2 {
 
     margin: 0;
+
+    color: var(--text);
 
     font-size: 20px;
 
@@ -84,7 +90,7 @@
 
     margin-top: 2px;
 
-    color: #9ca3af;
+    color: var(--text-light);
 
     font-size: 11px;
 
@@ -106,7 +112,7 @@
 
     margin: 0 10px 12px;
 
-    color: #6b7280;
+    color: var(--text-light);
 
     font-size: 10px;
 
@@ -133,7 +139,7 @@
 
     border-radius: 10px;
 
-    color: #9ca3af;
+    color: var(--text-light);
 
     text-decoration: none;
 
@@ -141,16 +147,17 @@
 
     font-weight: 500;
 
-    transition: 0.2s ease;
-
+    transition:
+        background-color .2s ease,
+        color .2s ease;
 }
 
 
 .sidebar-link:hover {
 
-    color: #ffffff;
+    color: var(--text);
 
-    background: #1f2937;
+    background: var(--hover-background);
 
 }
 
@@ -159,7 +166,7 @@
 
     color: #ffffff;
 
-    background: #4f46e5;
+    background: var(--primary);
 
     box-shadow:
         0 6px 15px rgba(79, 70, 229, 0.25);
@@ -175,7 +182,7 @@
 
     padding-top: 18px;
 
-    border-top: 1px solid #1f2937;
+    border-top: 1px solid var(--border);
 
 }
 
@@ -211,7 +218,7 @@
 
     border-radius: 50%;
 
-    background: #312e81;
+    background: var(--primary);
 
     color: #ffffff;
 
@@ -241,6 +248,8 @@
 
     white-space: nowrap;
 
+    color: var(--text);
+
     font-size: 13px;
 
 }
@@ -256,7 +265,7 @@
 
     margin-top: 2px;
 
-    color: #9ca3af;
+    color: var(--text-light);
 
     font-size: 10px;
 
@@ -285,7 +294,7 @@
 
     background: transparent;
 
-    color: #9ca3af;
+    color: var(--text-light);
 
     cursor: pointer;
 
@@ -293,7 +302,9 @@
 
     text-align: left;
 
-    transition: 0.2s ease;
+    transition:
+        background-color .2s ease,
+        color .2s ease;
 
 }
 

@@ -1,33 +1,57 @@
+/* ========================================
+   Teams Page
+======================================== */
+
 .teams-page {
-    padding: 15px;
     width: 100%;
+    padding: 15px;
+
+    color: var(--text);
 }
+
+
+/* ========================================
+   Header
+======================================== */
 
 .teams-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+
     margin-bottom: 28px;
 }
 
+
 .page-label {
     margin: 0 0 6px;
+
+    color: var(--text-light);
+
     font-size: 12px;
     font-weight: 700;
+
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    opacity: 0.6;
 }
+
 
 .teams-header h1 {
     margin: 0;
+
+    color: var(--text);
+
     font-size: 32px;
     font-weight: 700;
 }
 
+
 .page-description {
     margin: 8px 0 0;
-    opacity: 0.65;
+
+    color: var(--text-light);
+
+    font-size: 14px;
 }
 
 
@@ -48,17 +72,27 @@
 
     gap: 10px;
 
-    border: 1px dashed rgba(128, 128, 128, 0.35);
+    border: 1px dashed var(--border);
+
     border-radius: 16px;
+
+    background: var(--card);
+
+    color: var(--text-light);
 }
+
 
 .teams-state h2 {
     margin: 4px 0;
+
+    color: var(--text);
 }
+
 
 .teams-state p {
     margin: 0;
-    opacity: 0.65;
+
+    color: var(--text-light);
 }
 
 
@@ -81,16 +115,31 @@
 ======================================== */
 
 .team-project-card {
-    border: 1px solid rgba(128, 128, 128, 0.2);
+    border: 1px solid var(--border);
 
     border-radius: 18px;
 
     padding: 20px;
 
-    background: var(--card-bg, #fff);
+    background: var(--card);
 
     box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.05);
+        0 8px 30px var(--shadow-color);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.team-project-card:hover {
+    transform: translateY(-2px);
+
+    border-color: var(--primary-soft-border);
+
+    box-shadow:
+        0 12px 32px var(--shadow-color);
 }
 
 
@@ -108,22 +157,27 @@
 
     padding-bottom: 18px;
 
-    border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+    border-bottom: 1px solid var(--border);
 }
+
 
 .team-project-header h2 {
     margin: 0;
 
+    color: var(--text);
+
     font-size: 20px;
 }
+
 
 .team-project-header p {
     margin: 6px 0 0;
 
-    font-size: 13px;
+    color: var(--text-light);
 
-    opacity: 0.6;
+    font-size: 13px;
 }
+
 
 .team-project-count {
     min-width: 34px;
@@ -138,9 +192,12 @@
 
     border-radius: 10px;
 
-    background: rgba(128, 128, 128, 0.1);
+    background: var(--primary-soft);
+
+    color: var(--primary);
 
     font-size: 13px;
+    font-weight: 600;
 }
 
 
@@ -158,6 +215,7 @@
     padding: 18px 0;
 }
 
+
 .team-member {
     display: flex;
 
@@ -172,8 +230,9 @@
     transition: background 0.2s ease;
 }
 
+
 .team-member:hover {
-    background: rgba(128, 128, 128, 0.07);
+    background: var(--hover-bg);
 }
 
 
@@ -192,15 +251,18 @@
     align-items: center;
     justify-content: center;
 
-    border-radius: 50%;
-
     overflow: hidden;
 
-    background: rgba(128, 128, 128, 0.15);
+    border-radius: 50%;
+
+    background: var(--primary-soft);
+
+    color: var(--primary);
 
     font-size: 16px;
     font-weight: 700;
 }
+
 
 .team-avatar img {
     width: 100%;
@@ -220,20 +282,23 @@
     flex: 1;
 }
 
+
 .team-info h3 {
     margin: 0;
 
-    font-size: 14px;
+    color: var(--text);
 
+    font-size: 14px;
     font-weight: 600;
 }
+
 
 .team-info p {
     margin: 3px 0 0;
 
-    font-size: 12px;
+    color: var(--text-light);
 
-    opacity: 0.6;
+    font-size: 12px;
 
     overflow: hidden;
 
@@ -252,11 +317,13 @@
 
     border-radius: 20px;
 
+    background: var(--primary-soft);
+
+    color: var(--primary);
+
     font-size: 11px;
 
     font-weight: 600;
-
-    background: rgba(80, 120, 255, 0.12);
 }
 
 
@@ -274,9 +341,9 @@
 
     padding: 20px;
 
-    font-size: 13px;
+    color: var(--text-light);
 
-    opacity: 0.55;
+    font-size: 13px;
 }
 
 
@@ -287,8 +354,9 @@
 .add-member-section {
     padding-top: 16px;
 
-    border-top: 1px solid rgba(128, 128, 128, 0.15);
+    border-top: 1px solid var(--border);
 }
+
 
 .add-member-btn {
     width: 100%;
@@ -302,25 +370,32 @@
 
     padding: 11px 15px;
 
-    border: 1px dashed rgba(128, 128, 128, 0.35);
+    border: 1px dashed var(--border);
 
     border-radius: 10px;
 
     background: transparent;
 
+    color: var(--text-light);
+
     cursor: pointer;
 
+    font-family: inherit;
     font-size: 13px;
 
     transition:
         background 0.2s ease,
-        border-color 0.2s ease;
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
-.add-member-btn:hover {
-    background: rgba(128, 128, 128, 0.07);
 
-    border-color: rgba(128, 128, 128, 0.6);
+.add-member-btn:hover {
+    background: var(--hover-bg);
+
+    border-color: var(--primary);
+
+    color: var(--primary);
 }
 
 
@@ -335,6 +410,7 @@
 
     gap: 8px;
 }
+
 
 .add-member-input-wrap {
     flex: 1;
@@ -351,10 +427,27 @@
 
     padding: 0 11px;
 
-    border: 1px solid rgba(128, 128, 128, 0.3);
+    border: 1px solid var(--border);
 
     border-radius: 10px;
+
+    background: var(--background);
+
+    color: var(--text-light);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
+
+.add-member-input-wrap:focus-within {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px var(--primary-focus);
+}
+
 
 .add-member-input-wrap input {
     width: 100%;
@@ -365,8 +458,22 @@
 
     background: transparent;
 
+    color: var(--text);
+
+    font-family: inherit;
+
     font-size: 13px;
 }
+
+
+.add-member-input-wrap input::placeholder {
+    color: var(--text-light);
+}
+
+
+/* ========================================
+   Add Member Submit
+======================================== */
 
 .add-member-submit {
     height: 40px;
@@ -379,20 +486,39 @@
 
     cursor: pointer;
 
+    font-family: inherit;
+
     font-size: 13px;
 
     font-weight: 600;
 
-    background: #111;
+    background: var(--primary);
 
-    color: #fff;
+    color: #ffffff;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
+
+
+.add-member-submit:hover:not(:disabled) {
+    background: var(--primary-hover);
+
+    transform: translateY(-1px);
+}
+
 
 .add-member-submit:disabled {
     opacity: 0.6;
 
     cursor: not-allowed;
 }
+
+
+/* ========================================
+   Cancel
+======================================== */
 
 .add-member-cancel {
     width: 40px;
@@ -405,18 +531,32 @@
     align-items: center;
     justify-content: center;
 
-    border: 1px solid rgba(128, 128, 128, 0.25);
+    border: 1px solid var(--border);
 
     border-radius: 10px;
 
     background: transparent;
 
+    color: var(--text-light);
+
     cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
+
 .add-member-cancel:hover {
-    background: rgba(128, 128, 128, 0.08);
+    background: var(--hover-bg);
+
+    color: var(--text);
 }
+
+
+/* ========================================
+   Remove Member
+======================================== */
 
 .remove-member-btn {
     width: 34px;
@@ -425,30 +565,44 @@
     margin-left: auto;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    border: 1px solid #fecaca;
+    flex-shrink: 0;
+
+    border: 1px solid var(--danger-border);
+
     border-radius: 8px;
 
-    background: #fff;
-    color: #dc2626;
+    background: var(--danger-soft);
+
+    color: var(--danger);
 
     cursor: pointer;
 
-    transition: .2s ease;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
+
 
 .remove-member-btn:hover {
-    background: #fef2f2;
-    border-color: #fca5a5;
-    color: #b91c1c;
+    background: var(--danger-hover);
+
+    border-color: var(--danger);
+
+    color: var(--danger);
 }
 
+
 .remove-member-btn:disabled {
-    opacity: .5;
+    opacity: 0.5;
+
     cursor: not-allowed;
 }
+
 
 /* ========================================
    Responsive
@@ -460,17 +614,45 @@
         padding: 20px;
     }
 
+
     .teams-projects {
         grid-template-columns: 1fr;
     }
+
 
     .add-member-form {
         flex-wrap: wrap;
     }
 
+
     .add-member-input-wrap {
         width: 100%;
+
         flex-basis: 100%;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .teams-page {
+        padding: 15px;
+    }
+
+
+    .team-project-card {
+        padding: 16px;
+    }
+
+
+    .team-project-header h2 {
+        font-size: 18px;
+    }
+
+
+    .owner-badge {
+        font-size: 10px;
     }
 
 }

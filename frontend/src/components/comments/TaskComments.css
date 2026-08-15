@@ -1,11 +1,17 @@
+/* ========================================
+   Task Comments
+======================================== */
+
 .task-comments {
     width: 100%;
     margin-top: 24px;
     padding: 22px;
     box-sizing: border-box;
-    border: 1px solid #e5e7eb;
+
+    border: 1px solid var(--border);
     border-radius: 18px;
-    background: #ffffff;
+
+    background: var(--card);
 }
 
 
@@ -22,13 +28,16 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #4f46e5;
+
+    color: var(--primary);
 }
 
 
 .comments-title h3 {
     margin: 0;
-    color: #111827;
+
+    color: var(--text);
+
     font-size: 17px;
 }
 
@@ -36,12 +45,16 @@
 .comments-title span {
     min-width: 22px;
     height: 22px;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     border-radius: 50%;
-    background: #eef2ff;
-    color: #4f46e5;
+
+    background: var(--primary-soft, rgba(99, 102, 241, 0.1));
+    color: var(--primary);
+
     font-size: 11px;
     font-weight: 700;
 }
@@ -54,75 +67,110 @@
 .comment-form {
     padding: 14px;
     margin-bottom: 22px;
-    border: 1px solid #e5e7eb;
+
+    border: 1px solid var(--border);
     border-radius: 12px;
-    background: #f8fafc;
+
+    background: var(--background);
 }
 
 
 .comment-form textarea,
 .comment-edit textarea {
     width: 100%;
+
     box-sizing: border-box;
+
     padding: 11px 12px;
-    border: 1px solid #dbe1ea;
+
+    border: 1px solid var(--border);
     border-radius: 9px;
+
     outline: none;
     resize: vertical;
-    background: #ffffff;
-    color: #111827;
+
+    background: var(--card);
+    color: var(--text);
+
     font-family: inherit;
     font-size: 13px;
+
+    transition: .2s ease;
+}
+
+
+.comment-form textarea::placeholder,
+.comment-edit textarea::placeholder {
+    color: var(--text-light);
 }
 
 
 .comment-form textarea:focus,
 .comment-edit textarea:focus {
-    border-color: #818cf8;
+    border-color: var(--primary);
+
     box-shadow:
         0 0 0 3px rgba(99, 102, 241, 0.08);
 }
 
 
+/* ========================================
+   Comment Form Footer
+======================================== */
+
 .comment-form-footer {
     display: flex;
+
     align-items: center;
     justify-content: space-between;
+
     gap: 12px;
+
     margin-top: 10px;
 }
 
 
 .comment-form-footer span {
-    color: #94a3b8;
+    color: var(--text-light);
+
     font-size: 11px;
 }
 
 
 .comment-form-footer button {
     display: inline-flex;
+
     align-items: center;
+
     gap: 6px;
+
     height: 36px;
+
     padding: 0 13px;
+
     border: none;
     border-radius: 8px;
-    background: #4f46e5;
+
+    background: var(--primary);
     color: #ffffff;
+
     font-family: inherit;
+
     font-size: 12px;
     font-weight: 600;
+
     cursor: pointer;
 }
 
 
 .comment-form-footer button:hover {
-    background: #4338ca;
+    background: var(--primary-hover);
 }
 
 
 .comment-form-footer button:disabled {
     opacity: 0.5;
+
     cursor: not-allowed;
 }
 
@@ -133,15 +181,19 @@
 
 .comments-list {
     display: flex;
+
     flex-direction: column;
 }
 
 
 .comment-item {
     display: flex;
+
     gap: 12px;
+
     padding: 17px 0;
-    border-bottom: 1px solid #f1f5f9;
+
+    border-bottom: 1px solid var(--border);
 }
 
 
@@ -157,14 +209,21 @@
 .comment-avatar {
     width: 36px;
     height: 36px;
+
     flex-shrink: 0;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
+
     overflow: hidden;
+
     border-radius: 50%;
-    background: #eef2ff;
-    color: #4f46e5;
+
+    background: var(--primary-soft, rgba(99, 102, 241, 0.1));
+    color: var(--primary);
+
     font-size: 13px;
     font-weight: 700;
 }
@@ -173,6 +232,7 @@
 .comment-avatar img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
 }
 
@@ -183,44 +243,57 @@
 
 .comment-content {
     flex: 1;
+
     min-width: 0;
 }
 
 
 .comment-top {
     display: flex;
+
     align-items: flex-start;
     justify-content: space-between;
+
     gap: 12px;
 }
 
 
 .comment-top > div:first-child {
     display: flex;
+
     align-items: center;
+
     gap: 9px;
+
     flex-wrap: wrap;
 }
 
 
 .comment-top strong {
-    color: #111827;
+    color: var(--text);
+
     font-size: 13px;
 }
 
 
 .comment-top time {
-    color: #94a3b8;
+    color: var(--text-light);
+
     font-size: 10px;
 }
 
 
 .comment-text {
     margin: 7px 0 0;
-    color: #475569;
+
+    color: var(--text-light);
+
     font-size: 13px;
+
     line-height: 1.6;
+
     white-space: pre-wrap;
+
     word-break: break-word;
 }
 
@@ -231,6 +304,7 @@
 
 .comment-actions {
     display: flex;
+
     gap: 4px;
 }
 
@@ -238,25 +312,33 @@
 .comment-actions button {
     width: 28px;
     height: 28px;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
+
     border: none;
+
     border-radius: 7px;
+
     background: transparent;
-    color: #94a3b8;
+
+    color: var(--text-light);
+
     cursor: pointer;
 }
 
 
 .comment-actions button:hover {
-    background: #f1f5f9;
-    color: #4f46e5;
+    background: var(--hover-background);
+
+    color: var(--primary);
 }
 
 
 .comment-actions button:last-child:hover {
-    color: #dc2626;
+    color: var(--danger);
 }
 
 
@@ -271,8 +353,11 @@
 
 .comment-edit-actions {
     display: flex;
+
     justify-content: flex-end;
+
     gap: 7px;
+
     margin-top: 8px;
 }
 
@@ -280,29 +365,52 @@
 .comment-cancel-btn,
 .comment-save-btn {
     height: 34px;
+
     padding: 0 12px;
+
     display: inline-flex;
+
     align-items: center;
+
     gap: 5px;
+
     border-radius: 8px;
+
     font-family: inherit;
+
     font-size: 11px;
+
     font-weight: 600;
+
     cursor: pointer;
 }
 
 
 .comment-cancel-btn {
-    border: 1px solid #e5e7eb;
-    background: #ffffff;
-    color: #64748b;
+    border: 1px solid var(--border);
+
+    background: var(--card);
+
+    color: var(--text-light);
+}
+
+
+.comment-cancel-btn:hover {
+    background: var(--hover-background);
 }
 
 
 .comment-save-btn {
     border: none;
-    background: #4f46e5;
+
+    background: var(--primary);
+
     color: #ffffff;
+}
+
+
+.comment-save-btn:hover {
+    background: var(--primary-hover);
 }
 
 
@@ -312,30 +420,224 @@
 
 .comments-state {
     padding: 28px 10px;
+
     text-align: center;
-    color: #94a3b8;
+
+    color: var(--text-light);
+
     font-size: 12px;
 }
 
 
 .comments-state.empty {
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     gap: 7px;
 }
 
 
 .comments-state.empty p {
     margin: 4px 0 0;
-    color: #475569;
+
+    color: var(--text-light);
+
     font-size: 13px;
+
     font-weight: 600;
 }
 
 
 .comments-state.empty span {
+    color: var(--text-light);
+
     font-size: 11px;
+}
+
+
+/* ========================================
+   DARK MODE
+   Uses existing [data-theme="dark"]
+======================================== */
+
+[data-theme="dark"] .task-comments {
+    background: var(--card);
+
+    border-color: var(--border);
+}
+
+
+/* ========================================
+   Header
+======================================== */
+
+[data-theme="dark"] .comments-title {
+    color: var(--primary);
+}
+
+
+[data-theme="dark"] .comments-title h3 {
+    color: var(--text);
+}
+
+
+[data-theme="dark"] .comments-title span {
+    background: var(--primary-soft);
+
+    color: var(--primary-hover);
+}
+
+
+/* ========================================
+   Comment Form
+======================================== */
+
+[data-theme="dark"] .comment-form {
+    background: var(--background);
+
+    border-color: var(--border);
+}
+
+
+/* ========================================
+   Textarea
+======================================== */
+
+[data-theme="dark"] .comment-form textarea,
+[data-theme="dark"] .comment-edit textarea {
+    background: var(--card);
+
+    border-color: var(--border);
+
+    color: var(--text);
+}
+
+
+[data-theme="dark"] .comment-form textarea::placeholder,
+[data-theme="dark"] .comment-edit textarea::placeholder {
+    color: var(--text-light);
+}
+
+
+[data-theme="dark"] .comment-form textarea:focus,
+[data-theme="dark"] .comment-edit textarea:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+
+/* ========================================
+   Footer Text
+======================================== */
+
+[data-theme="dark"] .comment-form-footer span {
+    color: var(--text-light);
+}
+
+
+/* ========================================
+   Comment List
+======================================== */
+
+[data-theme="dark"] .comment-item {
+    border-bottom-color: var(--border);
+}
+
+
+/* ========================================
+   Avatar
+======================================== */
+
+[data-theme="dark"] .comment-avatar {
+    background: var(--primary-soft);
+
+    color: var(--primary-hover);
+}
+
+
+/* ========================================
+   Comment User
+======================================== */
+
+[data-theme="dark"] .comment-top strong {
+    color: var(--text);
+}
+
+
+[data-theme="dark"] .comment-top time {
+    color: var(--text-light);
+}
+
+
+/* ========================================
+   Comment Text
+======================================== */
+
+[data-theme="dark"] .comment-text {
+    color: var(--text-light);
+}
+
+
+/* ========================================
+   Action Buttons
+======================================== */
+
+[data-theme="dark"] .comment-actions button {
+    color: var(--text-light);
+}
+
+
+[data-theme="dark"] .comment-actions button:hover {
+    background: var(--hover-background);
+
+    color: var(--primary);
+}
+
+
+[data-theme="dark"] .comment-actions button:last-child:hover {
+    color: var(--danger);
+}
+
+
+/* ========================================
+   Cancel Button
+======================================== */
+
+[data-theme="dark"] .comment-cancel-btn {
+    background: var(--card);
+
+    border-color: var(--border);
+
+    color: var(--text-light);
+}
+
+
+[data-theme="dark"] .comment-cancel-btn:hover {
+    background: var(--hover-background);
+}
+
+
+/* ========================================
+   State
+======================================== */
+
+[data-theme="dark"] .comments-state {
+    color: var(--text-light);
+}
+
+
+[data-theme="dark"] .comments-state.empty p {
+    color: var(--text-light);
+}
+
+
+[data-theme="dark"] .comments-state.empty span {
+    color: var(--text-light);
 }
 
 
@@ -352,12 +654,14 @@
 
     .comment-form-footer {
         align-items: flex-end;
+
         flex-direction: column;
     }
 
 
     .comment-form-footer button {
         width: 100%;
+
         justify-content: center;
     }
 

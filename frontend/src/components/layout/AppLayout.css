@@ -1,11 +1,17 @@
-/* .app-layout {
+/* ========================================
+   App Layout
+======================================== */
 
-    --sidebar-width: 270px;
-
+.app-layout {
     min-height: 100vh;
 
-    background: #f8fafc;
+    background: var(--background);
 
+    color: var(--text);
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
 }
 
 
@@ -13,20 +19,15 @@
    Main Application Area
 ======================================== */
 
-/* .app-main {
-
-    min-width: 0;
-
-    width: calc(100% - var(--sidebar-width));
-
+.app-main {
     min-height: 100vh;
 
-    margin-left: var(--sidebar-width);
+    margin-left: 220px;
 
-    display: flex;
+    background: var(--background);
 
-    flex-direction: column;
-
+    transition:
+        background-color 0.25s ease;
 }
 
 
@@ -34,58 +35,23 @@
    Page Content
 ======================================== */
 
-/* .app-content {
+.app-content {
+    min-height: calc(100vh - 72px);
 
-    flex: 1;
+    padding: 32px 38px;
 
-    min-width: 0;
+    box-sizing: border-box;
 
-    overflow-x: hidden;
+    background: var(--background);
 
-} */
+    transition:
+        background-color 0.25s ease;
+}
 
 
 /* ========================================
    Responsive
 ======================================== */
-
-/*@media (max-width: 900px) { 
-
-    .app-layout {
-
-        --sidebar-width: 0px;
-
-    }
-
-    .app-main {
-
-        width: 100%;
-
-        margin-left: 0;
-
-    }
-
-}  */
-
-
-.app-layout {
-    min-height: 100vh;
-    background: #f8fafc;
-}
-
-
-.app-main {
-    min-height: 100vh;
-    margin-left: 220px;
-}
-
-
-.app-content {
-    min-height: calc(100vh - 72px);
-    padding: 32px 38px;
-    box-sizing: border-box;
-}
-
 
 @media (max-width: 768px) {
 
@@ -96,6 +62,15 @@
 
     .app-content {
         padding: 24px 18px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .app-content {
+        padding: 18px 14px;
     }
 
 }

@@ -1,3 +1,7 @@
+/* ========================================
+   Task Card
+======================================== */
+
 .task-card {
 
     display: flex;
@@ -8,18 +12,18 @@
 
     padding: 16px;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 14px;
 
-    background: #ffffff;
+    background: var(--card);
 
-    box-shadow:
-        0 4px 12px rgba(15, 23, 42, 0.04);
+    box-shadow: var(--shadow);
 
     transition:
         transform .2s ease,
-        box-shadow .2s ease;
+        box-shadow .2s ease,
+        border-color .2s ease;
 
 }
 
@@ -34,11 +38,15 @@
 }
 
 
+/* ========================================
+   Task Title
+======================================== */
+
 .task-card h4 {
 
     margin: 0;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 15px;
 
@@ -47,11 +55,15 @@
 }
 
 
+/* ========================================
+   Description
+======================================== */
+
 .task-description {
 
     margin: 0;
 
-    color: #64748b;
+    color: var(--text-light);
 
     font-size: 12px;
 
@@ -59,6 +71,10 @@
 
 }
 
+
+/* ========================================
+   Meta
+======================================== */
 
 .task-meta {
 
@@ -74,6 +90,10 @@
 
 }
 
+
+/* ========================================
+   Priority
+======================================== */
 
 .priority {
 
@@ -109,6 +129,10 @@
 }
 
 
+/* ========================================
+   Assignee
+======================================== */
+
 .task-assignee {
 
     display: inline-flex;
@@ -121,7 +145,7 @@
 
     overflow: hidden;
 
-    color: #64748b;
+    color: var(--text-light);
 
     white-space: nowrap;
 
@@ -129,6 +153,10 @@
 
 }
 
+
+/* ========================================
+   Footer
+======================================== */
 
 .task-footer {
 
@@ -140,14 +168,18 @@
 
     padding-top: 10px;
 
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid var(--border);
 
-    color: #64748b;
+    color: var(--text-light);
 
     font-size: 11px;
 
 }
 
+
+/* ========================================
+   Actions
+======================================== */
 
 .task-actions {
 
@@ -160,8 +192,11 @@
 }
 
 
-.task-edit-btn,
+/* ========================================
+   Edit Button
+======================================== */
 
+.task-edit-btn,
 .task-delete-btn {
 
     display: inline-flex;
@@ -186,8 +221,12 @@
 
     cursor: pointer;
 
+    transition: .2s ease;
+
 }
 
+
+/* Edit */
 
 .task-edit-btn {
 
@@ -207,6 +246,8 @@
 }
 
 
+/* Delete */
+
 .task-delete-btn {
 
     border: 1px solid #fee2e2;
@@ -224,6 +265,57 @@
 
 }
 
+
+/* ========================================
+   Dark Mode
+======================================== */
+
+[data-theme="dark"] .task-card:hover {
+
+    border-color: #334155;
+
+}
+
+
+[data-theme="dark"] .task-edit-btn {
+
+    border-color: #3730a3;
+
+    background: #312e81;
+
+    color: #c7d2fe;
+
+}
+
+
+[data-theme="dark"] .task-edit-btn:hover {
+
+    background: #3730a3;
+
+}
+
+
+[data-theme="dark"] .task-delete-btn {
+
+    border-color: #7f1d1d;
+
+    background: #450a0a;
+
+    color: #fca5a5;
+
+}
+
+
+[data-theme="dark"] .task-delete-btn:hover {
+
+    background: #7f1d1d;
+
+}
+
+
+/* ========================================
+   Mobile
+======================================== */
 
 @media (max-width: 500px) {
 

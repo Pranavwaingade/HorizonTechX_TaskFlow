@@ -1,3 +1,7 @@
+/* ========================================
+   Dashboard Extras
+======================================== */
+
 .dashboard-extras {
 
     display: grid;
@@ -19,9 +23,9 @@
 
 .dashboard-extra-card {
 
-    background: #ffffff;
+    background: var(--card);
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 16px;
 
@@ -40,7 +44,7 @@
 
     padding-bottom: 17px;
 
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--border);
 
 }
 
@@ -55,7 +59,7 @@
 
     margin: 0 0 5px;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 17px;
 
@@ -73,7 +77,7 @@
 
     margin: 0;
 
-    color: #9ca3af;
+    color: var(--text-light);
 
     font-size: 12px;
 
@@ -103,7 +107,7 @@
 
     padding: 14px 3px;
 
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--border);
 
 }
 
@@ -184,7 +188,7 @@
 
     overflow: hidden;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 13px;
 
@@ -203,7 +207,7 @@
 
     overflow: hidden;
 
-    color: #64748b;
+    color: var(--text-light);
 
     font-size: 11px;
 
@@ -216,7 +220,7 @@
 
 .activity-info small {
 
-    color: #94a3b8;
+    color: var(--text-light);
 
     font-size: 10px;
 
@@ -292,7 +296,7 @@
 
     padding: 14px 3px;
 
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--border);
 
 }
 
@@ -350,7 +354,7 @@
 
     overflow: hidden;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 13px;
 
@@ -367,7 +371,7 @@
 
     margin: 0;
 
-    color: #94a3b8;
+    color: var(--text-light);
 
     font-size: 10px;
 
@@ -414,7 +418,7 @@
 
     gap: 6px;
 
-    color: #94a3b8;
+    color: var(--text-light);
 
     text-align: center;
 
@@ -425,7 +429,7 @@
 
     margin: 3px 0 0;
 
-    color: #64748b;
+    color: var(--text);
 
     font-size: 13px;
 
@@ -435,6 +439,8 @@
 
 
 .extra-empty span {
+
+    color: var(--text-light);
 
     font-size: 10px;
 

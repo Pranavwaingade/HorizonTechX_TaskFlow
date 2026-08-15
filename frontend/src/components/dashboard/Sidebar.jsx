@@ -63,9 +63,10 @@ function Sidebar() {
                 Brand
             ============================== */}
 
-            <div className="sidebar-brand">
-
-                <div className="brand-logo">
+            <a href="/" style={{textDecoration:"none"}} className="sidebar-brand">
+                
+                    
+                <div className="brand-logo" >
                     T
                 </div>
 
@@ -80,8 +81,8 @@ function Sidebar() {
                     </span>
 
                 </div>
-
-            </div>
+            
+            </a>
 
 
             {/* ==============================

@@ -6,6 +6,8 @@
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+
+    color: var(--text);
 }
 
 
@@ -17,6 +19,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+
     gap: 24px;
     margin-bottom: 28px;
 }
@@ -25,7 +28,7 @@
 .page-label {
     margin: 0 0 6px;
 
-    color: #64748b;
+    color: var(--text-light);
 
     font-size: 12px;
     font-weight: 600;
@@ -38,7 +41,7 @@
 .tasks-header h1 {
     margin: 0;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 30px;
     font-weight: 700;
@@ -50,7 +53,7 @@
 .page-description {
     margin: 7px 0 0;
 
-    color: #6b7280;
+    color: var(--text-light);
 
     font-size: 14px;
     line-height: 1.5;
@@ -76,7 +79,7 @@
     border: none;
     border-radius: 10px;
 
-    background: #4f46e5;
+    background: var(--primary);
 
     color: #ffffff;
 
@@ -97,7 +100,7 @@
 
 
 .create-task-btn:hover {
-    background: #4338ca;
+    background: var(--primary-hover);
 
     transform: translateY(-1px);
 
@@ -130,11 +133,13 @@
 
     box-sizing: border-box;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 14px;
 
-    background: #ffffff;
+    background: var(--card);
+
+    box-shadow: var(--shadow);
 }
 
 
@@ -159,17 +164,18 @@
 
     box-sizing: border-box;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 9px;
 
-    background: #ffffff;
+    background: var(--card);
 
-    color: #94a3b8;
+    color: var(--text-light);
 
     transition:
         border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
 
@@ -191,7 +197,7 @@
 
     background: transparent;
 
-    color: #111827;
+    color: var(--text);
 
     font-family: inherit;
 
@@ -200,7 +206,7 @@
 
 
 .task-search input::placeholder {
-    color: #94a3b8;
+    color: var(--text-light);
 }
 
 
@@ -223,13 +229,13 @@
 
     box-sizing: border-box;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 9px;
 
-    background: #ffffff;
+    background: var(--card);
 
-    color: #64748b;
+    color: var(--text-light);
 }
 
 
@@ -241,13 +247,21 @@
 
     background: transparent;
 
-    color: #374151;
+    color: var(--text);
 
     font-family: inherit;
 
     font-size: 12px;
 
     cursor: pointer;
+}
+
+
+/* Dark Mode Select Options */
+
+[data-theme="dark"] .task-filter select option {
+    background: #1e293b;
+    color: #f8fafc;
 }
 
 
@@ -286,22 +300,24 @@
 
     box-sizing: border-box;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 18px;
 
-    background: #ffffff;
+    background: var(--card);
+
+    box-shadow: var(--shadow);
 
     text-align: center;
 
-    color: #94a3b8;
+    color: var(--text-light);
 }
 
 
 .tasks-state h2 {
     margin: 14px 0 6px;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 20px;
 }
@@ -310,7 +326,7 @@
 .tasks-state p {
     margin: 0 0 18px;
 
-    color: #64748b;
+    color: var(--text-light);
 
     font-size: 13px;
 
@@ -331,7 +347,17 @@
 
     background: #eef2ff;
 
-    color: #4f46e5;
+    color: var(--primary);
+}
+
+
+/* ========================================
+   Dark Mode
+======================================== */
+
+[data-theme="dark"] .empty-task-icon {
+    background: #312e81;
+    color: #c7d2fe;
 }
 
 

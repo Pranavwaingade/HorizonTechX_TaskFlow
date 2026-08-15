@@ -8,8 +8,14 @@
 
     padding: 0 28px;
 
-    border-bottom: 1px solid #e5e7eb;
-    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
 }
 
 
@@ -47,11 +53,11 @@
     align-items: center;
     justify-content: center;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
     border-radius: 10px;
 
-    background: #ffffff;
-    color: #64748b;
+    background: var(--card);
+    color: var(--text-light);
 
     cursor: pointer;
 
@@ -61,9 +67,9 @@
 
 .notification-btn:hover,
 .notification-btn.active {
-    border-color: #c7d2fe;
-    background: #eef2ff;
-    color: #4f46e5;
+    border-color: var(--primary);
+    background: var(--hover-background);
+    color: var(--primary);
 }
 
 
@@ -78,10 +84,10 @@
     width: 6px;
     height: 6px;
 
-    border: 1.5px solid #ffffff;
+    border: 1.5px solid var(--card);
     border-radius: 50%;
 
-    background: #ef4444;
+    background: var(--danger);
 }
 
 
@@ -93,7 +99,7 @@
     width: 1px;
     height: 30px;
 
-    background: #e5e7eb;
+    background: var(--border);
 }
 
 
@@ -120,7 +126,7 @@
 
 
 .topbar-user:hover {
-    background: #f8fafc;
+    background: var(--hover-background);
 }
 
 
@@ -142,8 +148,8 @@
 
     border-radius: 50%;
 
-    background: #eef2ff;
-    color: #4f46e5;
+    background: var(--hover-background);
+    color: var(--primary);
 
     font-size: 14px;
     font-weight: 700;
@@ -170,7 +176,7 @@
 
 
 .topbar-user-info strong {
-    color: #111827;
+    color: var(--text);
 
     font-size: 12px;
     font-weight: 700;
@@ -184,7 +190,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 
-    color: #94a3b8;
+    color: var(--text-light);
 
     font-size: 10px;
 }
@@ -200,17 +206,18 @@
     top: calc(100% + 10px);
     right: 0;
 
-    background: #ffffff;
+    background: var(--card);
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
     border-radius: 12px;
 
-    box-shadow:
-        0 15px 40px rgba(15, 23, 42, 0.14);
+    box-shadow: var(--shadow);
 
     overflow: hidden;
 
     z-index: 400;
+
+    color: var(--text);
 }
 
 
@@ -231,7 +238,7 @@
 .dropdown-header strong {
     display: block;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 13px;
 }
@@ -242,7 +249,7 @@
 
     margin-top: 3px;
 
-    color: #94a3b8;
+    color: var(--text-light);
 
     font-size: 11px;
 }
@@ -275,13 +282,13 @@
 
     border-radius: 50%;
 
-    background: #f1f5f9;
-    color: #64748b;
+    background: var(--hover-background);
+    color: var(--text-light);
 }
 
 
 .notification-empty strong {
-    color: #374151;
+    color: var(--text);
 
     font-size: 12px;
 }
@@ -290,7 +297,7 @@
 .notification-empty span {
     margin-top: 4px;
 
-    color: #94a3b8;
+    color: var(--text-light);
 
     font-size: 11px;
 }
@@ -335,8 +342,8 @@
 
     border-radius: 50%;
 
-    background: #eef2ff;
-    color: #4f46e5;
+    background: var(--hover-background);
+    color: var(--primary);
 
     font-size: 14px;
     font-weight: 700;
@@ -354,7 +361,7 @@
 .profile-dropdown-user strong {
     display: block;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 13px;
 }
@@ -371,7 +378,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 
-    color: #94a3b8;
+    color: var(--text-light);
 
     font-size: 10px;
 }
@@ -386,7 +393,7 @@
 
     margin: 5px 3px;
 
-    background: #eef0f3;
+    background: var(--border);
 }
 
 
@@ -409,7 +416,7 @@
 
     background: transparent;
 
-    color: #475467;
+    color: var(--text-light);
 
     font-size: 12px;
 
@@ -422,8 +429,8 @@
 
 
 .dropdown-item:hover {
-    background: #f5f7ff;
-    color: #4f46e5;
+    background: var(--hover-background);
+    color: var(--primary);
 }
 
 
@@ -432,13 +439,13 @@
 ======================================== */
 
 .dropdown-item.logout-item {
-    color: #dc2626;
+    color: var(--danger);
 }
 
 
 .dropdown-item.logout-item:hover {
-    background: #fef2f2;
-    color: #dc2626;
+    background: rgba(220, 38, 38, 0.10);
+    color: var(--danger);
 }
 
 

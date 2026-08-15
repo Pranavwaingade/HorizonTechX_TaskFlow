@@ -1,3 +1,7 @@
+/* ========================================
+   Modal Overlay
+======================================== */
+
 .modal-overlay {
 
     position: fixed;
@@ -21,6 +25,10 @@
 }
 
 
+/* ========================================
+   Task Modal
+======================================== */
+
 .task-modal {
 
     width: 100%;
@@ -33,15 +41,29 @@
 
     padding: 26px;
 
+    box-sizing: border-box;
+
+    border: 1px solid var(--border);
+
     border-radius: 18px;
 
-    background: #ffffff;
+    background: var(--card);
+
+    color: var(--text);
 
     box-shadow:
-        0 25px 60px rgba(15, 23, 42, 0.2);
+        0 25px 60px var(--shadow-color);
 
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease;
 }
 
+
+/* ========================================
+   Modal Header
+======================================== */
 
 .task-modal-header {
 
@@ -54,7 +76,7 @@
 
     margin: 0 0 4px;
 
-    color: #6366f1;
+    color: var(--primary);
 
     font-size: 11px;
 
@@ -71,12 +93,16 @@
 
     margin: 0;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 22px;
 
 }
 
+
+/* ========================================
+   Form
+======================================== */
 
 .task-modal form {
 
@@ -97,7 +123,7 @@
 
     gap: 7px;
 
-    color: #374151;
+    color: var(--text);
 
     font-size: 12px;
 
@@ -105,6 +131,10 @@
 
 }
 
+
+/* ========================================
+   Inputs
+======================================== */
 
 .task-modal .input {
 
@@ -114,41 +144,82 @@
 
     padding: 11px 12px;
 
-    border: 1px solid #dbe1ea;
+    border: 1px solid var(--border);
 
     border-radius: 9px;
 
     outline: none;
 
-    background: #ffffff;
+    background: var(--background);
 
-    color: #111827;
+    color: var(--text);
 
     font-family: inherit;
 
     font-size: 13px;
 
-    transition: .2s ease;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+
+.task-modal .input::placeholder {
+
+    color: var(--text-light);
 
 }
 
 
 .task-modal .input:focus {
 
-    border-color: #6366f1;
+    border-color: var(--primary);
+
+    background: var(--card);
 
     box-shadow:
-        0 0 0 3px rgba(99, 102, 241, 0.1);
+        0 0 0 3px var(--primary-focus);
 
 }
 
+
+/* ========================================
+   Select
+======================================== */
+
+.task-modal select.input {
+
+    cursor: pointer;
+
+}
+
+
+.task-modal select.input option {
+
+    background: var(--card);
+
+    color: var(--text);
+
+}
+
+
+/* ========================================
+   Textarea
+======================================== */
 
 .task-modal textarea {
 
     resize: vertical;
 
+    min-height: 100px;
+
 }
 
+
+/* ========================================
+   Modal Buttons
+======================================== */
 
 .modal-buttons {
 
@@ -180,44 +251,65 @@
 
     cursor: pointer;
 
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+
 }
 
+
+/* ========================================
+   Secondary
+======================================== */
 
 .secondary-btn {
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
-    background: #ffffff;
+    background: var(--card);
 
-    color: #475569;
+    color: var(--text-light);
+
+}
+
+
+.secondary-btn:hover:not(:disabled) {
+
+    background: var(--hover-bg);
+
+    color: var(--text);
 
 }
 
 
-.secondary-btn:hover {
-
-    background: #f8fafc;
-
-}
-
+/* ========================================
+   Primary
+======================================== */
 
 .primary-btn {
 
     border: none;
 
-    background: #4f46e5;
+    background: var(--primary);
 
     color: #ffffff;
 
 }
 
 
-.primary-btn:hover {
+.primary-btn:hover:not(:disabled) {
 
-    background: #4338ca;
+    background: var(--primary-hover);
+
+    transform: translateY(-1px);
 
 }
 
+
+/* ========================================
+   Disabled
+======================================== */
 
 .primary-btn:disabled,
 .secondary-btn:disabled {
@@ -229,11 +321,67 @@
 }
 
 
+/* ========================================
+   Scrollbar
+======================================== */
+
+.task-modal::-webkit-scrollbar {
+
+    width: 6px;
+
+}
+
+
+.task-modal::-webkit-scrollbar-track {
+
+    background: transparent;
+
+}
+
+
+.task-modal::-webkit-scrollbar-thumb {
+
+    border-radius: 10px;
+
+    background: var(--border);
+
+}
+
+
+.task-modal::-webkit-scrollbar-thumb:hover {
+
+    background: var(--text-light);
+
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
 @media (max-width: 600px) {
+
+    .modal-overlay {
+
+        padding: 14px;
+
+    }
+
 
     .task-modal {
 
+        max-height: 92vh;
+
         padding: 20px;
+
+        border-radius: 16px;
+
+    }
+
+
+    .task-modal h2 {
+
+        font-size: 20px;
 
     }
 
@@ -249,6 +397,24 @@
     .primary-btn {
 
         width: 100%;
+
+    }
+
+}
+
+
+@media (max-width: 400px) {
+
+    .modal-overlay {
+
+        padding: 10px;
+
+    }
+
+
+    .task-modal {
+
+        padding: 16px;
 
     }
 

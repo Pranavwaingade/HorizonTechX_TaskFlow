@@ -1,0 +1,680 @@
+/* ========================================
+   Settings Page
+======================================== */
+
+.settings-page {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 28px;
+}
+
+
+/* ========================================
+   Header
+======================================== */
+
+.settings-header {
+    margin-bottom: 24px;
+}
+
+.settings-header .page-label {
+    margin: 0 0 5px;
+
+    color: #6366f1;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.settings-header h1 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 28px;
+    font-weight: 750;
+}
+
+.settings-header .page-description {
+    margin: 7px 0 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   Main Card
+======================================== */
+
+.settings-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, .05);
+}
+
+
+/* ========================================
+   Section
+======================================== */
+
+.settings-section {
+    padding: 24px;
+}
+
+
+/* ========================================
+   Section Heading
+======================================== */
+
+.settings-section-heading {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 11px;
+
+    margin-bottom: 20px;
+}
+
+
+/* ========================================
+   Section Icon
+======================================== */
+
+.settings-section-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+
+/* ========================================
+   Section Text
+======================================== */
+
+.settings-section-heading h2 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.settings-section-heading p {
+    margin: 4px 0 0;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   Settings Options
+======================================== */
+
+.settings-options {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid #eef0f3;
+    border-radius: 11px;
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   Setting Row
+======================================== */
+
+.setting-row {
+    min-height: 68px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 14px 16px;
+
+    background: #ffffff;
+}
+
+.setting-row + .setting-row {
+    border-top: 1px solid #eef0f3;
+}
+
+
+.setting-row strong {
+    display: block;
+
+    color: #374151;
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+
+.setting-row span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   Toggle
+======================================== */
+
+.settings-toggle {
+    width: 40px;
+    height: 22px;
+
+    flex-shrink: 0;
+
+    position: relative;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 20px;
+
+    background: #cbd5e1;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+
+.settings-toggle span {
+    position: absolute;
+
+    top: 3px;
+    left: 3px;
+
+    width: 16px;
+    height: 16px;
+
+    margin: 0;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 1px 3px rgba(15, 23, 42, .2);
+
+    transition: .2s ease;
+}
+
+
+.settings-toggle.active {
+    background: #4f46e5;
+}
+
+
+.settings-toggle.active span {
+    left: 21px;
+}
+
+
+/* ========================================
+   Divider
+======================================== */
+
+.settings-divider {
+    width: 100%;
+    height: 1px;
+
+    background: #eef0f3;
+}
+
+
+/* ========================================
+   Theme Options
+======================================== */
+
+.theme-options {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+/* ========================================
+   Theme Option
+======================================== */
+
+.theme-option {
+    min-height: 72px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 14px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+
+.theme-option:hover {
+    border-color: #c7d2fe;
+
+    background: #f8f9ff;
+}
+
+
+.theme-option.selected {
+    border-color: #818cf8;
+
+    background: #f5f7ff;
+
+    box-shadow:
+        0 0 0 2px rgba(99, 102, 241, .08);
+}
+
+
+/* ========================================
+   Theme Icon
+======================================== */
+
+.theme-option-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+
+.theme-option.selected
+.theme-option-icon {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+
+
+/* ========================================
+   Theme Text
+======================================== */
+
+.theme-option strong {
+    display: block;
+
+    color: #374151;
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+
+.theme-option span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+/* ========================================
+   Theme Check
+======================================== */
+
+.theme-check {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    color: #4f46e5;
+}
+
+
+/* ========================================
+   Security
+======================================== */
+
+.security-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 15px 16px;
+
+    border: 1px solid #eef0f3;
+    border-radius: 11px;
+
+    background: #fafbfc;
+}
+
+
+.security-info strong {
+    display: block;
+
+    color: #374151;
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+
+.security-info span:not(.security-status) {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+/* ========================================
+   Security Status
+======================================== */
+
+.security-status {
+    padding: 5px 9px;
+
+    border: 1px solid #bbf7d0;
+    border-radius: 20px;
+
+    background: #f0fdf4;
+
+    color: #16a34a;
+
+    font-size: 10px;
+    font-weight: 650;
+}
+
+
+/* ========================================
+   Footer
+======================================== */
+
+.settings-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 18px 24px;
+
+    border-top: 1px solid #eef0f3;
+
+    background: #fafbfc;
+}
+
+
+/* ========================================
+   Save Button
+======================================== */
+
+.settings-save-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 9px 15px;
+
+    border: 1px solid #4f46e5;
+    border-radius: 9px;
+
+    background: #4f46e5;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+
+.settings-save-btn:hover {
+    background: #4338ca;
+
+    border-color: #4338ca;
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 700px) {
+
+    .settings-page {
+        padding: 22px;
+    }
+
+    .theme-options {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ========================================
+   Mobile
+======================================== */
+
+@media (max-width: 500px) {
+
+    .settings-page {
+        padding: 18px 14px;
+    }
+
+    .settings-header h1 {
+        font-size: 24px;
+    }
+
+    .settings-section {
+        padding: 20px;
+    }
+
+    .setting-row {
+        gap: 12px;
+        padding: 13px;
+    }
+
+    .security-info {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .settings-footer {
+        padding: 16px 20px;
+    }
+
+    .settings-save-btn {
+        width: 100%;
+    }
+
+}
+
+
+/* ========================================
+   Small Mobile
+======================================== */
+
+@media (max-width: 380px) {
+
+    .settings-section-heading {
+        gap: 9px;
+    }
+
+    .settings-section-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .setting-row strong {
+        font-size: 11px;
+    }
+
+}
+
+
+
+/* ========================================
+   Dark Theme
+======================================== */
+
+html[data-theme="dark"] {
+    background: #0f172a;
+}
+
+html[data-theme="dark"] body {
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+html[data-theme="dark"] .settings-page {
+    background: #0f172a;
+}
+
+html[data-theme="dark"] .settings-header h1 {
+    color: #f8fafc;
+}
+
+html[data-theme="dark"] .settings-header .page-description {
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] .settings-card {
+    background: #111827;
+    border-color: #1f2937;
+    box-shadow: none;
+}
+
+html[data-theme="dark"] .settings-section-heading h2 {
+    color: #f8fafc;
+}
+
+html[data-theme="dark"] .settings-options {
+    border-color: #1f2937;
+}
+
+html[data-theme="dark"] .setting-row {
+    background: #111827;
+}
+
+html[data-theme="dark"] .setting-row + .setting-row {
+    border-color: #1f2937;
+}
+
+html[data-theme="dark"] .setting-row strong {
+    color: #e5e7eb;
+}
+
+html[data-theme="dark"] .settings-divider {
+    background: #1f2937;
+}
+
+html[data-theme="dark"] .theme-option {
+    background: #111827;
+    border-color: #1f2937;
+}
+
+html[data-theme="dark"] .theme-option:hover {
+    background: #172033;
+    border-color: #4f46e5;
+}
+
+html[data-theme="dark"] .theme-option.selected {
+    background: #172033;
+    border-color: #6366f1;
+}
+
+html[data-theme="dark"] .theme-option strong {
+    color: #e5e7eb;
+}
+
+html[data-theme="dark"] .theme-option-icon {
+    background: #1e293b;
+    color: #94a3b8;
+}
+
+html[data-theme="dark"]
+.theme-option.selected
+.theme-option-icon {
+    background: #312e81;
+    color: #a5b4fc;
+}
+
+html[data-theme="dark"] .security-info {
+    background: #172033;
+    border-color: #1f2937;
+}
+
+html[data-theme="dark"] .security-info strong {
+    color: #e5e7eb;
+}
+
+html[data-theme="dark"] .settings-footer {
+    background: #0f172a;
+    border-color: #1f2937;
+}

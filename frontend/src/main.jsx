@@ -5,6 +5,16 @@ import App from "./App";
 import "./index.css";
 
 import { AuthProvider } from "./context/AuthContext";
+import { Toaster } from "react-hot-toast";
+
+const savedTheme =
+    localStorage.getItem("taskflow-theme") || "light";
+
+document.documentElement.setAttribute(
+    "data-theme",
+    savedTheme
+);
+
 
 ReactDOM.createRoot(
     document.getElementById("root")
@@ -15,6 +25,7 @@ ReactDOM.createRoot(
         <AuthProvider>
 
             <App />
+            <Toaster />
 
         </AuthProvider>
 

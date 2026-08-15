@@ -1,3 +1,7 @@
+/* ========================================
+   Kanban Board
+======================================== */
+
 .kanban-board {
 
     display: grid;
@@ -12,20 +16,33 @@
 }
 
 
+/* ========================================
+   Kanban Column
+======================================== */
+
 .kanban-column {
 
     min-width: 0;
 
     padding: 14px;
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 16px;
 
-    background: #f8fafc;
+    background: var(--background);
 
+    color: var(--text);
+
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease;
 }
 
+
+/* ========================================
+   Column Header
+======================================== */
 
 .kanban-column-header {
 
@@ -46,7 +63,7 @@
 
     margin: 0;
 
-    color: #1f2937;
+    color: var(--text);
 
     font-size: 14px;
 
@@ -71,9 +88,9 @@
 
     border-radius: 20px;
 
-    background: #e5e7eb;
+    background: var(--primary-soft);
 
-    color: #475569;
+    color: var(--primary);
 
     font-size: 11px;
 
@@ -81,6 +98,10 @@
 
 }
 
+
+/* ========================================
+   Tasks
+======================================== */
 
 .kanban-tasks {
 
@@ -93,6 +114,10 @@
 }
 
 
+/* ========================================
+   Empty Kanban
+======================================== */
+
 .empty-kanban {
 
     min-height: 100px;
@@ -103,11 +128,15 @@
 
     justify-content: center;
 
-    border: 1px dashed #dbe1ea;
+    padding: 15px;
+
+    border: 1px dashed var(--border);
 
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--card);
+
+    color: var(--text-light);
 
 }
 
@@ -116,19 +145,35 @@
 
     margin: 0;
 
-    color: #94a3b8;
+    color: var(--text-light);
 
     font-size: 12px;
 
 }
 
 
+/* ========================================
+   Responsive
+======================================== */
+
 @media (max-width: 1000px) {
 
     .kanban-board {
 
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .kanban-column {
+
+        padding: 12px;
+
+        border-radius: 14px;
 
     }
 

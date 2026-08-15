@@ -23,14 +23,18 @@
 
     padding: 22px;
 
-    background: #ffffff;
+    background: var(--card);
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
     border-radius: 16px;
 
 }
 
+
+/* ========================================
+   Section Header
+======================================== */
 
 .section-card-header {
 
@@ -44,7 +48,7 @@
 
     padding-bottom: 18px;
 
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--border);
 
 }
 
@@ -59,7 +63,7 @@
 
     margin: 0 0 5px;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 17px;
 
@@ -68,7 +72,7 @@
 
 .section-card-header h2 svg {
 
-    color: #4f46e5;
+    color: var(--primary);
 
 }
 
@@ -77,7 +81,7 @@
 
     margin: 0;
 
-    color: #9ca3af;
+    color: var(--text-light);
 
     font-size: 12px;
 
@@ -96,7 +100,7 @@
 
     gap: 5px;
 
-    color: #4f46e5;
+    color: var(--primary);
 
     text-decoration: none;
 
@@ -111,7 +115,7 @@
 
 .view-all-btn:hover {
 
-    color: #3730a3;
+    color: var(--primary-hover);
 
 }
 
@@ -139,7 +143,7 @@
 
     padding: 15px 4px;
 
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--border);
 
     color: inherit;
 
@@ -164,6 +168,10 @@
 }
 
 
+/* ========================================
+   Project Icon
+======================================== */
+
 .project-icon {
 
     width: 38px;
@@ -180,12 +188,16 @@
 
     border-radius: 10px;
 
-    background: #ede9fe;
+    background: var(--primary-soft, rgba(99, 102, 241, 0.1));
 
-    color: #7c3aed;
+    color: var(--primary);
 
 }
 
+
+/* ========================================
+   Project Info
+======================================== */
 
 .project-info {
 
@@ -202,7 +214,7 @@
 
     overflow: hidden;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 14px;
 
@@ -219,7 +231,7 @@
 
     overflow: hidden;
 
-    color: #9ca3af;
+    color: var(--text-light);
 
     font-size: 11px;
 
@@ -234,7 +246,7 @@
 
     flex-shrink: 0;
 
-    color: #cbd5e1;
+    color: var(--text-light);
 
 }
 
@@ -264,7 +276,7 @@
 
     padding: 15px 4px;
 
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--border);
 
 }
 
@@ -275,6 +287,10 @@
 
 }
 
+
+/* ========================================
+   Task Info
+======================================== */
 
 .task-info {
 
@@ -289,7 +305,7 @@
 
     overflow: hidden;
 
-    color: #111827;
+    color: var(--text);
 
     font-size: 14px;
 
@@ -304,12 +320,16 @@
 
     margin: 0;
 
-    color: #9ca3af;
+    color: var(--text-light);
 
     font-size: 11px;
 
 }
 
+
+/* ========================================
+   Task Right
+======================================== */
 
 .task-right {
 
@@ -325,6 +345,10 @@
 
 }
 
+
+/* ========================================
+   Task Status
+======================================== */
 
 .task-status {
 
@@ -366,9 +390,13 @@
 }
 
 
+/* ========================================
+   Task Date
+======================================== */
+
 .task-date {
 
-    color: #9ca3af;
+    color: var(--text-light);
 
     font-size: 10px;
 
@@ -393,7 +421,7 @@
 
     gap: 7px;
 
-    color: #94a3b8;
+    color: var(--text-light);
 
     text-align: center;
 
@@ -404,7 +432,7 @@
 
     margin: 2px 0 0;
 
-    color: #64748b;
+    color: var(--text-light);
 
     font-size: 14px;
 
@@ -415,7 +443,40 @@
 
 .dashboard-empty span {
 
+    color: var(--text-light);
+
     font-size: 11px;
+
+}
+
+
+/* ========================================
+   Dark Theme Status Badges
+======================================== */
+
+[data-theme="dark"] .task-status.completed {
+
+    background: var(--success-bg, rgba(34, 197, 94, 0.12));
+
+    color: #86efac;
+
+}
+
+
+[data-theme="dark"] .task-status.progress {
+
+    background: rgba(37, 99, 235, 0.18);
+
+    color: #93c5fd;
+
+}
+
+
+[data-theme="dark"] .task-status.pending {
+
+    background: var(--warning-bg, rgba(245, 158, 11, 0.12));
+
+    color: #fde68a;
 
 }
 

@@ -15,6 +15,8 @@ import ProjectDetails from "./pages/ProjectDetails";
 import Tasks from "./pages/Tasks";
 import TaskDetails from "./pages/TaskDetails";
 import Teams from "./pages/Teams";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 
 function App() {
 
@@ -66,7 +68,7 @@ function App() {
                             path="/projects"
                             element={<Projects />}
                         />
-
+                        
                         <Route
                             path="/projects/:id"
                             element={<ProjectDetails />}
@@ -83,6 +85,9 @@ function App() {
                             path="/teams"
                             element={<Teams />}
                         />
+
+                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/settings" element={<Settings />} />
 
 
                     </Route>

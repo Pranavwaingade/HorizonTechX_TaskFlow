@@ -1,0 +1,767 @@
+/* ========================================
+   Profile Page
+======================================== */
+
+.profile-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px;
+}
+
+
+/* ========================================
+   Header
+======================================== */
+
+.profile-header {
+    margin-bottom: 24px;
+}
+
+.profile-header .page-label {
+    margin: 0 0 5px;
+
+    color: #6366f1;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.profile-header h1 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 28px;
+    font-weight: 750;
+}
+
+.profile-header .page-description {
+    margin: 7px 0 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   Main Card
+======================================== */
+
+.profile-card {
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, .05);
+}
+
+
+/* ========================================
+   Profile Top
+======================================== */
+
+.profile-card-top {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 24px;
+}
+
+
+/* ========================================
+   Avatar
+======================================== */
+
+.profile-avatar {
+    width: 64px;
+    height: 64px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background: #eef2ff;
+    color: #4f46e5;
+
+    font-size: 22px;
+    font-weight: 750;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* ========================================
+   User Heading
+======================================== */
+
+.profile-user-heading {
+    min-width: 0;
+}
+
+.profile-user-heading h2 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.profile-user-heading p {
+    margin: 4px 0 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+/* ========================================
+   Edit Button
+======================================== */
+
+.profile-edit-btn {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 9px 13px;
+
+    border: 1px solid #e0e7ff;
+    border-radius: 9px;
+
+    background: #f8f9ff;
+    color: #4f46e5;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.profile-edit-btn:hover {
+    background: #eef2ff;
+    border-color: #c7d2fe;
+}
+
+
+/* ========================================
+   Divider
+======================================== */
+
+.profile-divider {
+    width: 100%;
+    height: 1px;
+
+    background: #eef0f3;
+}
+
+
+/* ========================================
+   Profile Section
+======================================== */
+
+.profile-section {
+    padding: 24px;
+}
+
+
+/* ========================================
+   Section Title
+======================================== */
+
+.profile-section-title {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+    color: #4f46e5;
+}
+
+.profile-section-title > svg {
+    margin-top: 2px;
+
+    flex-shrink: 0;
+}
+
+.profile-section-title h3 {
+    margin: 0;
+
+    color: #111827;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.profile-section-title p {
+    margin: 4px 0 0;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+/* ========================================
+   Fields
+======================================== */
+
+.profile-fields {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* ========================================
+   Field
+======================================== */
+
+.profile-field {
+    min-width: 0;
+}
+
+.profile-field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #374151;
+
+    font-size: 11px;
+    font-weight: 650;
+}
+
+
+/* ========================================
+   Input
+======================================== */
+
+.profile-input-wrap {
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 12px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+
+    background: #f8fafc;
+
+    color: #94a3b8;
+
+    transition: .2s ease;
+}
+
+.profile-input-wrap:focus-within {
+    border-color: #a5b4fc;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, .08);
+}
+
+.profile-input-wrap input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #111827;
+
+    font-size: 12px;
+}
+
+.profile-input-wrap input:disabled {
+    cursor: not-allowed;
+
+    color: #64748b;
+}
+
+.profile-input-wrap input:not(:disabled) {
+    color: #111827;
+}
+
+
+/* ========================================
+   Field Hint
+======================================== */
+
+.field-hint {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+}
+
+
+/* ========================================
+   Profile Actions
+======================================== */
+
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 9px;
+
+    margin-top: 22px;
+}
+
+
+/* ========================================
+   Cancel
+======================================== */
+
+.profile-cancel-btn {
+    padding: 9px 14px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #64748b;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.profile-cancel-btn:hover {
+    background: #f8fafc;
+    color: #374151;
+}
+
+
+/* ========================================
+   Save
+======================================== */
+
+.profile-save-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 9px 14px;
+
+    border: 1px solid #4f46e5;
+    border-radius: 9px;
+
+    background: #4f46e5;
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.profile-save-btn:hover {
+    background: #4338ca;
+    border-color: #4338ca;
+}
+
+.profile-save-btn:disabled,
+.profile-cancel-btn:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   Security
+======================================== */
+
+.security-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+/* ========================================
+   Change Password
+======================================== */
+
+.change-password-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 9px 13px;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #475467;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.change-password-btn:hover {
+    border-color: #c7d2fe;
+
+    background: #f8f9ff;
+
+    color: #4f46e5;
+}
+
+
+/* ========================================
+   DARK MODE
+======================================== */
+
+[data-theme="dark"] .profile-card {
+    background: var(--card);
+
+    border-color: var(--border);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ========================================
+   Dark Header
+======================================== */
+
+[data-theme="dark"] .profile-header h1 {
+    color: var(--text);
+}
+
+[data-theme="dark"] .profile-header .page-description {
+    color: var(--text-light);
+}
+
+
+/* ========================================
+   Dark Profile Top
+======================================== */
+
+[data-theme="dark"] .profile-user-heading h2 {
+    color: var(--text);
+}
+
+[data-theme="dark"] .profile-user-heading p {
+    color: var(--text-light);
+}
+
+
+/* ========================================
+   Dark Avatar
+======================================== */
+
+[data-theme="dark"] .profile-avatar {
+    background: var(--primary-soft);
+
+    color: #a5b4fc;
+}
+
+
+/* ========================================
+   Dark Edit Button
+======================================== */
+
+[data-theme="dark"] .profile-edit-btn {
+    border-color: #3730a3;
+
+    background: rgba(99, 102, 241, 0.12);
+
+    color: #a5b4fc;
+}
+
+[data-theme="dark"] .profile-edit-btn:hover {
+    background: rgba(99, 102, 241, 0.2);
+
+    border-color: #4f46e5;
+}
+
+
+/* ========================================
+   Dark Divider
+======================================== */
+
+[data-theme="dark"] .profile-divider {
+    background: var(--border);
+}
+
+
+/* ========================================
+   Dark Section Title
+======================================== */
+
+[data-theme="dark"] .profile-section-title h3 {
+    color: var(--text);
+}
+
+[data-theme="dark"] .profile-section-title p {
+    color: var(--text-light);
+}
+
+
+/* ========================================
+   Dark Field Label
+======================================== */
+
+[data-theme="dark"] .profile-field label {
+    color: #cbd5e1;
+}
+
+
+/* ========================================
+   Dark Input
+======================================== */
+
+[data-theme="dark"] .profile-input-wrap {
+    border-color: var(--border);
+
+    background: #0f172a;
+
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .profile-input-wrap:focus-within {
+    border-color: #818cf8;
+
+    background: #1e293b;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 102, 241, .15);
+}
+
+[data-theme="dark"] .profile-input-wrap input {
+    color: var(--text);
+}
+
+[data-theme="dark"] .profile-input-wrap input:not(:disabled) {
+    color: var(--text);
+}
+
+[data-theme="dark"] .profile-input-wrap input:disabled {
+    color: #64748b;
+}
+
+
+/* ========================================
+   Dark Field Hint
+======================================== */
+
+[data-theme="dark"] .field-hint {
+    color: #64748b;
+}
+
+
+/* ========================================
+   Dark Cancel Button
+======================================== */
+
+[data-theme="dark"] .profile-cancel-btn {
+    border-color: var(--border);
+
+    background: var(--card);
+
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .profile-cancel-btn:hover {
+    background: var(--hover-background);
+
+    color: var(--text);
+}
+
+
+/* ========================================
+   Dark Save Button
+======================================== */
+
+[data-theme="dark"] .profile-save-btn {
+    background: var(--primary);
+
+    border-color: var(--primary);
+}
+
+[data-theme="dark"] .profile-save-btn:hover {
+    background: var(--primary-hover);
+
+    border-color: var(--primary-hover);
+}
+
+
+/* ========================================
+   Dark Change Password
+======================================== */
+
+[data-theme="dark"] .change-password-btn {
+    border-color: var(--border);
+
+    background: var(--card);
+
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .change-password-btn:hover {
+    border-color: #4f46e5;
+
+    background: rgba(99, 102, 241, 0.12);
+
+    color: #a5b4fc;
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 800px) {
+
+    .profile-page {
+        padding: 22px;
+    }
+
+    .profile-fields {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ========================================
+   Tablet / Mobile
+======================================== */
+
+@media (max-width: 600px) {
+
+    .profile-page {
+        padding: 18px 14px;
+    }
+
+    .profile-header h1 {
+        font-size: 24px;
+    }
+
+    .profile-card-top {
+        padding: 20px;
+
+        flex-wrap: wrap;
+    }
+
+    .profile-edit-btn {
+        width: 100%;
+
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    .profile-section {
+        padding: 20px;
+    }
+
+    .security-section {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .change-password-btn {
+        width: 100%;
+    }
+
+}
+
+
+/* ========================================
+   Small Mobile
+======================================== */
+
+@media (max-width: 400px) {
+
+    .profile-card-top {
+        gap: 12px;
+    }
+
+    .profile-avatar {
+        width: 54px;
+        height: 54px;
+
+        font-size: 19px;
+    }
+
+    .profile-user-heading h2 {
+        font-size: 16px;
+    }
+
+    .profile-actions {
+        flex-direction: column-reverse;
+    }
+
+    .profile-save-btn,
+    .profile-cancel-btn {
+        width: 100%;
+    }
+
+}

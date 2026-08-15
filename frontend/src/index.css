@@ -10,6 +10,8 @@
 
     --border: #E2E8F0;
 
+    --hover-background: #F1F5F9;
+
     --success: #16A34A;
     --warning: #F59E0B;
     --danger: #DC2626;
@@ -20,9 +22,54 @@
 
     --radius: 12px;
 }
+/* ========================================
+   Dark Theme
+======================================== */
+
+[data-theme="dark"] {
+    --background: #0f172a;
+    --card: #1e293b;
+
+    --text: #f8fafc;
+    --text-light: #94a3b8;
+
+    --border: #334155;
+
+    --primary: #6366f1;
+    --primary-hover: #818cf8;
+
+    --primary-soft: rgba(99, 102, 241, 0.15);
+
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #38bdf8;
+
+    --success-bg: rgba(34, 197, 94, 0.12);
+    --warning-bg: rgba(245, 158, 11, 0.12);
+    --info-bg: rgba(56, 189, 248, 0.12);
+
+    --status-default-bg: #334155;
+    --status-default-text: #cbd5e1;
+
+    --shadow-color: rgba(0, 0, 0, 0.25);
+}
+
+/* ========================================
+   Global
+======================================== */
+
+html {
+    background: var(--background);
+    transition:
+        background-color .2s ease,
+        color .2s ease;
+}
+
 
 body {
     margin: 0;
+
     font-family:
         Inter,
         -apple-system,
@@ -32,4 +79,32 @@ body {
 
     background: var(--background);
     color: var(--text);
+
+    transition:
+        background-color .2s ease,
+        color .2s ease;
 }
+
+
+/* ========================================
+   Global Elements
+======================================== */
+
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+
+/* ========================================
+   Selection
+======================================== */
+
+::selection {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+
