@@ -7,13 +7,9 @@
 
     padding: 30px 20px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #eef2ff,
-            #f8fafc 50%,
-            #e0f2fe
-        );
+    background: var(--background);
+
+    transition: background-color 0.25s ease;
 }
 
 .auth-card {
@@ -132,7 +128,7 @@
 
     border-radius: 10px;
 
-    background: white;
+    background:var(--input-background);
 
     transition: 0.2s;
 }

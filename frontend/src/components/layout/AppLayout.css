@@ -3,6 +3,7 @@
 ======================================== */
 
 .app-layout {
+
     min-height: 100vh;
 
     background: var(--background);
@@ -12,6 +13,7 @@
     transition:
         background-color 0.25s ease,
         color 0.25s ease;
+
 }
 
 
@@ -20,6 +22,7 @@
 ======================================== */
 
 .app-main {
+
     min-height: 100vh;
 
     margin-left: 220px;
@@ -27,7 +30,9 @@
     background: var(--background);
 
     transition:
+        margin-left 0.25s ease,
         background-color 0.25s ease;
+
 }
 
 
@@ -36,6 +41,7 @@
 ======================================== */
 
 .app-content {
+
     min-height: calc(100vh - 72px);
 
     padding: 32px 38px;
@@ -45,23 +51,33 @@
     background: var(--background);
 
     transition:
-        background-color 0.25s ease;
+        background-color 0.25s ease,
+        padding 0.25s ease;
+
 }
 
 
 /* ========================================
-   Responsive
+   Mobile
 ======================================== */
 
 @media (max-width: 768px) {
 
     .app-main {
-        margin-left: 70px;
+
+        margin-left: 0;
+
+        width: 100%;
+
     }
 
 
     .app-content {
+
+        width: 100%;
+
         padding: 24px 18px;
+
     }
 
 }
@@ -70,7 +86,9 @@
 @media (max-width: 480px) {
 
     .app-content {
+
         padding: 18px 14px;
+
     }
 
 }
