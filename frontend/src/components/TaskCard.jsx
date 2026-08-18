@@ -54,6 +54,9 @@ function TaskCard({
         task.owner?.name ||
         "Unassigned";
 
+        const assigneeName =
+    task.assignedTo?.name ||
+    "Unassigned";
 
     const taskOwnerId =
         task.owner?._id ||
@@ -164,7 +167,7 @@ function TaskCard({
 
                     <User size={15} />
 
-                    {ownerName}
+                    {assigneeName}
 
                 </span>
 
