@@ -1,79 +1,192 @@
-# TaskFlow 📋
+# TaskFlow
 
-A full-stack MERN project management and team collaboration application designed to help users create projects, manage tasks, collaborate through comments, and track project progress from a centralized dashboard.
+TaskFlow is a full-stack task and project management web application built with the MERN stack. It provides authentication, project management, task management, comments, team information, dashboard insights, profile management, and theme preferences.
 
-## Project Overview
+## 🚀 Live Demo
 
-TaskFlow is a modern project management tool inspired by platforms like Trello and Asana.
+**Frontend:** https://magenta-entremet-698087.netlify.app
 
-Users can register and log in securely, create projects, create and manage tasks, assign tasks, track task status and priority, add comments, manage their profile, and customize application settings.
+**Backend API:** https://horizontechx-taskflow.onrender.com
 
-The application provides a clean dashboard where users can quickly view their projects, tasks, and recent activity.
+## ✨ Features
 
-TaskFlow is built using the MERN stack with JWT-based authentication, MongoDB database integration, RESTful APIs, and a responsive React frontend.
-
-## Features
-
-### 👤 User Features
-
-- User registration
-- User login
+- User registration and login
 - JWT-based authentication
-- Persistent authentication after page refresh
-- Logout functionality
-- Protected application routes
+- Protected routes
+- Dashboard with projects, tasks, activity, and team information
+- Create, update, and manage projects
+- Create and manage tasks
+- Task comments with add, edit, and delete functionality
+- Team member information
 - User profile management
-- Profile information update
-- Change password functionality
-- Personal workspace dashboard
+- Change password support
+- Notification preferences
+- Light and dark theme
+- Theme persistence after page reload
+- Responsive UI
+- React Router SPA routing with Netlify reload support
+- Toast notifications
 
-### 📊 Dashboard Features
+## 🛠️ Tech Stack
 
-- Dashboard overview
-- Recent projects
-- Recent tasks
-- Task status overview
-- Task priority information
-- Due date information
-- Quick project navigation
-- Quick task navigation
-- Empty states for projects and tasks
-- Responsive dashboard layout
+### Frontend
+- React
+- Vite
+- React Router
+- Axios
+- Lucide React
+- React Hot Toast
+- CSS
 
-### 📁 Project Features
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT
+- bcryptjs
+- CORS
+- Cookie Parser
+- dotenv
 
-- Create new projects
-- Edit existing projects
-- View project details
-- Delete projects
-- Project description
-- Project-based task organization
-- View project tasks
-- Project task count
-- Project-specific task management
+### Deployment
+- Frontend: Netlify
+- Backend: Render
+- Database: MongoDB Atlas
+- Source Code: GitHub
 
-### ✅ Task Features
-
-- Create tasks
-- Edit tasks
-- Delete tasks
-- Assign tasks to projects
-- Task title
-- Task description
-- Task due date
-- Task priority
-- Task status
-- Project selection
-- Project-specific task creation
-- Task status management
-
-### 📌 Task Status
-
-Tasks support the following statuses:
+## 📁 Project Structure
 
 ```text
-Pending
-   ↓
-In Progress
-   ↓
-Completed
+HorizonTechX_TaskFlow/
+├── frontend/
+│   ├── public/
+│   │   └── _redirects
+│   ├── src/
+│   ├── package.json
+│   └── ...
+├── backend/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── server.js
+│   ├── package.json
+│   └── ...
+└── README.md
+```
+
+## ⚙️ Local Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Pranavwaingade/HorizonTechX_TaskFlow.git
+cd HorizonTechX_TaskFlow
+```
+
+### 2. Frontend Setup
+
+```bash
+cd frontend
+npm install
+```
+
+Create `.env`:
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+Run:
+
+```bash
+npm run dev
+```
+
+### 3. Backend Setup
+
+Open another terminal:
+
+```bash
+cd backend
+npm install
+```
+
+Create `.env`:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
+
+Run:
+
+```bash
+npm start
+```
+
+or:
+
+```bash
+npm run dev
+```
+
+## 🔐 Environment Variables
+
+Never commit `.env` files or secrets to GitHub.
+
+### Frontend
+
+```env
+VITE_API_URL=your_backend_api_url
+```
+
+### Backend
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
+
+## 🌐 Deployment
+
+The frontend is deployed on Netlify and the backend is deployed on Render.
+
+**Production API:**
+
+```text
+https://horizontechx-taskflow.onrender.com/api
+```
+
+## 🔄 React Router / Netlify
+
+A `_redirects` file is used so React Router pages work correctly after browser refresh:
+
+```text
+/*    /index.html   200
+```
+
+## 📌 Main Modules
+
+- Authentication
+- Dashboard
+- Projects
+- Tasks
+- Comments
+- Team
+- Profile
+- Settings
+
+## 👨‍💻 Author
+
+**Pranav Waingade**
+
+Computer Science Student | MERN Stack Developer
+
+## 📄 License
+
+This project is created for learning, portfolio, and demonstration purposes.
