@@ -100,7 +100,7 @@ function TaskComments({ taskId }) {
 
             fetchComments(false);
 
-        }, 3000);
+        }, 2000);
 
 
         // Cleanup interval
