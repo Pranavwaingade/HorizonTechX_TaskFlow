@@ -35,13 +35,15 @@ function TaskComments({ taskId }) {
     // Fetch Comments
     // ========================================
 
-    const fetchComments = async () => {
+    const fetchComments = async (showLoader = false) => {
 
         if (!taskId) return;
 
         try {
 
-            setLoading(true);
+            if (showLoader) {
+                setLoading(true);
+            }
 
             const { data } =
                 await API.get(
@@ -59,14 +61,21 @@ function TaskComments({ taskId }) {
                 error
             );
 
-            toast.error(
-                error.response?.data?.message ||
-                "Failed to load comments"
-            );
+            // Toast only during initial loading
+            if (showLoader) {
+
+                toast.error(
+                    error.response?.data?.message ||
+                    "Failed to load comments"
+                );
+
+            }
 
         } finally {
 
-            setLoading(false);
+            if (showLoader) {
+                setLoading(false);
+            }
 
         }
 
@@ -74,12 +83,32 @@ function TaskComments({ taskId }) {
 
 
     // ========================================
-    // Load
+    // Load Comments + Auto Refresh
     // ========================================
 
     useEffect(() => {
 
-        fetchComments();
+        if (!taskId) return;
+
+
+        // Initial load
+        fetchComments(true);
+
+
+        // Auto refresh every 3 seconds
+        const interval = setInterval(() => {
+
+            fetchComments(false);
+
+        }, 3000);
+
+
+        // Cleanup interval
+        return () => {
+
+            clearInterval(interval);
+
+        };
 
     }, [taskId]);
 
@@ -128,6 +157,7 @@ function TaskComments({ taskId }) {
 
 
             setText("");
+
 
             toast.success(
                 "Comment added 💬"
@@ -227,6 +257,7 @@ function TaskComments({ taskId }) {
 
             setEditText("");
 
+
             toast.success(
                 "Comment updated ✅"
             );
@@ -294,7 +325,7 @@ function TaskComments({ taskId }) {
 
 
     // ========================================
-    // Date
+    // Format Date
     // ========================================
 
     const formatDate = (date) => {
@@ -326,7 +357,9 @@ function TaskComments({ taskId }) {
         <section className="task-comments">
 
 
-            {/* Header */}
+            {/* =================================
+                Header
+            ================================= */}
 
             <div className="comments-header">
 
@@ -349,7 +382,9 @@ function TaskComments({ taskId }) {
             </div>
 
 
-            {/* Add Comment */}
+            {/* =================================
+                Add Comment
+            ================================= */}
 
             <form
                 className="comment-form"
@@ -387,7 +422,8 @@ function TaskComments({ taskId }) {
 
                         {submitting
                             ? "Posting..."
-                            : "Post Comment"}
+                            : "Post Comment"
+                        }
 
                     </button>
 
@@ -396,10 +432,14 @@ function TaskComments({ taskId }) {
             </form>
 
 
-            {/* Comments */}
+            {/* =================================
+                Comments List
+            ================================= */}
 
             <div className="comments-list">
 
+
+                {/* Loading */}
 
                 {loading && (
 
@@ -411,6 +451,8 @@ function TaskComments({ taskId }) {
 
                 )}
 
+
+                {/* Empty */}
 
                 {!loading &&
                     comments.length === 0 && (
@@ -435,6 +477,8 @@ function TaskComments({ taskId }) {
                     )}
 
 
+                {/* Comments */}
+
                 {!loading &&
                     comments.map((comment) => (
 
@@ -444,7 +488,9 @@ function TaskComments({ taskId }) {
                         >
 
 
-                            {/* Avatar */}
+                            {/* =================================
+                                Avatar
+                            ================================= */}
 
                             <div className="comment-avatar">
 
@@ -474,7 +520,9 @@ function TaskComments({ taskId }) {
                             </div>
 
 
-                            {/* Content */}
+                            {/* =================================
+                                Content
+                            ================================= */}
 
                             <div className="comment-content">
 
@@ -500,7 +548,9 @@ function TaskComments({ taskId }) {
                                     </div>
 
 
-                                    {/* Actions */}
+                                    {/* =================================
+                                        Actions
+                                    ================================= */}
 
                                     {editingId !==
                                         comment._id && (
@@ -547,7 +597,9 @@ function TaskComments({ taskId }) {
                                 </div>
 
 
-                                {/* Edit */}
+                                {/* =================================
+                                    Edit Comment
+                                ================================= */}
 
                                 {editingId ===
                                     comment._id ? (
