@@ -91,7 +91,7 @@ function Login() {
                 <div className="auth-brand">
 
                     <div className="auth-logo">
-                        P
+                        T
                     </div>
 
                     <h1>
