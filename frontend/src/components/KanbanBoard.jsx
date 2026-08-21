@@ -9,9 +9,7 @@ function KanbanBoard({
     onDelete,
 }) {
 
-    // ========================================
     // Separate Tasks By Status
-    // ========================================
 
     const pendingTasks = tasks.filter(
         (task) => task.status === "Pending"
@@ -26,9 +24,7 @@ function KanbanBoard({
     );
 
 
-    // ========================================
     // Render Tasks
-    // ========================================
 
     const renderTasks = (taskList) => {
 
@@ -61,18 +57,14 @@ function KanbanBoard({
     };
 
 
-    // ========================================
     // UI
-    // ========================================
 
     return (
 
         <div className="kanban-board">
 
 
-            {/* =================================
-                Pending
-            ================================= */}
+                {/* Pending */}
 
             <div className="kanban-column">
 
@@ -98,9 +90,7 @@ function KanbanBoard({
             </div>
 
 
-            {/* =================================
-                In Progress
-            ================================= */}
+                {/* In Progress */}
 
             <div className="kanban-column">
 
@@ -126,9 +116,7 @@ function KanbanBoard({
             </div>
 
 
-            {/* =================================
-                Completed
-            ================================= */}
+             {/*Completed*/}
 
             <div className="kanban-column">
 

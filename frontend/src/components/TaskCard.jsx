@@ -24,9 +24,7 @@ function TaskCard({
     const { user } = useAuth();
 
 
-    // ========================================
     // Format Date
-    // ========================================
 
     const formatDate = (date) => {
 
@@ -46,9 +44,7 @@ function TaskCard({
     };
 
 
-    // ========================================
     // Task Owner
-    // ========================================
 
     const ownerName =
         task.owner?.name ||
@@ -63,18 +59,14 @@ function TaskCard({
         task.owner;
 
 
-    // ========================================
     // Current Logged-in User
-    // ========================================
 
     const currentUserId =
         user?._id ||
         user?.id;
 
 
-    // ========================================
     // Owner Permission
-    // ========================================
 
     const isTaskOwner =
         currentUserId &&
@@ -83,18 +75,14 @@ function TaskCard({
         taskOwnerId.toString();
 
 
-    // ========================================
     // Priority
-    // ========================================
 
     const priority =
         task.priority ||
         "Medium";
 
 
-    // ========================================
     // Open Task Details
-    // ========================================
 
     const handleCardClick = () => {
 
@@ -109,9 +97,7 @@ function TaskCard({
     };
 
 
-    // ========================================
     // UI
-    // ========================================
 
     return (
 
@@ -120,18 +106,14 @@ function TaskCard({
             onClick={handleCardClick}
         >
 
-            {/* =================================
-                Task Title
-            ================================= */}
+                {/* Task Title */}
 
             <h4>
                 {task.title}
             </h4>
 
 
-            {/* =================================
-                Description
-            ================================= */}
+                {/* Description */}
 
             {task.description && (
 
@@ -142,9 +124,7 @@ function TaskCard({
             )}
 
 
-            {/* =================================
-                Task Meta
-            ================================= */}
+                {/* Task Meta */}
 
             <div className="task-meta">
 
@@ -174,9 +154,7 @@ function TaskCard({
             </div>
 
 
-            {/* =================================
-                Due Date
-            ================================= */}
+                {/* Due Date */}
 
             <div className="task-footer">
 
@@ -193,9 +171,7 @@ function TaskCard({
             </div>
 
 
-            {/* =================================
-                Owner Actions
-            ================================= */}
+                {/* Owner Actions */}
 
             {isTaskOwner &&
                 (onEdit || onDelete) && (

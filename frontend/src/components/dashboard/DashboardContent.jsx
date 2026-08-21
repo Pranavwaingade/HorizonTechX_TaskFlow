@@ -94,9 +94,7 @@ function DashboardContent() {
 
         <section className="dashboard-content">
 
-            {/* ==============================
-                Recent Projects
-            ============================== */}
+                {/* Recent Projects */}
 
             <div className="dashboard-section-card">
 
@@ -209,9 +207,7 @@ function DashboardContent() {
             </div>
 
 
-            {/* ==============================
-                Recent Tasks
-            ============================== */}
+                {/* Recent Tasks */}
 
             <div className="dashboard-section-card">
 

@@ -25,9 +25,7 @@ function DashboardExtras() {
         useState(true);
 
 
-    // ========================================
     // Fetch Recent Activity
-    // ========================================
 
     useEffect(() => {
 
@@ -63,9 +61,7 @@ function DashboardExtras() {
     }, []);
 
 
-    // ========================================
     // Fetch Team Members From Projects
-    // ========================================
 
     useEffect(() => {
 
@@ -148,9 +144,7 @@ function DashboardExtras() {
     }, []);
 
 
-    // ========================================
     // Activity Icon
-    // ========================================
 
     const getActivityIcon = (status) => {
 
@@ -177,9 +171,7 @@ function DashboardExtras() {
     };
 
 
-    // ========================================
     // Activity Status Class
-    // ========================================
 
     const getActivityClass = (status) => {
 
@@ -200,9 +192,7 @@ function DashboardExtras() {
     };
 
 
-    // ========================================
     // Format Time
-    // ========================================
 
     const formatTime = (date) => {
 
@@ -225,18 +215,14 @@ function DashboardExtras() {
     };
 
 
-    // ========================================
     // UI
-    // ========================================
 
     return (
 
         <section className="dashboard-extras">
 
 
-            {/* ==================================
-                Recent Activity
-            ================================== */}
+                {/* Recent Activity */}
 
             <div className="dashboard-extra-card">
 
@@ -352,9 +338,7 @@ function DashboardExtras() {
             </div>
 
 
-            {/* ==================================
-                Team Members
-            ================================== */}
+                {/* Team Members */}
 
             <div className="dashboard-extra-card">
 

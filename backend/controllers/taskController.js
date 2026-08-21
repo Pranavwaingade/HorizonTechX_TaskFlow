@@ -2,11 +2,6 @@ import Task from "../models/Task.js";
 import Project from "../models/Project.js";
 
 
-// ========================================
-// Helper
-// Check if user can access project
-// ========================================
-
 const canAccessProject = async (projectId, userId) => {
 
     const project = await Project.findOne({
@@ -28,10 +23,8 @@ const canAccessProject = async (projectId, userId) => {
 };
 
 
-// ========================================
 // Create Task
 // Owner + Project Members
-// ========================================
 
 export const createTask = async (req, res) => {
 
@@ -90,9 +83,7 @@ export const createTask = async (req, res) => {
         }
 
 
-        // =================================
         // Validate Assigned User
-        // =================================
 
         if (assignedTo) {
 
@@ -200,10 +191,8 @@ export const createTask = async (req, res) => {
 };
 
 
-// ========================================
 // Get All Tasks
 // Owner + Project Members
-// ========================================
 
 export const getTasks = async (req, res) => {
 
@@ -302,10 +291,8 @@ export const getTasks = async (req, res) => {
 };
 
 
-// ========================================
 // Get Single Task
 // Owner + Project Members
-// ========================================
 
 export const getTaskById = async (req, res) => {
 
@@ -408,10 +395,8 @@ export const getTaskById = async (req, res) => {
 };
 
 
-// ========================================
 // Update Task
 // Project Owner OR Task Creator
-// ========================================
 
 export const updateTask = async (req, res) => {
 
@@ -492,9 +477,7 @@ export const updateTask = async (req, res) => {
         }
 
 
-        // =================================
         // Validate assignedTo
-        // =================================
 
         if (
             req.body.assignedTo !== undefined &&
@@ -602,10 +585,8 @@ export const updateTask = async (req, res) => {
 };
 
 
-// ========================================
 // Delete Task
 // Project Owner OR Task Creator
-// ========================================
 
 export const deleteTask = async (req, res) => {
 

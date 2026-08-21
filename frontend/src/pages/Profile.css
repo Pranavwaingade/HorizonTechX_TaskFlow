@@ -1,6 +1,4 @@
-/* ========================================
-   Profile Page
-======================================== */
+   /* Profile Page */
 
 .profile-page {
     width: 100%;
@@ -10,9 +8,7 @@
 }
 
 
-/* ========================================
-   Header
-======================================== */
+   /* Header */
 
 .profile-header {
     margin-bottom: 24px;
@@ -49,9 +45,7 @@
 }
 
 
-/* ========================================
-   Main Card
-======================================== */
+   /* Main Card */
 
 .profile-card {
     overflow: hidden;
@@ -66,9 +60,7 @@
 }
 
 
-/* ========================================
-   Profile Top
-======================================== */
+   /* Profile Top */
 
 .profile-card-top {
     display: flex;
@@ -80,9 +72,7 @@
 }
 
 
-/* ========================================
-   Avatar
-======================================== */
+   /* Avatar */
 
 .profile-avatar {
     width: 64px;
@@ -113,9 +103,7 @@
 }
 
 
-/* ========================================
-   User Heading
-======================================== */
+   /* User Heading */
 
 .profile-user-heading {
     min-width: 0;
@@ -143,9 +131,7 @@
 }
 
 
-/* ========================================
-   Edit Button
-======================================== */
+   /* Edit Button */
 
 .profile-edit-btn {
     margin-left: auto;
@@ -178,9 +164,7 @@
 }
 
 
-/* ========================================
-   Divider
-======================================== */
+   /* Divider */
 
 .profile-divider {
     width: 100%;
@@ -190,18 +174,14 @@
 }
 
 
-/* ========================================
-   Profile Section
-======================================== */
+   /* Profile Section */
 
 .profile-section {
     padding: 24px;
 }
 
 
-/* ========================================
-   Section Title
-======================================== */
+   /* Section Title */
 
 .profile-section-title {
     display: flex;
@@ -238,9 +218,7 @@
 }
 
 
-/* ========================================
-   Fields
-======================================== */
+   /* Fields */
 
 .profile-fields {
     display: grid;
@@ -252,9 +230,7 @@
 }
 
 
-/* ========================================
-   Field
-======================================== */
+   /* Field */
 
 .profile-field {
     min-width: 0;
@@ -272,9 +248,7 @@
 }
 
 
-/* ========================================
-   Input
-======================================== */
+   /* Input */
 
 .profile-input-wrap {
     height: 42px;
@@ -329,9 +303,7 @@
 }
 
 
-/* ========================================
-   Field Hint
-======================================== */
+   /* Field Hint */
 
 .field-hint {
     display: block;
@@ -344,9 +316,7 @@
 }
 
 
-/* ========================================
-   Profile Actions
-======================================== */
+   /* Profile Actions */
 
 .profile-actions {
     display: flex;
@@ -358,9 +328,7 @@
 }
 
 
-/* ========================================
-   Cancel
-======================================== */
+   /* Cancel */
 
 .profile-cancel-btn {
     padding: 9px 14px;
@@ -385,9 +353,7 @@
 }
 
 
-/* ========================================
-   Save
-======================================== */
+   /* Save */
 
 .profile-save-btn {
     display: flex;
@@ -424,9 +390,7 @@
 }
 
 
-/* ========================================
-   Security
-======================================== */
+   /* Security */
 
 .security-section {
     display: flex;
@@ -437,9 +401,7 @@
 }
 
 
-/* ========================================
-   Change Password
-======================================== */
+   /* Change Password */
 
 .change-password-btn {
     display: flex;
@@ -473,9 +435,7 @@
 }
 
 
-/* ========================================
-   DARK MODE
-======================================== */
+   /* DARK MODE */
 
 [data-theme="dark"] .profile-card {
     background: var(--card);
@@ -487,9 +447,7 @@
 }
 
 
-/* ========================================
-   Dark Header
-======================================== */
+   /* Dark Header */
 
 [data-theme="dark"] .profile-header h1 {
     color: var(--text);
@@ -500,9 +458,7 @@
 }
 
 
-/* ========================================
-   Dark Profile Top
-======================================== */
+   /* Dark Profile Top */
 
 [data-theme="dark"] .profile-user-heading h2 {
     color: var(--text);
@@ -513,9 +469,7 @@
 }
 
 
-/* ========================================
-   Dark Avatar
-======================================== */
+   /* Dark Avatar */
 
 [data-theme="dark"] .profile-avatar {
     background: var(--primary-soft);
@@ -524,10 +478,7 @@
 }
 
 
-/* ========================================
-   Dark Edit Button
-======================================== */
-
+   /* Dark Edit Button */
 [data-theme="dark"] .profile-edit-btn {
     border-color: #3730a3;
 
@@ -543,18 +494,14 @@
 }
 
 
-/* ========================================
-   Dark Divider
-======================================== */
+   /* Dark Divider */
 
 [data-theme="dark"] .profile-divider {
     background: var(--border);
 }
 
 
-/* ========================================
-   Dark Section Title
-======================================== */
+   /* Dark Section Title */
 
 [data-theme="dark"] .profile-section-title h3 {
     color: var(--text);
@@ -565,18 +512,14 @@
 }
 
 
-/* ========================================
-   Dark Field Label
-======================================== */
+   /* Dark Field Label */
 
 [data-theme="dark"] .profile-field label {
     color: #cbd5e1;
 }
 
 
-/* ========================================
-   Dark Input
-======================================== */
+   /* Dark Input */
 
 [data-theme="dark"] .profile-input-wrap {
     border-color: var(--border);
@@ -608,18 +551,14 @@
 }
 
 
-/* ========================================
-   Dark Field Hint
-======================================== */
+   /* Dark Field Hint */
 
 [data-theme="dark"] .field-hint {
     color: #64748b;
 }
 
 
-/* ========================================
-   Dark Cancel Button
-======================================== */
+   /* Dark Cancel Button */
 
 [data-theme="dark"] .profile-cancel-btn {
     border-color: var(--border);
@@ -636,9 +575,7 @@
 }
 
 
-/* ========================================
-   Dark Save Button
-======================================== */
+   /* Dark Save Button */
 
 [data-theme="dark"] .profile-save-btn {
     background: var(--primary);
@@ -653,9 +590,7 @@
 }
 
 
-/* ========================================
-   Dark Change Password
-======================================== */
+   /* Dark Change Password */
 
 [data-theme="dark"] .change-password-btn {
     border-color: var(--border);
@@ -674,9 +609,7 @@
 }
 
 
-/* ========================================
-   Responsive
-======================================== */
+   /* Responsive */
 
 @media (max-width: 800px) {
 
@@ -691,9 +624,7 @@
 }
 
 
-/* ========================================
-   Tablet / Mobile
-======================================== */
+   /* Tablet / Mobile */
 
 @media (max-width: 600px) {
 
@@ -734,9 +665,7 @@
 }
 
 
-/* ========================================
-   Small Mobile
-======================================== */
+   /* Small Mobile */
 
 @media (max-width: 400px) {
 

@@ -1,6 +1,4 @@
-/* ========================================
-   Task Comments
-======================================== */
+/* Task Comments */
 
 .task-comments {
     width: 100%;
@@ -15,9 +13,7 @@
 }
 
 
-/* ========================================
-   Header
-======================================== */
+/* Header */
 
 .comments-header {
     margin-bottom: 18px;
@@ -60,9 +56,7 @@
 }
 
 
-/* ========================================
-   Add Comment
-======================================== */
+/* Add Comment */
 
 .comment-form {
     padding: 14px;
@@ -114,9 +108,7 @@
 }
 
 
-/* ========================================
-   Comment Form Footer
-======================================== */
+/* Comment Form Footer */
 
 .comment-form-footer {
     display: flex;
@@ -175,9 +167,7 @@
 }
 
 
-/* ========================================
-   Comments List
-======================================== */
+/* Comments List */
 
 .comments-list {
     display: flex;
@@ -202,9 +192,7 @@
 }
 
 
-/* ========================================
-   Avatar
-======================================== */
+/* Avatar */
 
 .comment-avatar {
     width: 36px;
@@ -237,9 +225,7 @@
 }
 
 
-/* ========================================
-   Content
-======================================== */
+/* Content */
 
 .comment-content {
     flex: 1;
@@ -298,9 +284,7 @@
 }
 
 
-/* ========================================
-   Actions
-======================================== */
+/* Actions */
 
 .comment-actions {
     display: flex;
@@ -342,9 +326,7 @@
 }
 
 
-/* ========================================
-   Edit
-======================================== */
+/* Edit */
 
 .comment-edit {
     margin-top: 9px;
@@ -414,9 +396,7 @@
 }
 
 
-/* ========================================
-   State
-======================================== */
+/* State */
 
 .comments-state {
     padding: 28px 10px;
@@ -458,10 +438,10 @@
 }
 
 
-/* ========================================
+/*
    DARK MODE
    Uses existing [data-theme="dark"]
-======================================== */
+*/
 
 [data-theme="dark"] .task-comments {
     background: var(--card);
@@ -470,9 +450,7 @@
 }
 
 
-/* ========================================
-   Header
-======================================== */
+/* Header */
 
 [data-theme="dark"] .comments-title {
     color: var(--primary);
@@ -491,9 +469,7 @@
 }
 
 
-/* ========================================
-   Comment Form
-======================================== */
+/* Comment Form */
 
 [data-theme="dark"] .comment-form {
     background: var(--background);
@@ -502,9 +478,7 @@
 }
 
 
-/* ========================================
-   Textarea
-======================================== */
+/* Textarea */
 
 [data-theme="dark"] .comment-form textarea,
 [data-theme="dark"] .comment-edit textarea {
@@ -531,27 +505,21 @@
 }
 
 
-/* ========================================
-   Footer Text
-======================================== */
+/* Footer Text */
 
 [data-theme="dark"] .comment-form-footer span {
     color: var(--text-light);
 }
 
 
-/* ========================================
-   Comment List
-======================================== */
+/* Comment List */
 
 [data-theme="dark"] .comment-item {
     border-bottom-color: var(--border);
 }
 
 
-/* ========================================
-   Avatar
-======================================== */
+/* Avatar */
 
 [data-theme="dark"] .comment-avatar {
     background: var(--primary-soft);
@@ -560,9 +528,7 @@
 }
 
 
-/* ========================================
-   Comment User
-======================================== */
+/* Comment User */
 
 [data-theme="dark"] .comment-top strong {
     color: var(--text);
@@ -574,18 +540,14 @@
 }
 
 
-/* ========================================
-   Comment Text
-======================================== */
+/* Comment Text */
 
 [data-theme="dark"] .comment-text {
     color: var(--text-light);
 }
 
 
-/* ========================================
-   Action Buttons
-======================================== */
+/* Action Buttons */
 
 [data-theme="dark"] .comment-actions button {
     color: var(--text-light);
@@ -604,9 +566,7 @@
 }
 
 
-/* ========================================
-   Cancel Button
-======================================== */
+/* Cancel Button */
 
 [data-theme="dark"] .comment-cancel-btn {
     background: var(--card);
@@ -622,9 +582,7 @@
 }
 
 
-/* ========================================
-   State
-======================================== */
+/* State */
 
 [data-theme="dark"] .comments-state {
     color: var(--text-light);
@@ -641,9 +599,7 @@
 }
 
 
-/* ========================================
-   Mobile
-======================================== */
+   /* Mobile */
 
 @media (max-width: 600px) {
 

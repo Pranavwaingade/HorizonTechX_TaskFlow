@@ -26,9 +26,7 @@ function App() {
 
             <Routes>
 
-                {/* ==============================
-                    Public Routes
-                ============================== */}
+                    {/* Public Routes */}
 
                 <Route
                     path="/"
@@ -51,9 +49,7 @@ function App() {
                 />
 
 
-                {/* ==============================
-                    Protected Routes
-                ============================== */}
+                    {/* Protected Routes */}
 
                 <Route element={<ProtectedRoute />}>
 
@@ -94,9 +90,7 @@ function App() {
 
                 </Route>
 
-                {/* ==============================
-                    Invalid URL
-                ============================== */}
+                    {/* Invalid URL */}
 
                 <Route
                     path="*"

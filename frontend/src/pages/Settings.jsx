@@ -14,9 +14,7 @@ import "./Settings.css";
 
 function Settings() {
 
-    // ========================================
     // Load Saved Settings
-    // ========================================
 
     const getSavedSettings = () => {
 
@@ -47,9 +45,7 @@ function Settings() {
     localStorage.getItem("taskflow-theme");
 
 
-    // ========================================
     // State
-    // ========================================
 
     const [emailNotifications, setEmailNotifications] =
         useState(
@@ -76,9 +72,7 @@ const [theme, setTheme] =
         "light"
     );
 
-    // ========================================
     // Apply Theme
-    // ========================================
 
     useEffect(() => {
 
@@ -95,10 +89,7 @@ const [theme, setTheme] =
     }, [theme]);
 
 
-    // ========================================
     // Save Settings
-    // ========================================
-
     
     const handleSave = () => {
 
@@ -128,18 +119,14 @@ const [theme, setTheme] =
     };
 
 
-    // ========================================
     // UI
-    // ========================================
 
     return (
 
         <section className="settings-page">
 
 
-            {/* =================================
-                Header
-            ================================= */}
+                {/* Header */}
 
             <div className="settings-header">
 
@@ -159,16 +146,12 @@ const [theme, setTheme] =
             </div>
 
 
-            {/* =================================
-                Settings Card
-            ================================= */}
+                {/* Settings Card */}
 
             <div className="settings-card">
 
 
-                {/* =================================
-                    Notifications
-                ================================= */}
+                    {/* Notifications */}
 
                 <div className="settings-section">
 
@@ -326,9 +309,7 @@ const [theme, setTheme] =
                 <div className="settings-divider" />
 
 
-                {/* =================================
-                    Appearance
-                ================================= */}
+                    {/* Appearance */}
 
                 <div className="settings-section">
 
@@ -458,9 +439,7 @@ const [theme, setTheme] =
                 <div className="settings-divider" />
 
 
-                {/* =================================
-                    Security
-                ================================= */}
+                    {/* Security */}
 
                 <div className="settings-section">
 
@@ -513,9 +492,7 @@ const [theme, setTheme] =
                 </div>
 
 
-                {/* =================================
-                    Save
-                ================================= */}
+                    {/* Save */}
 
                 <div className="settings-footer">
 

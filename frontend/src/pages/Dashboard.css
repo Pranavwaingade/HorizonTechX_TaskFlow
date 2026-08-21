@@ -1,58 +1,41 @@
 .dashboard-label {
 
     margin: 0 0 5px;
-
     color: var(--text-light);
-
     font-size: 12px;
-
     font-weight: 600;
-
     text-transform: uppercase;
-
     letter-spacing: 1px;
 
 }
 
 
-/* ========================================
-   Dashboard Heading
-======================================== */
+   /* Dashboard Heading */
 
 .dashboard-topbar h1 {
 
     margin: 0;
-
     color: var(--text);
-
     font-size: 30px;
-
     letter-spacing: -0.8px;
 
 }
 
 
-/* ========================================
-   Welcome
-======================================== */
+   /* Welcome */
 
 .dashboard-welcome {
 
     padding: 28px 30px;
-
     margin-bottom: 28px;
-
     border-radius: 18px;
-
     background:
         linear-gradient(
             135deg,
             var(--primary),
             #6366f1
         );
-
     color: #ffffff;
-
     box-shadow:
         0 12px 30px rgba(79, 70, 229, 0.18);
 
@@ -62,9 +45,7 @@
 .dashboard-welcome p {
 
     margin: 0 0 6px;
-
     font-size: 14px;
-
     opacity: 0.85;
 
 }
@@ -73,42 +54,27 @@
 .dashboard-welcome h2 {
 
     margin: 0;
-
     font-size: 25px;
-
     font-weight: 700;
 
 }
 
 
-/* ========================================
-   Placeholder
-======================================== */
+   /* Placeholder */
 
 .dashboard-placeholder {
 
     min-height: 220px;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
     padding: 30px;
-
     border: 1px solid var(--border);
-
     border-radius: 18px;
-
     background: var(--card);
-
     color: var(--text);
-
     text-align: center;
-
     transition:
         background-color 0.2s ease,
         border-color 0.2s ease,
@@ -120,9 +86,7 @@
 .dashboard-placeholder h3 {
 
     margin: 0 0 8px;
-
     color: var(--text);
-
     font-size: 20px;
 
 }
@@ -131,18 +95,13 @@
 .dashboard-placeholder p {
 
     margin: 0;
-
     color: var(--text-light);
-
     font-size: 14px;
 
 }
 
 
-/* ========================================
-   Mobile
-======================================== */
-
+   /* Mobile */
 @media (max-width: 768px) {
 
     .dashboard-main {

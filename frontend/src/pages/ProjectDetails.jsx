@@ -24,9 +24,7 @@ function ProjectDetails() {
     const { user } = useAuth();
 
 
-    // ========================================
     // State
-    // ========================================
 
     const [project, setProject] =
         useState(null);
@@ -47,9 +45,7 @@ function ProjectDetails() {
         useState(null);
 
 
-    // ========================================
     // Fetch Project
-    // ========================================
 
     const fetchProject = async () => {
 
@@ -85,9 +81,7 @@ function ProjectDetails() {
     };
 
 
-    // ========================================
     // Fetch Tasks
-    // ========================================
 
     const fetchTasks = async () => {
 
@@ -138,9 +132,7 @@ function ProjectDetails() {
     };
 
 
-    // ========================================
     // Initial Load
-    // ========================================
 
     useEffect(() => {
 
@@ -152,9 +144,7 @@ function ProjectDetails() {
     }, [id]);
 
 
-    // ========================================
     // Project Owner Check
-    // ========================================
 
     const projectOwnerId =
         project?.owner?._id ||
@@ -171,10 +161,8 @@ function ProjectDetails() {
         currentUserId.toString();
 
 
-    // ========================================
     // Create Task
     // OWNER ONLY
-    // ========================================
 
     const handleAddTask = () => {
 
@@ -195,9 +183,7 @@ function ProjectDetails() {
     };
 
 
-    // ========================================
     // Edit Task
-    // ========================================
 
     const handleEditTask = (task) => {
 
@@ -208,9 +194,7 @@ function ProjectDetails() {
     };
 
 
-    // ========================================
     // Delete Task
-    // ========================================
 
     const handleDeleteTask = async (
         taskId
@@ -253,9 +237,7 @@ function ProjectDetails() {
     };
 
 
-    // ========================================
     // Task Success
-    // ========================================
 
     const handleTaskSuccess = () => {
 
@@ -264,9 +246,7 @@ function ProjectDetails() {
     };
 
 
-    // ========================================
     // Close Task Modal
-    // ========================================
 
     const handleCloseTaskModal = () => {
 
@@ -277,9 +257,7 @@ function ProjectDetails() {
     };
 
 
-    // ========================================
     // Loading
-    // ========================================
 
     if (loading) {
 
@@ -304,9 +282,7 @@ function ProjectDetails() {
     }
 
 
-    // ========================================
     // Project Not Found
-    // ========================================
 
     if (!project) {
 
@@ -347,26 +323,20 @@ function ProjectDetails() {
     }
 
 
-    // ========================================
     // Members
-    // ========================================
 
     const members =
         project.members || [];
 
 
-    // ========================================
     // UI
-    // ========================================
 
     return (
 
         <section className="project-details-page">
 
 
-            {/* =================================
-                Back
-            ================================= */}
+                {/* Back */}
 
             <Link
                 to="/projects"
@@ -380,9 +350,7 @@ function ProjectDetails() {
             </Link>
 
 
-            {/* =================================
-                Project Header
-            ================================= */}
+                {/* Project Header */}
 
             <div className="project-details-header">
 
@@ -413,9 +381,7 @@ function ProjectDetails() {
                 </div>
 
 
-                {/* =================================
-                    Add Task - OWNER ONLY
-                ================================= */}
+                    {/* Add Task - OWNER ONLY */}
 
                 {isProjectOwner && (
 
@@ -436,9 +402,7 @@ function ProjectDetails() {
             </div>
 
 
-            {/* =================================
-                Team Members
-            ================================= */}
+                {/*  Team Members */}
 
             <div className="project-members-section">
 
@@ -535,9 +499,7 @@ function ProjectDetails() {
             </div>
 
 
-            {/* =================================
-                Tasks
-            ================================= */}
+                {/* Tasks */}
 
             <div className="project-tasks-section">
 
@@ -604,9 +566,7 @@ function ProjectDetails() {
             </div>
 
 
-            {/* =================================
-                Task Modal
-            ================================= */}
+                {/* Task Modal */}
 
             {isProjectOwner && (
 

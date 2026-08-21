@@ -30,9 +30,7 @@ function TaskModal({
     const [saving, setSaving] = useState(false);
 
 
-    // ========================================
     // Selected Project
-    // ========================================
 
     const selectedProject =
         projects.find(
@@ -41,9 +39,7 @@ function TaskModal({
         );
 
 
-    // ========================================
     // Project Members
-    // ========================================
 
     const projectMembers =
         selectedProject
@@ -57,9 +53,7 @@ function TaskModal({
             : [];
 
 
-    // ========================================
     // Prepare Form
-    // ========================================
 
     useEffect(() => {
 
@@ -130,9 +124,7 @@ function TaskModal({
     ]);
 
 
-    // ========================================
     // Reset Assigned User When Project Changes
-    // ========================================
 
     useEffect(() => {
 
@@ -165,9 +157,7 @@ function TaskModal({
     }, [formData.project, projects]);
 
 
-    // ========================================
     // Input Change
-    // ========================================
 
     const handleChange = (e) => {
 
@@ -188,9 +178,7 @@ function TaskModal({
     };
 
 
-    // ========================================
     // Submit
-    // ========================================
 
     const handleSubmit = async (e) => {
 
@@ -250,9 +238,7 @@ function TaskModal({
             };
 
 
-            // =================================
             // Update
-            // =================================
 
             if (task) {
 
@@ -272,9 +258,7 @@ function TaskModal({
             }
 
 
-            // =================================
             // Create
-            // =================================
 
             else {
 
@@ -328,9 +312,7 @@ function TaskModal({
     };
 
 
-    // ========================================
     // Close
-    // ========================================
 
     const handleClose = () => {
 
@@ -341,9 +323,7 @@ function TaskModal({
     };
 
 
-    // ========================================
     // Hidden
-    // ========================================
 
     if (!open) {
 
@@ -352,17 +332,13 @@ function TaskModal({
     }
 
 
-    // ========================================
     // Project Locked
-    // ========================================
 
     const isProjectLocked =
         Boolean(projectId);
 
 
-    // ========================================
     // UI
-    // ========================================
 
     return (
 
@@ -389,9 +365,7 @@ function TaskModal({
             <div className="task-modal">
 
 
-                {/* =================================
-                    Header
-                ================================= */}
+                    {/* Header */}
 
                 <div className="task-modal-header">
 
@@ -414,9 +388,7 @@ function TaskModal({
                 </div>
 
 
-                {/* =================================
-                    Form
-                ================================= */}
+                    {/* Form */}
 
                 <form
                     onSubmit={handleSubmit}
@@ -553,9 +525,7 @@ function TaskModal({
                     )}
 
 
-                    {/* =================================
-                        Assign To
-                    ================================= */}
+                        {/* Assign To */}
 
                     <label>
 
@@ -814,9 +784,7 @@ function TaskModal({
                 </form>
 
 
-                {/* =================================
-                    Comments
-                ================================= */}
+                {/* Comments */}
 
                 {task && (
 

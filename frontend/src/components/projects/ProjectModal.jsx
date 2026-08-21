@@ -22,9 +22,7 @@ function ProjectModal({
     const [saving, setSaving] = useState(false);
 
 
-    // ========================================
     // Load Project For Edit
-    // ========================================
 
     useEffect(() => {
 
@@ -47,9 +45,7 @@ function ProjectModal({
     }, [project, open]);
 
 
-    // ========================================
     // Input Change
-    // ========================================
 
     const handleChange = (e) => {
 
@@ -66,9 +62,7 @@ function ProjectModal({
     };
 
 
-    // ========================================
     // Submit
-    // ========================================
 
     const handleSubmit = async (e) => {
 

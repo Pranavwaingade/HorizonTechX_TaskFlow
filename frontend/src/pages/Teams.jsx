@@ -34,9 +34,7 @@ function Teams() {
         useState(false);
 
 
-    // ========================================
     // Check Project Owner
-    // ========================================
 
     const isProjectOwner = (project) => {
 
@@ -60,9 +58,7 @@ function Teams() {
     };
 
 
-    // ========================================
     // Fetch Projects
-    // ========================================
 
     const fetchProjects = async () => {
 
@@ -98,9 +94,7 @@ function Teams() {
     };
 
 
-    // ========================================
     // Load
-    // ========================================
 
     useEffect(() => {
 
@@ -109,10 +103,8 @@ function Teams() {
     }, []);
 
 
-    // ========================================
     // Open Add Member
     // OWNER ONLY
-    // ========================================
 
     const handleOpenAddMember = (project) => {
 
@@ -135,9 +127,7 @@ function Teams() {
     };
 
 
-    // ========================================
     // Close Add Member
-    // ========================================
 
     const handleCloseAddMember = () => {
 
@@ -150,10 +140,8 @@ function Teams() {
     };
 
 
-    // ========================================
     // Add Member
     // OWNER ONLY
-    // ========================================
 
     const handleAddMember = async (project) => {
 
@@ -232,10 +220,8 @@ function Teams() {
     };
 
 
-    // ========================================
     // Remove Member
     // OWNER ONLY
-    // ========================================
 
     const handleRemoveMember = async (
         project,
@@ -307,18 +293,14 @@ function Teams() {
     };
 
 
-    // ========================================
     // UI
-    // ========================================
 
     return (
 
         <section className="teams-page">
 
 
-            {/* =================================
-                Header
-            ================================= */}
+                {/* Header */}
 
             <div className="teams-header">
 
@@ -344,9 +326,7 @@ function Teams() {
             </div>
 
 
-            {/* =================================
-                Loading
-            ================================= */}
+                {/* Loading */}
 
             {loading ? (
 
@@ -393,9 +373,7 @@ function Teams() {
                         >
 
 
-                            {/* =================================
-                                Project Header
-                            ================================= */}
+                                {/* Project Header */}
 
                             <div className="team-project-header">
 
@@ -432,16 +410,12 @@ function Teams() {
                             </div>
 
 
-                            {/* =================================
-                                Members
-                            ================================= */}
+                                {/* Members */}
 
                             <div className="project-members">
 
 
-                                {/* =================================
-                                    Owner
-                                ================================= */}
+                                    {/* Owner */}
 
                                 {project.owner && (
 
@@ -509,9 +483,7 @@ function Teams() {
                                 )}
 
 
-                                {/* =================================
-                                    Project Members
-                                ================================= */}
+                                    {/* Project Members */}
 
                                 {project.members?.map(
                                     (member) => (
@@ -572,10 +544,7 @@ function Teams() {
                                             </div>
 
 
-                                            {/* =================================
-                                                Remove Member
-                                                OWNER ONLY
-                                            ================================= */}
+                                                {/* Remove Member  OWNER ONLY */}
 
                                             {isProjectOwner(
                                                 project
@@ -610,9 +579,7 @@ function Teams() {
                                 )}
 
 
-                                {/* =================================
-                                    No Members
-                                ================================= */}
+                                    {/* No Members */}
 
                                 {(!project.members ||
                                     project.members.length === 0) && (
@@ -634,10 +601,7 @@ function Teams() {
                             </div>
 
 
-                            {/* =================================
-                                Add Member
-                                OWNER ONLY
-                            ================================= */}
+                                {/* Add Member  OWNER ONLY */}
 
                             {isProjectOwner(project) && (
 

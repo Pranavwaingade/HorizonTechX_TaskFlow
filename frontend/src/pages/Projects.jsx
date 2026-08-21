@@ -31,9 +31,7 @@ function Projects() {
         useState(null);
 
 
-    // ========================================
     // Fetch Projects
-    // ========================================
 
     const fetchProjects = async () => {
 
@@ -69,9 +67,7 @@ function Projects() {
     };
 
 
-    // ========================================
     // Page Load
-    // ========================================
 
     useEffect(() => {
 
@@ -80,9 +76,7 @@ function Projects() {
     }, []);
 
 
-    // ========================================
     // Open Create Modal
-    // ========================================
 
     const handleCreateProject = () => {
 
@@ -93,9 +87,7 @@ function Projects() {
     };
 
 
-    // ========================================
     // Close Modal
-    // ========================================
 
     const handleCloseModal = () => {
 
@@ -106,9 +98,7 @@ function Projects() {
     };
 
 
-    // ========================================
     // Project Saved
-    // ========================================
 
     const handleProjectSuccess = () => {
 
@@ -117,18 +107,14 @@ function Projects() {
     };
 
 
-    // ========================================
     // UI
-    // ========================================
 
     return (
 
         <section className="projects-page">
 
 
-            {/* =================================
-                Header
-            ================================= */}
+                {/* Header */}
 
             <div className="projects-header">
 
@@ -165,9 +151,7 @@ function Projects() {
             </div>
 
 
-            {/* =================================
-                Loading
-            ================================= */}
+                {/* Loading */}
 
             {loading && (
 
@@ -184,9 +168,7 @@ function Projects() {
             )}
 
 
-            {/* =================================
-                Empty
-            ================================= */}
+                {/* Empty */}
 
             {!loading &&
                 projects.length === 0 && (
@@ -225,9 +207,7 @@ function Projects() {
                 )}
 
 
-            {/* =================================
-                Project Grid
-            ================================= */}
+                {/* Project Grid */}
 
             {!loading &&
                 projects.length > 0 && (
@@ -311,9 +291,7 @@ function Projects() {
                 )}
 
 
-            {/* =================================
-                Project Modal
-            ================================= */}
+                {/* Project Modal */}
 
             <ProjectModal
                 open={projectModalOpen}

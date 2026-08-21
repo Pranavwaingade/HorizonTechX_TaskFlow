@@ -29,9 +29,7 @@ function Topbar() {
     const notificationRef = useRef(null);
 
 
-    // ========================================
     // User
-    // ========================================
 
     const userName =
         user?.name ||
@@ -48,9 +46,7 @@ function Topbar() {
         "U";
 
 
-    // ========================================
     // Close Dropdowns Outside Click
-    // ========================================
 
     useEffect(() => {
 
@@ -99,9 +95,7 @@ function Topbar() {
     }, []);
 
 
-    // ========================================
     // Notification
-    // ========================================
 
     const handleNotificationClick = () => {
 
@@ -114,9 +108,7 @@ function Topbar() {
     };
 
 
-    // ========================================
     // Profile
-    // ========================================
 
     const handleProfileClick = () => {
 
@@ -129,9 +121,7 @@ function Topbar() {
     };
 
 
-    // ========================================
     // Profile
-    // ========================================
 
     const handleProfile = () => {
 
@@ -142,9 +132,7 @@ function Topbar() {
     };
 
 
-    // ========================================
     // Settings
-    // ========================================
 
     const handleSettings = () => {
 
@@ -155,9 +143,7 @@ function Topbar() {
     };
 
 
-    // ========================================
     // Logout
-    // ========================================
 
     const handleLogout = () => {
 
@@ -175,9 +161,7 @@ function Topbar() {
     };
 
 
-    // ========================================
     // UI
-    // ========================================
 
     return (
 
@@ -186,9 +170,7 @@ function Topbar() {
             <div className="topbar-right">
 
 
-                {/* =================================
-                    Notification
-                ================================= */}
+                    {/* Notification */}
 
                 <div
                     className="topbar-dropdown-wrapper"
@@ -264,9 +246,7 @@ function Topbar() {
                 <div className="topbar-divider" />
 
 
-                {/* =================================
-                    User
-                ================================= */}
+                    {/* User */}
 
                 <div
                     className="topbar-dropdown-wrapper"

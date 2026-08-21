@@ -31,9 +31,7 @@ function TaskComments({ taskId }) {
         useState("");
 
 
-    // ========================================
     // Fetch Comments
-    // ========================================
 
     const fetchComments = async (showLoader = false) => {
 
@@ -82,9 +80,7 @@ function TaskComments({ taskId }) {
     };
 
 
-    // ========================================
     // Load Comments + Auto Refresh
-    // ========================================
 
     useEffect(() => {
 
@@ -113,9 +109,7 @@ function TaskComments({ taskId }) {
     }, [taskId]);
 
 
-    // ========================================
     // Add Comment
-    // ========================================
 
     const handleSubmit = async (e) => {
 
@@ -179,9 +173,7 @@ function TaskComments({ taskId }) {
     };
 
 
-    // ========================================
     // Start Edit
-    // ========================================
 
     const handleEditStart = (comment) => {
 
@@ -196,9 +188,7 @@ function TaskComments({ taskId }) {
     };
 
 
-    // ========================================
     // Cancel Edit
-    // ========================================
 
     const handleEditCancel = () => {
 
@@ -209,9 +199,7 @@ function TaskComments({ taskId }) {
     };
 
 
-    // ========================================
     // Update Comment
-    // ========================================
 
     const handleEditSave = async (
         commentId
@@ -274,9 +262,7 @@ function TaskComments({ taskId }) {
     };
 
 
-    // ========================================
     // Delete Comment
-    // ========================================
 
     const handleDelete = async (
         commentId
@@ -324,9 +310,7 @@ function TaskComments({ taskId }) {
     };
 
 
-    // ========================================
     // Format Date
-    // ========================================
 
     const formatDate = (date) => {
 
@@ -348,18 +332,14 @@ function TaskComments({ taskId }) {
     };
 
 
-    // ========================================
     // UI
-    // ========================================
 
     return (
 
         <section className="task-comments">
 
 
-            {/* =================================
-                Header
-            ================================= */}
+            {/* Header */}
 
             <div className="comments-header">
 
@@ -382,9 +362,7 @@ function TaskComments({ taskId }) {
             </div>
 
 
-            {/* =================================
-                Add Comment
-            ================================= */}
+            {/* Add Comment */}
 
             <form
                 className="comment-form"
@@ -432,9 +410,7 @@ function TaskComments({ taskId }) {
             </form>
 
 
-            {/* =================================
-                Comments List
-            ================================= */}
+            {/* Comments List */}
 
             <div className="comments-list">
 
@@ -488,9 +464,7 @@ function TaskComments({ taskId }) {
                         >
 
 
-                            {/* =================================
-                                Avatar
-                            ================================= */}
+                            {/* Avatar */}
 
                             <div className="comment-avatar">
 
@@ -520,9 +494,7 @@ function TaskComments({ taskId }) {
                             </div>
 
 
-                            {/* =================================
-                                Content
-                            ================================= */}
+                            {/* Content */}
 
                             <div className="comment-content">
 
@@ -548,9 +520,7 @@ function TaskComments({ taskId }) {
                                     </div>
 
 
-                                    {/* =================================
-                                        Actions
-                                    ================================= */}
+                                    {/* Actions */}
 
                                     {editingId !==
                                         comment._id && (
@@ -597,9 +567,7 @@ function TaskComments({ taskId }) {
                                 </div>
 
 
-                                {/* =================================
-                                    Edit Comment
-                                ================================= */}
+                                {/* Edit Comment */}
 
                                 {editingId ===
                                     comment._id ? (

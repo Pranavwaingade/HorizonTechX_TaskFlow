@@ -26,9 +26,7 @@ function TaskDetails() {
     const [loading, setLoading] = useState(true);
 
 
-    // ========================================
     // Fetch Task
-    // ========================================
 
     const fetchTask = async () => {
 
@@ -63,9 +61,7 @@ function TaskDetails() {
     };
 
 
-    // ========================================
     // Load
-    // ========================================
 
     useEffect(() => {
 
@@ -76,9 +72,7 @@ function TaskDetails() {
     }, [id]);
 
 
-    // ========================================
     // Format Date
-    // ========================================
 
     const formatDate = (date) => {
 
@@ -100,9 +94,7 @@ function TaskDetails() {
     };
 
 
-    // ========================================
     // Loading
-    // ========================================
 
     if (loading) {
 
@@ -123,9 +115,7 @@ function TaskDetails() {
     }
 
 
-    // ========================================
     // Not Found
-    // ========================================
 
     if (!task) {
 
@@ -157,9 +147,7 @@ function TaskDetails() {
     }
 
 
-    // ========================================
     // Data
-    // ========================================
 
     const priority =
         task.priority || "Medium";
@@ -174,17 +162,13 @@ function TaskDetails() {
         "No Project";
 
 
-    // ========================================
     // UI
-    // ========================================
 
     return (
 
         <section className="task-details-page">
 
-            {/* =================================
-                Top
-            ================================= */}
+                {/* Top */}
 
             <div className="task-details-top">
 
@@ -206,9 +190,7 @@ function TaskDetails() {
             </div>
 
 
-            {/* =================================
-                Main Task Card
-            ================================= */}
+                {/* Main Task Card */}
 
             <div className="task-details-card">
 
@@ -390,9 +372,7 @@ function TaskDetails() {
             </div>
 
 
-            {/* =================================
-                Comments
-            ================================= */}
+                {/* Comments */}
 
             <TaskComments
                 taskId={task._id}

@@ -31,9 +31,7 @@ function Sidebar({
     const { user, logout } = useAuth();
 
 
-    // ========================================
     // Logout
-    // ========================================
 
     const handleLogout = () => {
 
@@ -50,9 +48,7 @@ function Sidebar({
     };
 
 
-    // ========================================
     // Navigation Items
-    // ========================================
 
     const navItems = [
 
@@ -83,9 +79,7 @@ function Sidebar({
     ];
 
 
-    // ========================================
     // Navigation Click
-    // ========================================
 
     const handleNavigation = () => {
 
@@ -98,9 +92,7 @@ function Sidebar({
 
         <>
 
-            {/* ==================================
-                Mobile Menu Button
-            ================================== */}
+                {/* Mobile Menu Button */}
 
             <button
                 type="button"
@@ -114,10 +106,7 @@ function Sidebar({
             </button>
 
 
-            {/* ==================================
-                Overlay
-            ================================== */}
-
+                {/* Overlay */}
             {isOpen && (
 
                 <div
@@ -128,9 +117,7 @@ function Sidebar({
             )}
 
 
-            {/* ==================================
-                Sidebar
-            ================================== */}
+                {/* Sidebar */}
 
             <aside
                 className={
@@ -143,9 +130,7 @@ function Sidebar({
             >
 
 
-                {/* ==============================
-                    Mobile Close
-                ============================== */}
+                    {/* Mobile Close */}
 
                 <button
                     type="button"
@@ -159,9 +144,7 @@ function Sidebar({
                 </button>
 
 
-                {/* ==============================
-                    Brand
-                ============================== */}
+                    {/* Brand */}
 
                 <NavLink
                     to="/dashboard"
@@ -189,9 +172,7 @@ function Sidebar({
                 </NavLink>
 
 
-                {/* ==============================
-                    Navigation
-                ============================== */}
+                    {/* Navigation */}
 
                 <nav className="sidebar-nav">
 
@@ -237,9 +218,7 @@ function Sidebar({
                 </nav>
 
 
-                {/* ==============================
-                    Bottom User
-                ============================== */}
+                    {/* Bottom User */}
 
                 <div className="sidebar-bottom">
 

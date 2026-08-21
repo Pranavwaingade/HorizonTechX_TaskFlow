@@ -8,10 +8,8 @@ export const getDashboardStats = async (req, res) => {
         const userId = req.user._id;
 
 
-        // ========================================
         // Find Projects Accessible to User
         // Owner + Project Member
-        // ========================================
 
         const projects = await Project.find({
 
@@ -35,17 +33,13 @@ export const getDashboardStats = async (req, res) => {
         );
 
 
-        // ========================================
         // Project Stats
-        // ========================================
 
         const totalProjects =
             projectIds.length;
 
 
-        // ========================================
         // Task Stats
-        // ========================================
 
         const totalTasks =
             await Task.countDocuments({
@@ -93,9 +87,7 @@ export const getDashboardStats = async (req, res) => {
             });
 
 
-        // ========================================
         // Recent Projects
-        // ========================================
 
         const recentProjects =
             await Project.find({
@@ -123,9 +115,7 @@ export const getDashboardStats = async (req, res) => {
                 .limit(5);
 
 
-        // ========================================
         // Recent Tasks
-        // ========================================
 
         const todayTasks =
             await Task.find({
@@ -148,9 +138,7 @@ export const getDashboardStats = async (req, res) => {
                 .limit(5);
 
 
-        // ========================================
         // Recent Activity
-        // ========================================
 
         const recentActivity =
             await Task.find({
@@ -177,10 +165,8 @@ export const getDashboardStats = async (req, res) => {
                 );
 
 
-        // ========================================
         // Team Members
         // Get members from accessible projects
-        // ========================================
 
         const teamProjects =
             await Project.find({
@@ -199,9 +185,7 @@ export const getDashboardStats = async (req, res) => {
                 .select("members");
 
 
-        // ========================================
         // Remove Duplicate Members
-        // ========================================
 
         const memberMap = new Map();
 
@@ -234,9 +218,7 @@ export const getDashboardStats = async (req, res) => {
             );
 
 
-        // ========================================
         // Response
-        // ========================================
 
         res.status(200).json({
 
